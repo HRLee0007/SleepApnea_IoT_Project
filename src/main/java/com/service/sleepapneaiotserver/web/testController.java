@@ -33,10 +33,13 @@ public class testController {
         System.out.println(temp);
         return temp;
     }
-
-    @GetMapping("/")
+    @GetMapping("/hello")
     public String hello(){
-        return "hello 친구들";
+        return "hello";
+    }
+    @PostMapping("/hello/post")
+    public String hello_post(@RequestBody TestRequestDto info){
+        return info.getTime() + "is" + info.getBpmCount();
     }
 
 }
