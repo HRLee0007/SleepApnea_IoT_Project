@@ -23,21 +23,21 @@ public class InfosService {
     private final InfosRepository infosRepository;
 
     @Transactional
-    public Long 저장하기(InfosRequestDto infosRequestDto) {
-        int pulse = infosRequestDto.getPulse();
-        double o2 = infosRequestDto.getO2();
+    public int 저장하기(InfosRequestDto infosRequestDto) {
+        int count = infosRequestDto.getCount();
         String username = infosRequestDto.getUsername();
 
         //username에 해당되는 해당 user객체를 찾자.
         Optional<User> user = userRepository.findByUsername(username);
 
         Infos infos = Infos.builder()
-                        .pulse(pulse)
-                        .o2(o2)
+                        .count(count)
                         .user(user.get())
+                .statusStartAt(user.get().getStatusStartAt())
+                .statusEndAt(user.get().getStatusEndAt())
                         .build();
-
-        return infosRepository.save(infos).getId();
+        infosRepository.save(infos);
+        return 1;
     }
 
     @Transactional

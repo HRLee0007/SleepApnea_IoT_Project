@@ -24,3 +24,10 @@ spring:
     show-sql: true
     properties:
       hibernate.format_sql: true
+
+
+naver-cloud-sms:
+  accessKey: DRq0k45Ox5RihRjlWiLi
+  secretKey: vJ3BfgFsC52wnpxncOozbYnpksS7BqKtIY4XMng5
+  serviceId: ncp:sms:kr:298066471329:sleepapnea_sms
+  senderPhone: 01088578476

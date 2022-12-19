@@ -21,11 +21,8 @@ public class Infos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //심박수
-    private int pulse;
-
-    //산소포화도
-    private double o2;
+    // 선택현황
+    private int count;
 
     //infos : N, user : 1
     @ManyToOne(fetch = FetchType.EAGER)
@@ -36,11 +33,19 @@ public class Infos {
     @CreationTimestamp
     private Timestamp createDate;
 
+    private String statusStartAt;
+
+    private String statusEndAt;
+
     @Builder
-    public Infos(int pulse, double o2, User user){
-        this.pulse = pulse;
-        this.o2 = o2;
+    public Infos(int count, User user, String statusStartAt, String statusEndAt){
+        this.count = count;
         this.user = user;
+        this.statusStartAt = statusStartAt;
+        this.statusEndAt = statusEndAt;
+
     }
 
 }
+
+

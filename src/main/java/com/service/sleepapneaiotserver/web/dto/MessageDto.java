@@ -1,18 +1,15 @@
 package com.service.sleepapneaiotserver.web.dto;
 
-
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
-@NoArgsConstructor
 @AllArgsConstructor
-public class InfosRequestDto {
-
-    private int count;
-    private String username;
-
-
-
+@NoArgsConstructor
+@Getter
+@Builder
+public class MessageDto {
+    private String to;
+    private String content;
 }
