@@ -31,7 +31,7 @@
 # Architecture
 
 
-
+<img width="467" alt="스크린샷 2022-12-24 오후 6 37 58" src="https://user-images.githubusercontent.com/75271204/209430104-bb7ff83b-994d-4ec0-8ca5-9c1b70138111.png">
 
 
 
