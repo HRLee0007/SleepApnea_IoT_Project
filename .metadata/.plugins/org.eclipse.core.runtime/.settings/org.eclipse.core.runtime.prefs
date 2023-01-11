@@ -1,0 +1,4 @@
+content-types/org.eclipse.core.runtime.text/charset=UTF-8
+content-types/org.eclipse.jdt.core.javaProperties/charset=UTF-8
+content-types/org.springframework.boot.ide.properties.application.properties/charset=UTF-8
+eclipse.preferences.version=1
