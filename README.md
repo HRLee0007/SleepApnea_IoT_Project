@@ -1,13 +1,8 @@
-# sleepapnea-IoT-Server
+# apnea_project
+project folder for apnea detect&amp;treat module
 
-아두이노를 통해 수면무호흡환자의 무호흡 측정 및 호흡 유도, 보호자에게 긴급 문자 알림 서비스
 
-프로젝트 기간 : 2022.09.01 ~ 2022.12.19
-프로젝트 인원 : 3명
-프로젝트 임무 
- - 서민석 : 백엔드 및 웹 개발
- - 이현로 : 아두이노 개발 및 서버 통신 연동
- - 김대영 : 아두이노 및 웹 프론트엔드 개발
+무호흡 진단 및 증상 완화 모듈 및 앱 개발
 
 
 # Description
