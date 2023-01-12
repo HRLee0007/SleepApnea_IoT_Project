@@ -52,6 +52,7 @@ public class UserApiController {
     @GetMapping("/api/v1/userSign")
     public int changeSign(@RequestParam("sign") int sign, @RequestParam("username") String username) throws UnsupportedEncodingException, URISyntaxException, NoSuchAlgorithmException, InvalidKeyException, JsonProcessingException {
 
+
         if(sign == 3){
             List<String> userInfo = userService.유저메세지전송정보(username);
             String phoneNum = userInfo.get(0);
@@ -69,6 +70,5 @@ public class UserApiController {
         }
         return userService.사인변경(sign, username);
     }
-
 
 }

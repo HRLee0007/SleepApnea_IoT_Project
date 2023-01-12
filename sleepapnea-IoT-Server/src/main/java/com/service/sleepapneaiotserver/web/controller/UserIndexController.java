@@ -126,6 +126,4 @@ public class UserIndexController {
         return "redirect:/";
     }
 
-
-
 }
