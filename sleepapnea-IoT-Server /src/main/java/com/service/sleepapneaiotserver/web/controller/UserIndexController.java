@@ -125,5 +125,4 @@ public class UserIndexController {
             model.addAttribute("status", status);
         return "redirect:/";
     }
-
 }
