@@ -1,6 +1,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/java,c++,firebase
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,c++,firebase
 
+.DS_Store
+
 ### C++ ###
 # Prerequisites
 *.d
