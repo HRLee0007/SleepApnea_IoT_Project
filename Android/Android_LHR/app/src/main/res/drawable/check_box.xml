@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 체크박스 해제상태 -->
+
+    <item android:state_checked="false">
+        <shape>
+            <stroke android:color="#c4cbd2" android:width="1dp" />
+            <corners android:radius="1000dp" />
+            <solid android:color="#fff" />
+        </shape>
+    </item>
+    <!-- 체크박스 선택상태 -->
+    <item android:drawable="@drawable/check" android:state_checked="true" />
+    <!-- 체크박스 기본상태 -->
+</selector>

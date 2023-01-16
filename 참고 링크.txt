@@ -1,0 +1,36 @@
+참고 링크
+
+AWS EC2 서버 구축
+https://www.saichoiblog.com/aws-ec2-for-mac/
+
+안드로이드 녹음
+https://developer.android.com/guide/topics/media/mediarecorder?hl=ko
+
+안드로이드 오픈소스 사이트
+http://aedi.tistory.com/906
+
+
+안드로이드 오디오 녹음
+https://ju-hy.tistory.com/76
+https://stickode.tistory.com/65
+
+안드로이드 진동
+https://siadaddy-cordinglife.tistory.com/10
+
+안드로이드 백그라운드 진동(FCM)
+https://velog.io/@co323co/SpringBoot-Push-Server
+
+https://yamea-guide.tistory.com/entry/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C-FCM-%EB%B0%B1%EA%B7%B8%EB%9D%BC%EC%9A%B4%EB%93%9C%EC%97%90%EC%84%9C-%EC%A7%84%EB%8F%99-%EC%98%A4%EB%8F%84%EB%A1%9D-%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95
+
+https://blog.naver.com/PostView.naver?blogId=ndb796&logNo=221553341369
+
+https://chachas.tistory.com/94 
+
+파이어베이스 로그인
+https://velog.io/@anji00/Firebase-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0-1
+
+Spring boot - Firebase 연동
+https://firework-ham.tistory.com/111
+
+Spring boot - FCM Push 서버 구축
+https://galid1.tistory.com/740
