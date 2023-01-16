@@ -32,6 +32,7 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     implementation 'com.google.code.gson:gson:2.9.0'
     implementation group: 'org.webjars', name: 'jquery', version: '3.6.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.8.1'
 }
 
 tasks.named('test') {

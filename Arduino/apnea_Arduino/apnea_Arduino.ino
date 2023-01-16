@@ -155,15 +155,15 @@ void loop() {
     }
  }
 
- if (now_time - lastMillis > 100){
+  if (now_time - lastMillis > 100){
     if(no_breath_time%10 == 0)
       Serial.println("No_Breath Time: " + String(float(no_breath_time)/10) + " secs");
 
- if (result == '2') { // waiting start sign from server
+      if (result == '2') { // waiting start sign from server
 
-    Serial.println("Waiting....");
- }
-else if (result == '1') { // start
+        Serial.println("Waiting....");
+       }
+  else if (result == '1') { // start
 
     //  Serial.println("START....");
      // read every 100 ms - printing slows this down further
@@ -269,7 +269,6 @@ else if (result == '1') { // start
     else if(wind20Max - wind20Min < wind_no_breath_value) familyWARNING = 1;
     else familyWARNING = 0;
 
-//////////////////// 새로 추가한 wind20max 등에 대한 처리 이제 다시 해야함. 밑에서 - 2023.01.12(목) 17:54 퇴근 6분전
 ////////////////////
     if (no_breath_time >= 90 || vibrateWARNING == 1){ 
       // 무호흡 10초 이상 OR 장력센서 무반응 10초 이상 ==> 진동 ON.
@@ -310,8 +309,8 @@ else if (result == '1') { // start
         first_no_breath = 0;
     }
 
-    //if(no_breath_time >= 130 || soundWARNING == 1) 
-    if(no_breath_time > 150){ // 무호흡 15초 이상 OR 장력센서 무반응 15초 이상 ==> 소리 ON. (진동은 OFF)
+    if(soundWARNING == 1){ // 무호흡 15초 이상 OR 장력센서 무반응 15초 이상 ==> 소리 ON. (진동은 OFF)
+    // if(no_breath_time > 150){ 
     
        Serial.println("SOUND ON");
       while(1){
@@ -332,22 +331,22 @@ else if (result == '1') { // start
 
     }
 
-    //if(no_breath_time >= 200 || familyWARNING == 1)
-    if(no_breath_time > 200){ // 무호흡 20초 이상 OR 장력센서 무반응 30초 이상
+    if(familyWARNING == 1){// 무호흡 20초 이상 OR 장력센서 무반응 20초 이상
+    // if(no_breath_time > 200){ 
       // 보호자 문자 알림 서비스;
-      while(1){
-        httpGet("43.200.137.156","/api/v1/userSign?sign=3&username="+ username);
-        if(esp.find("+IPD,1:")){
+          while(1){
+            httpGet("43.200.137.156","/api/v1/userSign?sign=3&username="+ username);
+            if(esp.find("+IPD,1:")){
 
-        testC= esp.readString();
-        sign_result = testC.charAt(0);
-        for(int j = 0; j < 10; j ++)
-        Serial.print(sign_result);
+            testC= esp.readString();
+            sign_result = testC.charAt(0);
+            for(int j = 0; j < 10; j ++)
+            Serial.print(sign_result);
 
-        break;
+            break;
 
-      }
-  }
+            }
+          }
       
       Serial.println("WARNING!!! FAMILY_CALL");
     }
@@ -355,8 +354,11 @@ else if (result == '1') { // start
 
  }
  lastMillis = millis();
- }
- else if (result == '0') { // end
+
+
+
+
+else if (result == '0') { // end
 
      Serial.println("FINISH....");
 
@@ -367,18 +369,18 @@ else if (result == '1') { // start
         // Serial.print("#");
         if(esp.find("+IPD,1:")){
 
-        testC= esp.readString();  
-        sign_result = testC.charAt(0);
-        Serial.println("result = " + sign_result);
+          testC= esp.readString();  
+          sign_result = testC.charAt(0);
+          Serial.println("result = " + sign_result);
 
-        if(sign_result == '1'){
-        Serial.println("SUCCESSFUL SEND");
+          if(sign_result == '1'){
+            Serial.println("SUCCESSFUL SEND");
 
-        Serial.println("Total no_breath_count = " + no_breath_count);
-        Serial.println("Program exit");
+            Serial.println("Total no_breath_count = " + no_breath_count);
+            Serial.println("Program exit");
 
-        break;
-        }
+            break;
+          }
         } 
 
       }
@@ -386,6 +388,8 @@ else if (result == '1') { // start
      Serial.println("EXIT");
      exit(0);
 
-  }
+    }
+ }
+ 
  
  }
