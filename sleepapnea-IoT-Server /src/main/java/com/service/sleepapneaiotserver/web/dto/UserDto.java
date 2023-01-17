@@ -3,15 +3,13 @@ package com.service.sleepapneaiotserver.web.dto;
 
 import com.service.sleepapneaiotserver.domain.user.Role;
 import com.service.sleepapneaiotserver.domain.user.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Getter
 public class UserDto {
 
     private String username;
@@ -21,7 +19,7 @@ public class UserDto {
     private String address;
     private String phoneNum;
     private String c_phoneNum;
-    private Role role;
+    //private Role role;
 
     public User toEntity(){
         User user = User.builder()

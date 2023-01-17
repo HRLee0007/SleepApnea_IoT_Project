@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
@@ -54,11 +56,13 @@ public class UserIndexController {
     }
 
     @PostMapping("/auth/joinProc")
-    public String joinProc(UserDto userDto) {
+    @ResponseBody
+    public String joinProc(@RequestBody UserDto userDto) {
 
         // 유저 가입완료.
         userService.join(userDto);
-        return "redirect:/auth/loginpage";
+        //return "redirect:/auth/loginpage";
+        return "1";
     }
     // 회원가입 페이지
 //    @GetMapping("/auth/join")
