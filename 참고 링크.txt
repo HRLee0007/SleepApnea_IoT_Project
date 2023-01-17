@@ -1,6 +1,8 @@
 참고 링크
 
 AWS EC2 서버 구축
+https://bcp0109.tistory.com/356
+
 https://www.saichoiblog.com/aws-ec2-for-mac/
 
 안드로이드 녹음

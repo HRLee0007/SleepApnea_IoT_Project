@@ -270,7 +270,7 @@ void loop() {
     else familyWARNING = 0;
 
 ////////////////////
-    if (no_breath_time >= 90 || vibrateWARNING == 1){ 
+    if (vibrateWARNING == 1){ 
       // 무호흡 10초 이상 OR 장력센서 무반응 10초 이상 ==> 진동 ON.
         if(first_no_breath == 0){
           first_no_breath = 1;
