@@ -30,7 +30,8 @@ public class UserDto {
                 .address(address)
                 .phoneNum(phoneNum)
                 .c_phoneNum(c_phoneNum)
-                .role(Role.USER)
+//                .role(Role.USER)
+                .role(role)
                 .build();
         return user;
     }
