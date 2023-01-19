@@ -23,5 +23,4 @@ public class UserSessionDto implements Serializable {
         this.role = user.getRole();
         this.status = user.getStatus();
     }
-
 }
