@@ -25,7 +25,7 @@ public class JoinInfo {
     //@SerializedName("c_phoneNum")
     private String c_phoneNum;
 
-
+    //@SerializedName("role")
     private Role role;
 
 
@@ -42,14 +42,15 @@ public class JoinInfo {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "JoinInfo{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", realname='" + realname + '\'' +
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
                 ", phoneNum='" + phoneNum + '\'' +
-                ", c_poneNum='" + c_phoneNum + '\'' +
+                ", c_phoneNum='" + c_phoneNum + '\'' +
+                ", role=" + role +
                 '}';
     }
 }
