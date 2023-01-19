@@ -66,10 +66,10 @@ public class UserIndexController {
 
     @PostMapping("/auth/joinProcAndroid")
     @ResponseBody
-    public String joinProcAndroid(@RequestBody UserDto userDto) {
+    public String joinProcAndroid(@RequestBody UserDto userDto2) {
 
         // 유저 가입완료.
-        userService.join(userDto);
+        userService.join(userDto2);
         //return "redirect:/auth/loginpage";
         return "1";
     }

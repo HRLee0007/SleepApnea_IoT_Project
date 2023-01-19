@@ -19,7 +19,7 @@ public class UserDto {
     private String address;
     private String phoneNum;
     private String c_phoneNum;
-    //private Role role;
+    private Role role;
 
     public User toEntity(){
         User user = User.builder()
