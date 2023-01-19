@@ -29,11 +29,15 @@ public class UserService {
         return userRepository.save(dto.toEntity()).getId();
     }
 
+
+
     @Transactional
     public void statusOn(String username) {
         userRepository.statusOnChange(1, username);
         System.out.println("1에입장완료");
     }
+
+
 
     @Transactional
     public void statusOff(String username) {

@@ -56,8 +56,17 @@ public class UserIndexController {
     }
 
     @PostMapping("/auth/joinProc")
+    public String joinProc(UserDto userDto) {
+
+        // 유저 가입완료.
+        userService.join(userDto);
+        return "redirect:/auth/loginpage";
+//        return "1";
+    }
+
+    @PostMapping("/auth/joinProcAndroid")
     @ResponseBody
-    public String joinProc(@RequestBody UserDto userDto) {
+    public String joinProcAndroid(@RequestBody UserDto userDto) {
 
         // 유저 가입완료.
         userService.join(userDto);
