@@ -36,3 +36,9 @@ https://firework-ham.tistory.com/111
 
 Spring boot - FCM Push 서버 구축
 https://galid1.tistory.com/740
+
+Spring boot - 스프링시큐리티
+https://velog.io/@soyeon207/%EC%8B%A4%EC%8A%B5%ED%8E%B8-%EC%8A%A4%ED%94%84%EB%A7%81-%EC%8B%9C%ED%81%90%EB%A6%AC%ED%8B%B0-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0
+
+안드로이드 세션 만들기
+https://simsimjae.tistory.com/m/283

@@ -1,0 +1,33 @@
+server:
+  port: 8080
+
+
+
+spring:
+  devtools:
+    livereload:
+      enabled: true
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://52.79.222.91:3306/sleepapnea?serverTimezone=UTC&characterEncoding=UTF-8
+    username: gusfh
+    password: gusfh1234
+
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: update # 실행할때 마다 테이블을 새로 만들겠다는 뜻! 최초에만 create => 후엔 update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      use-new-id-generator-mappings: false #AUTO_INCREAMENT #FALSE => jpa가 제공하는 기본넘버링 사용x
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+
+
+naver-cloud-sms:
+  accessKey: DRq0k45Ox5RihRjlWiLi
+  secretKey: vJ3BfgFsC52wnpxncOozbYnpksS7BqKtIY4XMng5
+  serviceId: ncp:sms:kr:298066471329:sleepapnea_sms
+  senderPhone: 01088578476
