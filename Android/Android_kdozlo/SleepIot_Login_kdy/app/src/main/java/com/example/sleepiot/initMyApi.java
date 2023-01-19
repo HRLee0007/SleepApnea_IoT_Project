@@ -6,7 +6,7 @@ import retrofit2.http.POST;
 
 public interface initMyApi {
     //@통신 방식("통신 API명")
-    @POST("/auth/joinProcAndroid")
+    @POST("auth/joinProcAndroid")
     Call<String> getJoinResponse(@Body JoinInfo user);
 
     @POST("login")
