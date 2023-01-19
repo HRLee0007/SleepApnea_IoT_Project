@@ -9,7 +9,7 @@ public class RetrofitClient {
     private static RetrofitClient instance = null;
     private static initMyApi initMyApi;
     //사용하고 있는 서버 BASE 주소
-    private static String baseUrl = "http://43.200.137.156:8080/";
+    private static String baseUrl = "http://52.79.222.91:8080/";
 
     private RetrofitClient() {
         //로그를 보기 위한 Interceptor
