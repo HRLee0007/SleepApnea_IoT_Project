@@ -1,0 +1,109 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.android.tools.utp",
+    "module": "android-test-plugin-host-additional-test-output-proto",
+    "version": "30.1.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "android-test-plugin-host-additional-test-output-proto-30.1.0.jar",
+          "url": "android-test-plugin-host-additional-test-output-proto-30.1.0.jar",
+          "size": 18980,
+          "sha512": "8840ae9c7db1e49de911d5bf570f38a48a02a8ba1c01a4960f752d0961988925137a86d795b617c4368cb994c43505fdad0644c4c381c6751080d90c0db6badf",
+          "sha256": "86760efdddde8932d87f368a6cfc1337fa46160565c635d8d7d51598dc687e6a",
+          "sha1": "974bf8588baec7da156a6611e591b5064999a22e",
+          "md5": "b59de661da3799cbb25ad425f376c97a"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.google.protobuf",
+          "module": "protobuf-java",
+          "version": {
+            "requires": "3.10.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "android-test-plugin-host-additional-test-output-proto-30.1.0.jar",
+          "url": "android-test-plugin-host-additional-test-output-proto-30.1.0.jar",
+          "size": 18980,
+          "sha512": "8840ae9c7db1e49de911d5bf570f38a48a02a8ba1c01a4960f752d0961988925137a86d795b617c4368cb994c43505fdad0644c4c381c6751080d90c0db6badf",
+          "sha256": "86760efdddde8932d87f368a6cfc1337fa46160565c635d8d7d51598dc687e6a",
+          "sha1": "974bf8588baec7da156a6611e591b5064999a22e",
+          "md5": "b59de661da3799cbb25ad425f376c97a"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "android-test-plugin-host-additional-test-output-proto-30.1.0-javadoc.jar",
+          "url": "android-test-plugin-host-additional-test-output-proto-30.1.0-javadoc.jar",
+          "size": 417585,
+          "sha512": "2acb6ae5c31ab86087c4fcde5ae46eee3e487f12b7f95f39c7ddec284469e3df296971ed036ce02c418b4136d795d03ada15e42394517af153fa35856cb2ff15",
+          "sha256": "f8497df2240cdbedbfeffb221968a0741421d0c56cc2337a398476a4a7d04cce",
+          "sha1": "24ca6b5cede04ced627529cf63dab8be4c878135",
+          "md5": "5ab02611c59b242e2308e845a8129420"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "android-test-plugin-host-additional-test-output-proto-30.1.0-sources.jar",
+          "url": "android-test-plugin-host-additional-test-output-proto-30.1.0-sources.jar",
+          "size": 9628,
+          "sha512": "3071bf6e1404ad64195bdc2b6671480661720b6fcead4b415c72d725f90b89eb886ff43cfa9b32e1e5e189f9b013dde2f9b6b63781e4d656d1f573a22ff6d4e3",
+          "sha256": "0366c9d8ca69032eb8f412704d82935340603b137833173f4dcf8b8b2957a1d3",
+          "sha1": "101a11d0b22813e13c3d8e1f9787b3eab5ee4d41",
+          "md5": "afe57b1f50c9bc1e1ae8922f14b47a45"
+        }
+      ]
+    }
+  ]
+}

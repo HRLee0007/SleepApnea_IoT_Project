@@ -1,0 +1,154 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.appcompat",
+    "module": "appcompat-resources",
+    "version": "1.5.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.5-rc-2"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.2.0"
+          }
+        },
+        {
+          "group": "androidx.core",
+          "module": "core",
+          "version": {
+            "requires": "1.6.0"
+          }
+        },
+        {
+          "group": "androidx.vectordrawable",
+          "module": "vectordrawable",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.vectordrawable",
+          "module": "vectordrawable-animated",
+          "version": {
+            "requires": "1.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "appcompat-resources-1.5.1.aar",
+          "url": "appcompat-resources-1.5.1.aar",
+          "size": 67507,
+          "sha512": "7e6a8de85d174f2c20433594ba6637bc9785b0c9854982d4192e042fb86d9b0b1e499a041e5821664a68340e9b8d30c4c05151b612dbdb27e6523c33141fb24b",
+          "sha256": "6cfa9caae1869ffe03da9ec3ebf47ad84d70a7185ee86ec63aa8289cbb457e67",
+          "sha1": "fd320eec8e562828c2c7eca22e87ac6fae686c06",
+          "md5": "2592e4f7fb9fe29652c804324de184cc"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.2.0"
+          }
+        },
+        {
+          "group": "androidx.collection",
+          "module": "collection",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.core",
+          "module": "core",
+          "version": {
+            "requires": "1.6.0"
+          }
+        },
+        {
+          "group": "androidx.vectordrawable",
+          "module": "vectordrawable",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.vectordrawable",
+          "module": "vectordrawable-animated",
+          "version": {
+            "requires": "1.1.0"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.appcompat",
+          "module": "appcompat",
+          "version": {
+            "requires": "1.5.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "appcompat-resources-1.5.1.aar",
+          "url": "appcompat-resources-1.5.1.aar",
+          "size": 67507,
+          "sha512": "7e6a8de85d174f2c20433594ba6637bc9785b0c9854982d4192e042fb86d9b0b1e499a041e5821664a68340e9b8d30c4c05151b612dbdb27e6523c33141fb24b",
+          "sha256": "6cfa9caae1869ffe03da9ec3ebf47ad84d70a7185ee86ec63aa8289cbb457e67",
+          "sha1": "fd320eec8e562828c2c7eca22e87ac6fae686c06",
+          "md5": "2592e4f7fb9fe29652c804324de184cc"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "appcompat-resources-1.5.1-sources.jar",
+          "url": "appcompat-resources-1.5.1-sources.jar",
+          "size": 41078,
+          "sha512": "b490b7d90e77fef59da1a4c4bbced46f42054e3f7af4402bb31c22a86cd781f23d411a3f066fab4e50d7b358f7bc093c2ff0a19d23f17f2f4d637faaad4a5ba9",
+          "sha256": "fec905dd620354c86d3d2eacae24607a045fb00f8046719aec7583cf75422159",
+          "sha1": "fb65e13b11cb4391567e748e9ab7f27a64601039",
+          "md5": "2d834f6b94cb1c13e1c1364a07ddcae9"
+        }
+      ]
+    }
+  ]
+}

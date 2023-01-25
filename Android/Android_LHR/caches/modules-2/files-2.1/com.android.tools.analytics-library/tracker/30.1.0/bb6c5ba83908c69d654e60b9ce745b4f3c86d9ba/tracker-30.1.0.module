@@ -1,0 +1,171 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.android.tools.analytics-library",
+    "module": "tracker",
+    "version": "30.1.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.localToProject": "public",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.android.tools.analytics-library",
+          "module": "protos",
+          "version": {
+            "requires": "30.1.0"
+          }
+        },
+        {
+          "group": "com.android.tools.analytics-library",
+          "module": "shared",
+          "version": {
+            "requires": "30.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "tracker-30.1.0.jar",
+          "url": "tracker-30.1.0.jar",
+          "size": 40461,
+          "sha512": "36deb297b3be4ca2da440b9a98f00072fd894814c69c4e988eef45ca1b3ac1480a22a35adc67e2efe978ba65f5830c95d837c15e5d8b0f897b5e4ee12837f770",
+          "sha256": "a4186f191035e138006542fd343d4ddf1e0453526aa22f688b9a36a599417b26",
+          "sha1": "90ab58ba5f7b629e1ff14a60a5cae9aa2b0ced39",
+          "md5": "bb55b8cf4c644f577114279b450e7bbd"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.localToProject": "public",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.android.tools",
+          "module": "annotations",
+          "version": {
+            "requires": "30.1.0"
+          }
+        },
+        {
+          "group": "com.android.tools",
+          "module": "common",
+          "version": {
+            "requires": "30.1.0"
+          }
+        },
+        {
+          "group": "com.google.protobuf",
+          "module": "protobuf-java",
+          "version": {
+            "requires": "3.10.0"
+          }
+        },
+        {
+          "group": "com.google.guava",
+          "module": "guava",
+          "version": {
+            "requires": "30.1-jre"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.4.32"
+          }
+        },
+        {
+          "group": "com.android.tools.analytics-library",
+          "module": "protos",
+          "version": {
+            "requires": "30.1.0"
+          }
+        },
+        {
+          "group": "com.android.tools.analytics-library",
+          "module": "shared",
+          "version": {
+            "requires": "30.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "tracker-30.1.0.jar",
+          "url": "tracker-30.1.0.jar",
+          "size": 40461,
+          "sha512": "36deb297b3be4ca2da440b9a98f00072fd894814c69c4e988eef45ca1b3ac1480a22a35adc67e2efe978ba65f5830c95d837c15e5d8b0f897b5e4ee12837f770",
+          "sha256": "a4186f191035e138006542fd343d4ddf1e0453526aa22f688b9a36a599417b26",
+          "sha1": "90ab58ba5f7b629e1ff14a60a5cae9aa2b0ced39",
+          "md5": "bb55b8cf4c644f577114279b450e7bbd"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "tracker-30.1.0-javadoc.jar",
+          "url": "tracker-30.1.0-javadoc.jar",
+          "size": 402620,
+          "sha512": "c27ee419b3f78ef8a1709dc8efcbd4a770b88c066667c56ad9414ea1f5887d695e1bfc443e9066188ad811b6a23697c9a5132edb3cd6689fb20604149b14f972",
+          "sha256": "02167d507a985b43757443784e63115d15109a10b124cff940e5e8fda4bc14fd",
+          "sha1": "a0f9f87edc7937992e193a93b94302480a3a65ee",
+          "md5": "6d722f45f10bbe02dddb55ec05a6c769"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "tracker-30.1.0-sources.jar",
+          "url": "tracker-30.1.0-sources.jar",
+          "size": 18388,
+          "sha512": "3cfcfe3a78442267c9db4a08b80cb89c8f2cc7298e63bce89c419229d353fbdc195c07282c1f4965d6042b50a29d83d7bd496abff83d9aaa79e46dc36bd90b45",
+          "sha256": "73b720b549bd6689217e019a07d4de310ea2f71b66fed7eb57255f4caf415dc8",
+          "sha1": "8df30b08f4fb5c36f45684da5f62c21da21d4a3d",
+          "md5": "b31780872b145985351dc4d5f38bf080"
+        }
+      ]
+    }
+  ]
+}

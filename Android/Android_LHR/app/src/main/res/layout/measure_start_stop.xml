@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="220dp"
-        tools:context=".MainActivity"
+        tools:context=".activity.MainActivity"
         android:orientation="vertical"
         android:background="@drawable/button_half_round"
         android:elevation="10dp"
@@ -36,42 +36,41 @@
 
     </LinearLayout>
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
         android:background="@color/white"
-        android:layout_marginBottom="5dp">
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="-30dp"
+        tools:layout_editor_absoluteY="99dp">
+
         <ImageView
             android:id="@+id/start_button"
             android:layout_width="170dp"
             android:layout_height="170dp"
+            android:layout_marginLeft="25dp"
             android:layout_marginTop="360dp"
             android:layout_marginRight="10dp"
-            android:layout_marginLeft="25dp"
             android:src="@drawable/start_button"
 
             app:layout_constraintTop_toBottomOf="@id/signin_text"
-            app:layout_constraintBottom_toBottomOf="@id/owner_button"
-            tools:ignore="MissingConstraints"
-            />
+            tools:ignore="MissingConstraints" />
 
 
         <ImageView
             android:id="@+id/customer_button1"
             android:layout_width="170dp"
             android:layout_height="170dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="360dp"
             android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
             android:src="@drawable/stop_button"
-            tools:ignore="MissingConstraints"
             app:layout_constraintTop_toBottomOf="@id/start_button"
-            app:layout_constraintBottom_toBottomOf="@id/customer_button1"
+            tools:ignore="MissingConstraints"
 
             />
     </LinearLayout>
-
 
     <Button
         android:id="@+id/register_button"

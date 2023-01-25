@@ -1,5 +1,6 @@
 package com.example.sleepiot;
 
+import com.example.sleepiot.Role;
 import com.google.gson.annotations.SerializedName;
 
 public class JoinInfo {
