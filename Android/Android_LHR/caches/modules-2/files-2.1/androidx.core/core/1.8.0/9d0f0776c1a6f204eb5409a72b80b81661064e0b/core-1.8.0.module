@@ -1,0 +1,152 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.core",
+    "module": "core",
+    "version": "1.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.4"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.2.0"
+          }
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation-experimental",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-runtime",
+          "version": {
+            "requires": "2.3.1"
+          }
+        },
+        {
+          "group": "androidx.versionedparcelable",
+          "module": "versionedparcelable",
+          "version": {
+            "requires": "1.1.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "core-1.8.0.aar",
+          "url": "core-1.8.0.aar",
+          "size": 1077345,
+          "sha512": "1142916335ff40d46e1db1205422cf4d7535d7a72f3e12c36c10017a0bdb05fe424dd0fe6748b4afa9b8ba27a191717e67d76f5c28f265b2a7568145de4b6faf",
+          "sha256": "48c64a15ec3eb11bfb33339e5ceb70ec7f821bd2dfa2eb8675ebd5353317e792",
+          "sha1": "56215072292d2db400ba7bfec758a980c0ecc9a4",
+          "md5": "6ea59b5e365d03f7f18e8625c01eb984"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.2.0"
+          }
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation-experimental",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.collection",
+          "module": "collection",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.concurrent",
+          "module": "concurrent-futures",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-runtime",
+          "version": {
+            "requires": "2.3.1"
+          }
+        },
+        {
+          "group": "androidx.versionedparcelable",
+          "module": "versionedparcelable",
+          "version": {
+            "requires": "1.1.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "core-1.8.0.aar",
+          "url": "core-1.8.0.aar",
+          "size": 1077345,
+          "sha512": "1142916335ff40d46e1db1205422cf4d7535d7a72f3e12c36c10017a0bdb05fe424dd0fe6748b4afa9b8ba27a191717e67d76f5c28f265b2a7568145de4b6faf",
+          "sha256": "48c64a15ec3eb11bfb33339e5ceb70ec7f821bd2dfa2eb8675ebd5353317e792",
+          "sha1": "56215072292d2db400ba7bfec758a980c0ecc9a4",
+          "md5": "6ea59b5e365d03f7f18e8625c01eb984"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "core-1.8.0-sources.jar",
+          "url": "core-1.8.0-sources.jar",
+          "size": 832588,
+          "sha512": "0e1dd3dde363e1696d7f4fafa6fe6c3eabfe3a4015474372bf573c1536a483f5d69eaf7a3d6ec922b912fe00301033fd107c984f6c225b050349625163eb38fc",
+          "sha256": "8af6ec5a930ab3df22faa055ae2bf028264ee65d758b95ed4d62b39f02f43ae9",
+          "sha1": "6d9dc81a87506edbc4890ff898df98c709a79fdf",
+          "md5": "cc9b1d616dba223f59c75387a2b18a8a"
+        }
+      ]
+    }
+  ]
+}

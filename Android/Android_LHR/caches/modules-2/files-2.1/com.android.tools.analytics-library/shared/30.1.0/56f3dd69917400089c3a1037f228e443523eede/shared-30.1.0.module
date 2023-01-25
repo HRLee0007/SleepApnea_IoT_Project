@@ -1,0 +1,164 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.android.tools.analytics-library",
+    "module": "shared",
+    "version": "30.1.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.localToProject": "public",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.android.tools.analytics-library",
+          "module": "protos",
+          "version": {
+            "requires": "30.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "shared-30.1.0.jar",
+          "url": "shared-30.1.0.jar",
+          "size": 109513,
+          "sha512": "ededca6a876abebb74453e1391dab7dc32db2d7deae5d89c029470b77f4999291a25b86971831ccd8621b9cf867e10680da1d52e8dc4eb34f4ee4d8c6329e819",
+          "sha256": "089a68e30cb1acdb5b11bbc915e9a952ee0fd8a925c96a1534ac4812aa634d13",
+          "sha1": "83535433ebefcd806e34e9914e46a2d051433ace",
+          "md5": "438ca51bb3c2b22ee873937e56c2bd37"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.localToProject": "public",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.android.tools",
+          "module": "annotations",
+          "version": {
+            "requires": "30.1.0"
+          }
+        },
+        {
+          "group": "com.android.tools",
+          "module": "common",
+          "version": {
+            "requires": "30.1.0"
+          }
+        },
+        {
+          "group": "com.google.guava",
+          "module": "guava",
+          "version": {
+            "requires": "30.1-jre"
+          }
+        },
+        {
+          "group": "com.google.code.gson",
+          "module": "gson",
+          "version": {
+            "requires": "2.8.6"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.4.32"
+          }
+        },
+        {
+          "group": "net.java.dev.jna",
+          "module": "jna-platform",
+          "version": {
+            "requires": "5.6.0"
+          }
+        },
+        {
+          "group": "com.android.tools.analytics-library",
+          "module": "protos",
+          "version": {
+            "requires": "30.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "shared-30.1.0.jar",
+          "url": "shared-30.1.0.jar",
+          "size": 109513,
+          "sha512": "ededca6a876abebb74453e1391dab7dc32db2d7deae5d89c029470b77f4999291a25b86971831ccd8621b9cf867e10680da1d52e8dc4eb34f4ee4d8c6329e819",
+          "sha256": "089a68e30cb1acdb5b11bbc915e9a952ee0fd8a925c96a1534ac4812aa634d13",
+          "sha1": "83535433ebefcd806e34e9914e46a2d051433ace",
+          "md5": "438ca51bb3c2b22ee873937e56c2bd37"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "shared-30.1.0-javadoc.jar",
+          "url": "shared-30.1.0-javadoc.jar",
+          "size": 261,
+          "sha512": "b9ed2a5fc127eb5ae9745990db07153d5e5be8c98bd67f65c785b7fefd53cced289fcad6f27343ac7db1d44fdb1f37074316c93b2ff20ed7a79134e80b349c45",
+          "sha256": "d75fcb6c8a140c8f608213bd95da7ce208b9a12384da51f881dcc4e099e4f334",
+          "sha1": "031439366e81c70d5cff121b6a94103d39c7b89e",
+          "md5": "ecf20d0b32944b15a32567e88096def7"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "shared-30.1.0-sources.jar",
+          "url": "shared-30.1.0-sources.jar",
+          "size": 21946,
+          "sha512": "b191b2670bcb5fd3b836b6659d75f2cafc5823eded664dd8d7c6cdb0335bb29fe70625e37989863621ceb825c13ae3c1bbad45df9beb36563530a1d3e4fa2f04",
+          "sha256": "732310c521327902441bb33bcfe49d39d75f68f869eff803164ec9305e377f43",
+          "sha1": "3ba3f9456c54fd0c150e5ff0881af682b6a36b62",
+          "md5": "564e08661dd5c18fa8582aabdbd19752"
+        }
+      ]
+    }
+  ]
+}

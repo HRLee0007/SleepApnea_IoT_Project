@@ -1,0 +1,5 @@
+okhttp3.logging.HttpLoggingInterceptor
+okhttp3.logging.HttpLoggingInterceptor$Level
+okhttp3.logging.HttpLoggingInterceptor$Logger
+okhttp3.logging.HttpLoggingInterceptor$Logger$1
+okhttp3.logging.package-info

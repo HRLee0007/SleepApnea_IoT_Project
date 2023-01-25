@@ -1,0 +1,130 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.android.tools.layoutlib",
+    "module": "layoutlib-api",
+    "version": "30.1.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "layoutlib-api-30.1.0.jar",
+          "url": "layoutlib-api-30.1.0.jar",
+          "size": 114476,
+          "sha512": "b0287a4d347f98a9c98f3e5697ae2cc9ea278a165167c808974a1c1a417df0f6ba1bfb2ffc3d04ccc73b828d5315bea6f399935b904b492512ccc67c9828a97e",
+          "sha256": "098cabc006498eebbd659c85c2c42a3c8794c9aef0d341c938531ffa5927341b",
+          "sha1": "da30c9e07152dc6554dfaa7824df9e46ecb73452",
+          "md5": "34b2726820f1ae434ddf8e2529afaa79"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.android.tools",
+          "module": "common",
+          "version": {
+            "requires": "30.1.0"
+          }
+        },
+        {
+          "group": "net.sf.kxml",
+          "module": "kxml2",
+          "version": {
+            "requires": "2.3.0"
+          }
+        },
+        {
+          "group": "com.android.tools",
+          "module": "annotations",
+          "version": {
+            "requires": "30.1.0"
+          }
+        },
+        {
+          "group": "org.jetbrains",
+          "module": "annotations",
+          "version": {
+            "requires": "13.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "layoutlib-api-30.1.0.jar",
+          "url": "layoutlib-api-30.1.0.jar",
+          "size": 114476,
+          "sha512": "b0287a4d347f98a9c98f3e5697ae2cc9ea278a165167c808974a1c1a417df0f6ba1bfb2ffc3d04ccc73b828d5315bea6f399935b904b492512ccc67c9828a97e",
+          "sha256": "098cabc006498eebbd659c85c2c42a3c8794c9aef0d341c938531ffa5927341b",
+          "sha1": "da30c9e07152dc6554dfaa7824df9e46ecb73452",
+          "md5": "34b2726820f1ae434ddf8e2529afaa79"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "layoutlib-api-30.1.0-javadoc.jar",
+          "url": "layoutlib-api-30.1.0-javadoc.jar",
+          "size": 750585,
+          "sha512": "bafef92755bac1b3fe4f9cb88cf70066967777492be1daa2af6dc98357b2c27e2ae966126613d178e308e234492c4edbe693e9a1045bd340b7b18a4a9309dd73",
+          "sha256": "30f1d94a7e8977ce2a347dc1a8b576b1395baf2a70204c1f665a46d85542d2f3",
+          "sha1": "247a8b22fa7c7d78d219027ce14f6f11eff35f0e",
+          "md5": "cd513ed2dae390c43bbd171f2aef3702"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "layoutlib-api-30.1.0-sources.jar",
+          "url": "layoutlib-api-30.1.0-sources.jar",
+          "size": 108023,
+          "sha512": "0603573788b86bb5273d2e23e7a2e0fb992680e045f8d2bfd22b5c198c701e246b305d8043734a6447e0f44290070a54cbf90610a58a2ad98b3a53a7b895fb18",
+          "sha256": "d34580760bb83a98875516030e3260d2d9bc1765a51d8ace1e34c5ca36bb5380",
+          "sha1": "f4192259886a2eaaecc26bfce5645bafe83f28d3",
+          "md5": "c732a6ad8eb971e2eda929e25faeb203"
+        }
+      ]
+    }
+  ]
+}

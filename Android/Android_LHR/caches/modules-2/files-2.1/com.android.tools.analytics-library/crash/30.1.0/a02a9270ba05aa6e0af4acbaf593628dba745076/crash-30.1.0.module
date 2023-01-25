@@ -1,0 +1,137 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.android.tools.analytics-library",
+    "module": "crash",
+    "version": "30.1.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "crash-30.1.0.jar",
+          "url": "crash-30.1.0.jar",
+          "size": 13644,
+          "sha512": "87b6ce5ff053df5b8db3925f65407206ed0c1affcb452cde30102671b38ffbbe50a1d8f064e80b56a6b71c684de8d15b18903adc039070714b2711f356debff7",
+          "sha256": "dabbbaa949d4ca521714b356c7d46e81447e13fdb423edcf8615ba5c096ad543",
+          "sha1": "c70d9a95c1ce1211174201ae6ca8d884691d8807",
+          "md5": "3b51108a784e0eb1d2a09889df3eaaaa"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.android.tools",
+          "module": "annotations",
+          "version": {
+            "requires": "30.1.0"
+          }
+        },
+        {
+          "group": "com.google.guava",
+          "module": "guava",
+          "version": {
+            "requires": "30.1-jre"
+          }
+        },
+        {
+          "group": "org.apache.httpcomponents",
+          "module": "httpmime",
+          "version": {
+            "requires": "4.5.6"
+          }
+        },
+        {
+          "group": "org.apache.httpcomponents",
+          "module": "httpcore",
+          "version": {
+            "requires": "4.4.10"
+          }
+        },
+        {
+          "group": "org.apache.httpcomponents",
+          "module": "httpclient",
+          "version": {
+            "requires": "4.5.6"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "crash-30.1.0.jar",
+          "url": "crash-30.1.0.jar",
+          "size": 13644,
+          "sha512": "87b6ce5ff053df5b8db3925f65407206ed0c1affcb452cde30102671b38ffbbe50a1d8f064e80b56a6b71c684de8d15b18903adc039070714b2711f356debff7",
+          "sha256": "dabbbaa949d4ca521714b356c7d46e81447e13fdb423edcf8615ba5c096ad543",
+          "sha1": "c70d9a95c1ce1211174201ae6ca8d884691d8807",
+          "md5": "3b51108a784e0eb1d2a09889df3eaaaa"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "crash-30.1.0-javadoc.jar",
+          "url": "crash-30.1.0-javadoc.jar",
+          "size": 408819,
+          "sha512": "b941d766e57bcdabde600ca42e63b7f8daae633628adcf809f6a7d95f04abba0e799c1ea0531bae17e280bb6ac3eaae31421dccaf9c0545a56ef9ad43e9cd2eb",
+          "sha256": "938ba8428c8a81c217552c4b06fe49b5a4792c681a596d44e8a3cebcefac21d7",
+          "sha1": "c1f24c3311ea525629fea693f2f0376fb35e9fd8",
+          "md5": "00a337de47f5e1c785a49401effca6d3"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "crash-30.1.0-sources.jar",
+          "url": "crash-30.1.0-sources.jar",
+          "size": 10692,
+          "sha512": "7da18048a1ef71cef1742653a34317cfccc954000ecb3da421aa4fb0095a6416a1fa946ce88e83e9a9d2e12b5b5a95e64be7fa073380e7e031f1a366b22a3f6e",
+          "sha256": "ae52a7b1b636e7891930c322fcf3249a548e98194c1f359a523ec73ed3e3dbbf",
+          "sha1": "490c7387abefa8ba5eaa671a3b09f8a6ec6601a5",
+          "md5": "4b03fe251c8baa37323c27ff99854fdd"
+        }
+      ]
+    }
+  ]
+}
