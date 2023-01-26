@@ -45,3 +45,6 @@ https://simsimjae.tistory.com/m/283
 
 FCM 소리알림
 https://todaycode.tistory.com/8
+
+Mysql 암호화 - 복호화
+https://stricky.tistory.com/330

@@ -2,9 +2,11 @@ package com.service.sleepapneaiotserver.web.controller;
 
 import com.service.sleepapneaiotserver.web.dto.UpdateResponseDto;
 import com.service.sleepapneaiotserver.web.dto.UserDto;
+import com.service.sleepapneaiotserver.web.dto.LoginDto;
 import com.service.sleepapneaiotserver.web.dto.UserSessionDto;
 import com.service.sleepapneaiotserver.web.service.InfosService;
 import com.service.sleepapneaiotserver.web.service.UserService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -123,6 +125,18 @@ public class UserIndexController {
         return "redirect:/";
     }
 
+    @PostMapping("/auth/statusonAndroid")
+    @ResponseBody
+    public String statusOnAndroid(@RequestBody LoginDto loginDto) {
+
+        // status를 1로 바꾸고
+        userService.statusOn(loginDto.getUsername());
+
+        // mysql DB에서
+        // return (안드로이드에서 필요한 유저정보들);
+        return "1";
+    }
+
 
 
     @GetMapping("/auth/statusoff")
@@ -140,5 +154,15 @@ public class UserIndexController {
         if(status == 1)
             model.addAttribute("status", status);
         return "redirect:/";
+    }
+
+    @PostMapping("/auth/statusoffAndroid")
+    @ResponseBody
+    public String statusOffAndroid(@RequestBody LoginDto loginDto) { // 유저네임만 있어도 됨
+
+        // status를 0으로 바꾸고
+        userService.statusOff(loginDto.getUsername());
+        //return (안드로이드에서 필요한 유저정보들);
+        return "1";
     }
 }

@@ -7,4 +7,6 @@ import java.util.List;
 public interface InfosRepository extends JpaRepository<Infos, Long> {
     List<Infos> findAllByUserId(Long userId);
 
+
+
 }
