@@ -15,6 +15,7 @@ import com.example.apnea_android.R;
 import com.example.apnea_android.RetrofitClient;
 import com.example.apnea_android.Role;
 import com.example.apnea_android.info.JoinInfo;
+import com.example.apnea_android.info.LoginInfo;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,6 +52,9 @@ public class join extends AppCompatActivity  implements View.OnClickListener {
             EditText join_myphone = findViewById(R.id.join_myphone);
             EditText join_pphone = findViewById(R.id.join_pphone);
 
+
+
+
             //로그인 정보 미입력 시
             if(join_id.getText().toString().trim().length() == 0 ||
                     join_pw.getText().toString().trim().length() == 0 ||
@@ -72,6 +76,8 @@ public class join extends AppCompatActivity  implements View.OnClickListener {
                         join_email.getText().toString(), join_address.getText().toString(), join_myphone.getText().toString(), join_pphone.getText().toString(), Role.USER);
 
                 joinResponse(joinUser);
+
+
             }
         } else if(v.getId() == R.id.join_cancel_btn) {
             Intent intent = new Intent(join.this, MainActivity.class);

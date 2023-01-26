@@ -1,9 +1,6 @@
 package com.service.sleepapneaiotserver.web.controller;
 
-import com.service.sleepapneaiotserver.web.dto.UpdateResponseDto;
-import com.service.sleepapneaiotserver.web.dto.UserDto;
-import com.service.sleepapneaiotserver.web.dto.LoginDto;
-import com.service.sleepapneaiotserver.web.dto.UserSessionDto;
+import com.service.sleepapneaiotserver.web.dto.*;
 import com.service.sleepapneaiotserver.web.service.InfosService;
 import com.service.sleepapneaiotserver.web.service.UserService;
 
@@ -125,16 +122,24 @@ public class UserIndexController {
         return "redirect:/";
     }
 
-    @PostMapping("/auth/statusonAndroid")
+    @PostMapping("/auth/statusAndroid")
     @ResponseBody
-    public String statusOnAndroid(@RequestBody LoginDto loginDto) {
+    public Integer statusAndroid(@RequestBody MeasureRequestDto measureRequestDto) {
 
-        // status를 1로 바꾸고
-        userService.statusOn(loginDto.getUsername());
+        if(measureRequestDto.getStatus() == 1) { //
+            userService.statusOn(measureRequestDto.getUsername());
 
-        // mysql DB에서
-        // return (안드로이드에서 필요한 유저정보들);
-        return "1";
+            // mysql DB에서
+            // return (안드로이드에서 필요한 유저정보들);
+            return 1;
+        }
+        else if(measureRequestDto.getStatus() == 0){
+            userService.statusOff(measureRequestDto.getUsername());
+
+            return 0;
+        }
+        else // status 값 오류 -> -1 반환
+            return -1;
     }
 
 
@@ -156,13 +161,4 @@ public class UserIndexController {
         return "redirect:/";
     }
 
-    @PostMapping("/auth/statusoffAndroid")
-    @ResponseBody
-    public String statusOffAndroid(@RequestBody LoginDto loginDto) { // 유저네임만 있어도 됨
-
-        // status를 0으로 바꾸고
-        userService.statusOff(loginDto.getUsername());
-        //return (안드로이드에서 필요한 유저정보들);
-        return "1";
-    }
 }
