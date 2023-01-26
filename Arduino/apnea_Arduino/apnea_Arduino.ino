@@ -25,7 +25,7 @@ int first_no_breath = 0; // 무호흡 총 횟수 측정을 위한 첫 무호흡 
 int windValue[200] = {0,};
 const float zeroWindAdjustment =  .2; // negative numbers yield smaller wind speeds and vice versa.
 int TMP_Therm_ADunits;  //temp termistor value from wind sensor
-float RV_Wind_ADunits;    //RV output from wind sensor 
+float RV_Wind_ADunits;  //RV output from wind sensor
 float RV_Wind_Volts;
 unsigned long lastMillis;
 unsigned long httpMillis = 99999;
@@ -68,7 +68,7 @@ void httpGet(String server, String uri) {
 
   String connect_server_cmd = "AT+CIPSTART=\"TCP\",\"" + server + "\",8080";
 
-  esp.print("AT+CIPSTART=\"TCP\",\"43.200.137.156\",8080");
+  esp.print("AT+CIPSTART=\"TCP\",\"52.79.222.91\",8080");
   esp.println();
 
 
@@ -142,7 +142,7 @@ void loop() {
   while(1){
       Serial.print(".");
       httpMillis = millis();
-      httpGet("43.200.137.156","/api/v1/user?username=" + username );
+      httpGet("52.79.222.91","/api/v1/user?username=" + username );
       if(esp.find("+IPD,1:")){
 
       testC= esp.readString();
@@ -277,7 +277,7 @@ void loop() {
           no_breath_count++;
         }
         while(1){
-        httpGet("43.200.137.156","/api/v1/userSign?sign=1&username="+ username);
+        httpGet("52.79.222.91","/api/v1/userSign?sign=1&username="+ username);
           if(esp.find("+IPD,1:")){
 
           testC= esp.readString();
@@ -294,7 +294,7 @@ void loop() {
     }
     else if(first_no_breath != 0){
       while(1){
-        httpGet("43.200.137.156","/api/v1/userSign?sign=0&username="+ username);
+        httpGet("52.79.222.91","/api/v1/userSign?sign=0&username="+ username);
           if(esp.find("+IPD,1:")){
 
           testC= esp.readString();
@@ -314,7 +314,7 @@ void loop() {
     
        Serial.println("SOUND ON");
       while(1){
-        httpGet("43.200.137.156","/api/v1/userSign?sign=2&username="+ username);
+        httpGet("52.79.222.91","/api/v1/userSign?sign=2&username="+ username);
         if(esp.find("+IPD,1:")){
 
         testC= esp.readString();
@@ -335,7 +335,7 @@ void loop() {
     // if(no_breath_time > 200){ 
       // 보호자 문자 알림 서비스;
           while(1){
-            httpGet("43.200.137.156","/api/v1/userSign?sign=3&username="+ username);
+            httpGet("52.79.222.91","/api/v1/userSign?sign=3&username="+ username);
             if(esp.find("+IPD,1:")){
 
             testC= esp.readString();
@@ -358,38 +358,37 @@ void loop() {
 
 
 
-else if (result == '0') { // end
+  else if (result == '0') { // end
 
-     Serial.println("FINISH....");
+      Serial.println("FINISH....");
 
 
-    while(1){
-        // Serial.print(";");
-        httpGet("43.200.137.156","/api/v1/infoSave?count=999&username="+ username);
-        // Serial.print("#");
-        if(esp.find("+IPD,1:")){
+      while(1){
+          // Serial.print(";");
+          httpGet("52.79.222.91","/api/v1/infoSave?count=999&username="+ username);
+          // Serial.print("#");
+          if(esp.find("+IPD,1:")){
 
-          testC= esp.readString();  
-          sign_result = testC.charAt(0);
-          Serial.println("result = " + sign_result);
+            testC= esp.readString();  
+            sign_result = testC.charAt(0);
+            Serial.println("result = " + sign_result);
 
-          if(sign_result == '1'){
-            Serial.println("SUCCESSFUL SEND");
+            if(sign_result == '1'){
+              Serial.println("SUCCESSFUL SEND");
 
-            Serial.println("Total no_breath_count = " + no_breath_count);
-            Serial.println("Program exit");
+              Serial.println("Total no_breath_count = " + no_breath_count);
+              Serial.println("Program exit");
 
-            break;
-          }
-        } 
+              break;
+            }
+          } 
+
+        }
+      //총 무호흡 횟수 http.begin(~~~~);
+      Serial.println("EXIT");
+      exit(0);
 
       }
-     //총 무호흡 횟수 http.begin(~~~~);
-     Serial.println("EXIT");
-     exit(0);
-
-    }
- }
+  }
  
- 
- }
+}

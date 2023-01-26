@@ -123,6 +123,8 @@ public class UserIndexController {
         return "redirect:/";
     }
 
+
+
     @GetMapping("/auth/statusoff")
     public String statusOff(Model model){
         UserSessionDto user = (UserSessionDto) httpSession.getAttribute("user");
