@@ -126,14 +126,14 @@ public class UserIndexController {
     @ResponseBody
     public Integer statusAndroid(@RequestBody MeasureRequestDto measureRequestDto) {
 
-        if(measureRequestDto.getStatus() == 1) { //
+        if(measureRequestDto.getStatus() == 0) { //
             userService.statusOn(measureRequestDto.getUsername());
 
             // mysql DB에서
             // return (안드로이드에서 필요한 유저정보들);
             return 1;
         }
-        else if(measureRequestDto.getStatus() == 0){
+        else if(measureRequestDto.getStatus() == 1){
             userService.statusOff(measureRequestDto.getUsername());
 
             return 0;
