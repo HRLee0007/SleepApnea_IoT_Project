@@ -55,7 +55,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 loginUser = new LoginInfo(id_edit.toString(), pw_edit.toString());
 
-                loginResponse(loginUser);
+//                loginResponse(loginUser);
+
+                //test용
+                Intent intent1 = new Intent(MainActivity.this, login.class);
+                startActivity(intent1);
                 break;
         }
     }

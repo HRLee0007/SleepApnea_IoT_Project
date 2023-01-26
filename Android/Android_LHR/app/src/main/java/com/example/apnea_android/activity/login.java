@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ import com.example.apnea_android.R;
 import com.example.apnea_android.info.LoginInfo;
 import com.example.apnea_android.info.MeasureRequestInfo;
 import com.example.apnea_android.initMyApi;
+import com.example.apnea_android.RetrofitClient;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,21 +23,29 @@ import retrofit2.Response;
 
 public class login extends AppCompatActivity implements View.OnClickListener {
 
-    ImageView start_button;
-    ImageView customer_button1;
+    Button start_button;
+    Button customer_button1;
     private RetrofitClient retrofitClient;
     private com.example.apnea_android.initMyApi initMyApi;
-    MeasureRequestInfo usr1 = new MeasureRequestInfo("kr1", 0);
+    MeasureRequestInfo usr1 = new MeasureRequestInfo("gusfh", 0);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.measure_start_stop);
+
+        start_button = (Button) findViewById(R.id.start_button);
+        customer_button1 = (Button) findViewById(R.id.customer_button1);
+
+        start_button.setOnClickListener(this);
+        customer_button1.setOnClickListener(this);
     }
 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.start_button:     // 측정 시작 버튼
+                System.out.println("측정 시작 클릭");
                 if(usr1.getStatus() == 0) {
                     statusResponse(usr1);
                 } else if(usr1.getStatus() == 1) {
@@ -43,6 +53,7 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                 }
                 break;
             case R.id.customer_button1:    // 측정 종료 버튼
+                System.out.println("측정 종료 클릭");
                 if(usr1.getStatus() == 1) {
                     statusResponse(usr1);
                 } else if(usr1.getStatus() == 0) {
