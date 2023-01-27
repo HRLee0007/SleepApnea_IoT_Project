@@ -3,11 +3,11 @@ package com.service.sleepapneaiotserver.web.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+
 @Builder
 @AllArgsConstructor
 @Getter
-public class FcmMessageDto {
+public class FCMMessageDto {
     private boolean validate_only;
     private Message message;
 
