@@ -24,7 +24,7 @@ import retrofit2.Response;
 public class login extends AppCompatActivity implements View.OnClickListener {
 
     Button start_button;
-    Button customer_button1;
+    Button stop_button;
     private RetrofitClient retrofitClient;
     private com.example.apnea_android.initMyApi initMyApi;
     MeasureRequestInfo usr1 = new MeasureRequestInfo("gusfh", 0);
@@ -36,10 +36,10 @@ public class login extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.measure_start_stop);
 
         start_button = (Button) findViewById(R.id.start_button);
-        customer_button1 = (Button) findViewById(R.id.customer_button1);
+        stop_button = (Button) findViewById(R.id.stop_button);
 
         start_button.setOnClickListener(this);
-        customer_button1.setOnClickListener(this);
+        stop_button.setOnClickListener(this);
     }
 
     public void onClick(View v) {
@@ -52,7 +52,7 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                     Toast.makeText(login.this, "이미 측정중 입니다.", Toast.LENGTH_LONG).show();
                 }
                 break;
-            case R.id.customer_button1:    // 측정 종료 버튼
+            case R.id.stop_button:    // 측정 종료 버튼
                 System.out.println("측정 종료 클릭");
                 if(usr1.getStatus() == 1) {
                     statusResponse(usr1);
