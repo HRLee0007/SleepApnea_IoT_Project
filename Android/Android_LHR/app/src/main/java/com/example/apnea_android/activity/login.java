@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.apnea_android.R;
@@ -16,6 +17,9 @@ import com.example.apnea_android.info.LoginInfo;
 import com.example.apnea_android.info.MeasureRequestInfo;
 import com.example.apnea_android.initMyApi;
 import com.example.apnea_android.RetrofitClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -48,6 +52,24 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                 System.out.println("측정 시작 클릭");
                 if(usr1.getStatus() == 0) {
                     statusResponse(usr1);
+
+                    //FCM Test
+                    FirebaseMessaging.getInstance().getToken()
+                            .addOnCompleteListener(new OnCompleteListener<String>() {
+                                @Override
+                                public void onComplete(@NonNull Task<String> task) {
+                                    if(!task.isSuccessful()) {
+                                        Log.d("kim", "Fatching FCM registration token failed", task.getException());
+                                    }
+
+                                    String token = task.getResult();
+
+                                    String msg = "test" + token;
+                                    Log.d("kim", msg);
+                                    Toast.makeText(login.this, msg, Toast.LENGTH_LONG).show();
+                                }
+                            });
+                    //FCM Test
                 } else if(usr1.getStatus() == 1) {
                     Toast.makeText(login.this, "이미 측정중 입니다.", Toast.LENGTH_LONG).show();
                 }
