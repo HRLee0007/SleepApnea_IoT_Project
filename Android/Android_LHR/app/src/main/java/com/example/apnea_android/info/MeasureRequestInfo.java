@@ -3,6 +3,7 @@ package com.example.apnea_android.info;
 public class MeasureRequestInfo {
 
     private String username;
+    
 
     private Integer status;
 
