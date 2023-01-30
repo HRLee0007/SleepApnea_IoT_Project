@@ -51,9 +51,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 EditText id_edit = findViewById(R.id.login_username);    // id 에디트를 찾음.
                 EditText pw_edit = findViewById(R.id.login_password);    // pw 에디트를 찾음
-                //String token = "";
+                String token = "";
 
-                loginUser = new LoginInfo(id_edit.getText().toString(), pw_edit.getText().toString());
+                loginUser = new LoginInfo(id_edit.getText().toString(), pw_edit.getText().toString(), token);
 
                 loginResponse(loginUser);
                 break;
