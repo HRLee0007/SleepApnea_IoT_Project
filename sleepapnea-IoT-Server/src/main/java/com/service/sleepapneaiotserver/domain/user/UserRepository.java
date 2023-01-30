@@ -31,4 +31,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying(clearAutomatically = true)
     @Query("UPDATE User m SET m.statusEndAt = :now where m.username = :username")
     void changeEndTime(@Param(value="now") String now,@Param(value="username") String username);
+
+
 }

@@ -80,9 +80,10 @@ public class UserApiController {
     }
     // 로그인 처리 - 반환 유저 객체
     @PostMapping("/auth/loginProcAndroid")
+    @ResponseBody
     public ResponseDto<UserDto> loginProcAndroid(@RequestBody LoginDto loginDto){
         //기존 유저인지 확인.
-        ResponseDto<UserDto> checkID = userService.로그인(loginDto);
+        ResponseDto<UserDto> checkedUserInfo = userService.로그인(loginDto);
         /* 해당되는 아이디가 없으면 반환값
         {
             "status": 400,
@@ -114,7 +115,7 @@ public class UserApiController {
                 }
             }
          */
-       return checkID;
+       return checkedUserInfo;
     }
 
 }

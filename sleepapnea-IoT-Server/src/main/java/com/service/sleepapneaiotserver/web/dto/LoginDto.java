@@ -1,26 +1,30 @@
 package com.service.sleepapneaiotserver.web.dto;
 
-import com.service.sleepapneaiotserver.domain.user.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.service.sleepapneaiotserver.domain.user.UserToken;
+import lombok.*;
 
 import java.io.Serializable;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 @Builder
+@Getter
+@Setter
 
 public class LoginDto implements Serializable {
 
     private String username;
     private String password;
+    private String token;
 
-    public LoginDto(User user){
-        this.username = user.getUsername();
-        this.password = user.getPassword();
+    public UserToken toEntity() {
+        UserToken userToken = UserToken.builder()
+                .username(username)
+                .password(password)
+                .token(token)
+                .build();
+        return userToken;
     }
 
 
