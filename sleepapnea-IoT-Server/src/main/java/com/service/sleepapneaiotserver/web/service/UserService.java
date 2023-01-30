@@ -56,28 +56,27 @@ public class UserService {
 
 
         if(checkEqu == true){ // username, password 일치 하면
-            // username에 token 값 갱신
-            // userDto반환
+
             loginDto.setPassword(encoder.encode(loginDto.getPassword()));
             Optional<UserToken> userToken = tokenRepository.findByUsername(loginDto.getUsername());
+            // username으로 UserToken 테이블에 기록 있는지 확인. (없으면 empty())
 
             if(userToken.equals(Optional.empty())){
-                // 비어있으면 저장.
-
+                // username에 맞는 레코드 없으면 Id 새로 받아서 저장.
                 tokenRepository.save(loginDto.toEntity()).getId();
             }
             else{
-                // 이미 있으면 업데이트.
+                // 해당 username이 DB에 이미 있으면 업데이트.
+
                 tokenRepository.renewToken(loginDto.getToken(),loginDto.getUsername());
 //                tokenRepository.renewPassword(loginDto.getPassword(),loginDto.getUsername());
 //                비번 업데이트(필요없음)
             }
 
-
-
-
             return new ResponseDto<>(HttpStatus.OK.value(), userDto);
+            // username에 맞는 유저정보(userDto) 리턴
         }else{
+            // 아디 비번 일치하지 않으면 에러 : 400, userDto -> NULL
             return new ResponseDto<>(HttpStatus.BAD_REQUEST.value(), userDto);
         }
     }
