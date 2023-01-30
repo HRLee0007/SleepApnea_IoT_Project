@@ -52,7 +52,15 @@ public class UserApiController {
     @GetMapping("/api/v1/userSign")
     public int changeSign(@RequestParam("sign") int sign, @RequestParam("username") String username) throws UnsupportedEncodingException, URISyntaxException, NoSuchAlgorithmException, InvalidKeyException, JsonProcessingException {
 
-        if(sign == 3){
+        if(sign == 1){ // 위험 1 : 진동
+
+        }
+
+        if(sign == 2){ // 위험 2 : 소리
+
+        }
+
+        if(sign == 3){ // 위험 3 : 보호자에게 긴급 문자 전송
             List<String> userInfo = userService.유저메세지전송정보(username);
             String phoneNum = userInfo.get(0);
             String realName = userInfo.get(1);
@@ -68,10 +76,11 @@ public class UserApiController {
             smsService.sendSms(messageDto);
         }
         return userService.사인변경(sign, username);
+
     }
     // 로그인 처리 - 반환 유저 객체
-    @PostMapping("/auth/loginProc1")
-    public ResponseDto<UserDto> loginProc(@RequestBody LoginDto loginDto){
+    @PostMapping("/auth/loginProcAndroid")
+    public ResponseDto<UserDto> loginProcAndroid(@RequestBody LoginDto loginDto){
         //기존 유저인지 확인.
         ResponseDto<UserDto> checkID = userService.로그인(loginDto);
         /* 해당되는 아이디가 없으면 반환값
