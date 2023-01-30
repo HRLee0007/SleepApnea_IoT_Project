@@ -25,6 +25,7 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final TokenRepository tokenRepository;
     private final BCryptPasswordEncoder encoder;
 
     @Transactional
@@ -53,11 +54,24 @@ public class UserService {
         // 입력받은 pw, 데이터베이스 pw 가 일치하면 true,
         boolean checkEqu = encoder.matches(loginDto.getPassword(), user.get().getPassword());
 
+
         if(checkEqu == true){ // username, password 일치 하면
             // username에 token 값 갱신
             // userDto반환
+            loginDto.setPassword(encoder.encode(loginDto.getPassword()));
+            Optional<UserToken> userToken = tokenRepository.findByUsername(loginDto.getUsername());
 
+            if(userToken.equals(Optional.empty())){
+                // 비어있으면 저장.
 
+                tokenRepository.save(loginDto.toEntity()).getId();
+            }
+            else{
+                // 이미 있으면 업데이트.
+                tokenRepository.renewToken(loginDto.getToken(),loginDto.getUsername());
+//                tokenRepository.renewPassword(loginDto.getPassword(),loginDto.getUsername());
+//                비번 업데이트(필요없음)
+            }
 
 
 

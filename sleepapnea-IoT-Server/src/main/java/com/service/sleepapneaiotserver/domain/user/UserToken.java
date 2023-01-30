@@ -29,7 +29,7 @@ public class UserToken {
     private String username;
 
     //유저비밀번호
-    @Column(name = "password", nullable = false, length = 50)
+    @Column(nullable = false, length = 100)
     private String password;
 
     @Column(nullable = true, length = 200)
