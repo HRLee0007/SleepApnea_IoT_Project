@@ -1,7 +1,9 @@
 package com.service.sleepapneaiotserver.web.service;
 
+import com.service.sleepapneaiotserver.domain.user.TokenRepository;
 import com.service.sleepapneaiotserver.domain.user.User;
 import com.service.sleepapneaiotserver.domain.user.UserRepository;
+import com.service.sleepapneaiotserver.domain.user.UserToken;
 import com.service.sleepapneaiotserver.web.dto.LoginDto;
 import com.service.sleepapneaiotserver.web.dto.ResponseDto;
 import com.service.sleepapneaiotserver.web.dto.UpdateResponseDto;
@@ -51,8 +53,15 @@ public class UserService {
         // 입력받은 pw, 데이터베이스 pw 가 일치하면 true,
         boolean checkEqu = encoder.matches(loginDto.getPassword(), user.get().getPassword());
 
-        if(checkEqu == true){
-            //같으면 userDto반환
+        if(checkEqu == true){ // username, password 일치 하면
+            // username에 token 값 갱신
+            // userDto반환
+
+
+
+
+
+
             return new ResponseDto<>(HttpStatus.OK.value(), userDto);
         }else{
             return new ResponseDto<>(HttpStatus.BAD_REQUEST.value(), userDto);
