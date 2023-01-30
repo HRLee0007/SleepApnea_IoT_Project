@@ -89,7 +89,7 @@ public class SmsService {
         List<MessageDto> messages = new ArrayList<>();
         messages.add(messageDto);
 
-        String phone = "01000000000";
+        String phone = "01088578476";
 
         SmsRequestDto request = SmsRequestDto.builder()
                 .type("SMS")
