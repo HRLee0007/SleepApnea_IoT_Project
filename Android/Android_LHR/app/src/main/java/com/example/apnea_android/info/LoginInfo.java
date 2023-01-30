@@ -7,6 +7,7 @@ public class LoginInfo {
     //@SerializedName("password")
     private String password;
 
+//    private String token;
 
     public LoginInfo(String username, String password) {
         this.username = username;
@@ -14,8 +15,7 @@ public class LoginInfo {
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "LoginInfo{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
