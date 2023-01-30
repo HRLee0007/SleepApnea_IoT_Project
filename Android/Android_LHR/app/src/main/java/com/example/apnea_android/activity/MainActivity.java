@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.apnea_android.R;
@@ -15,6 +16,9 @@ import com.example.apnea_android.RetrofitClient;
 import com.example.apnea_android.info.JoinInfo;
 import com.example.apnea_android.info.LoginInfo;
 import com.example.apnea_android.info.ResponseInfo;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,6 +41,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         join_btn.setOnClickListener(this);                 // 리스너를 달아줌.
         login_btn.setOnClickListener(this);                // 리스너를 달아줌.
+
+        //토큰 값 보기
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.d("Kim", "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+
+                        // Log and toast
+                        Log.d("Kim", "token = " + token);
+                    }
+                });
     }
 
     @Override
@@ -51,9 +73,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 EditText id_edit = findViewById(R.id.login_username);    // id 에디트를 찾음.
                 EditText pw_edit = findViewById(R.id.login_password);    // pw 에디트를 찾음
-                String token = "";
+//                String token = "123";
 
-                loginUser = new LoginInfo(id_edit.getText().toString(), pw_edit.getText().toString(), token);
+                loginUser = new LoginInfo(id_edit.getText().toString(), pw_edit.getText().toString());
 
                 loginResponse(loginUser);
                 break;
