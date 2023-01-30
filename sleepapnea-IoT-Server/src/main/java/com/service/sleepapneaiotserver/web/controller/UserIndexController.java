@@ -72,12 +72,6 @@ public class UserIndexController {
         //return "redirect:/auth/loginpage";
         return "1";
     }
-    // 회원가입 페이지
-//    @GetMapping("/auth/join")
-//    public String join() {
-//         return "user/userjoin";
-//    }
-
 
      //회원정보 수정
     @PostMapping("/auth/updateProc")

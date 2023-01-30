@@ -2,12 +2,11 @@ package com.service.sleepapneaiotserver.web.controller.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.service.sleepapneaiotserver.domain.user.User;
-import com.service.sleepapneaiotserver.web.dto.MessageDto;
-import com.service.sleepapneaiotserver.web.dto.UpdateResponseDto;
-import com.service.sleepapneaiotserver.web.dto.UserSessionDto;
+import com.service.sleepapneaiotserver.web.dto.*;
 import com.service.sleepapneaiotserver.web.service.SmsService;
 import com.service.sleepapneaiotserver.web.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletOutputStream;
@@ -25,6 +24,7 @@ public class UserApiController {
     private final HttpSession httpSession;
     private final UserService userService;
     private final SmsService smsService;
+    private final BCryptPasswordEncoder encoder;
 
 //    @PostMapping("/api/v1/updateProc")
 //    public int updateProfile(@RequestBody User user){
@@ -52,7 +52,6 @@ public class UserApiController {
     @GetMapping("/api/v1/userSign")
     public int changeSign(@RequestParam("sign") int sign, @RequestParam("username") String username) throws UnsupportedEncodingException, URISyntaxException, NoSuchAlgorithmException, InvalidKeyException, JsonProcessingException {
 
-
         if(sign == 3){
             List<String> userInfo = userService.유저메세지전송정보(username);
             String phoneNum = userInfo.get(0);
@@ -69,6 +68,44 @@ public class UserApiController {
             smsService.sendSms(messageDto);
         }
         return userService.사인변경(sign, username);
+    }
+    // 로그인 처리 - 반환 유저 객체
+    @PostMapping("/auth/loginProc1")
+    public ResponseDto<UserDto> loginProc(@RequestBody LoginDto loginDto){
+        //기존 유저인지 확인.
+        ResponseDto<UserDto> checkID = userService.로그인(loginDto);
+        /* 해당되는 아이디가 없으면 반환값
+        {
+            "status": 400,
+            "data": {
+                "username": null,
+                "password": null,
+                "realname": null,
+                "email": null,
+                "address": null,
+                "phoneNum": null,
+                "c_phoneNum": null,
+                "role": null
+            }
+        }
+         */
+
+        /*  해당되는 아이디가 존재 및 패스워드일치 시 반환형태
+        {
+                "status": 200,
+                "data": {
+                    "username": "GM",
+                    "password": "$2a$10$X1vWiHjdamighXtJa7hoieGTgY8Vh/98QyC.x9yo1UAtq1zE3/5ma",
+                    "realname": "운영자",
+                    "email": "gm@naver.com",
+                    "address": "경상북도 포항시 대안길 23, 102동 602호",
+                    "phoneNum": "01033338476",
+                    "c_phoneNum": "01033338476",
+                    "role": null
+                }
+            }
+         */
+       return checkID;
     }
 
 }

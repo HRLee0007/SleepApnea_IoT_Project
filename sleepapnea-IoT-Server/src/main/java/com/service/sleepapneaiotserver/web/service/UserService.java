@@ -2,9 +2,12 @@ package com.service.sleepapneaiotserver.web.service;
 
 import com.service.sleepapneaiotserver.domain.user.User;
 import com.service.sleepapneaiotserver.domain.user.UserRepository;
+import com.service.sleepapneaiotserver.web.dto.LoginDto;
+import com.service.sleepapneaiotserver.web.dto.ResponseDto;
 import com.service.sleepapneaiotserver.web.dto.UpdateResponseDto;
 import com.service.sleepapneaiotserver.web.dto.UserDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,16 +23,47 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
-
     private final BCryptPasswordEncoder encoder;
+
+    @Transactional
+    public ResponseDto<UserDto> 로그인(LoginDto loginDto){
+
+        // 요청성공 : 200, 요청실패 : 400
+        //아이디에 해당되는 유저가 있는지 확인해라.
+        Optional<User> user = userRepository.findByUsername(loginDto.getUsername());
+
+        //해당되는 아이디가 없으면 (Optional 객체가 empty) 400, null객체 반환
+        if(user.equals(Optional.empty())){
+            return new ResponseDto<>(HttpStatus.BAD_REQUEST.value(), new UserDto());
+        }
+        UserDto userDto = UserDto.builder()
+                .username(user.get().getUsername())
+                .password(user.get().getPassword())
+                .address(user.get().getAddress())
+                .email(user.get().getEmail())
+                .c_phoneNum(user.get().getC_phoneNum())
+                .phoneNum(user.get().getPhoneNum())
+                .realname(user.get().getRealname())
+                .role(user.get().getRole()).build();
+
+
+
+        // 입력받은 pw, 데이터베이스 pw 가 일치하면 true,
+        boolean checkEqu = encoder.matches(loginDto.getPassword(), user.get().getPassword());
+
+        if(checkEqu == true){
+            //같으면 userDto반환
+            return new ResponseDto<>(HttpStatus.OK.value(), userDto);
+        }else{
+            return new ResponseDto<>(HttpStatus.BAD_REQUEST.value(), userDto);
+        }
+    }
 
     @Transactional
     public Long join(UserDto dto){
         dto.setPassword(encoder.encode(dto.getPassword()));
         return userRepository.save(dto.toEntity()).getId();
     }
-
-
 
     @Transactional
     public void statusOn(String username) {

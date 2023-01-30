@@ -12,6 +12,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Getter
 @Builder
+
 public class LoginDto implements Serializable {
 
     private String username;
