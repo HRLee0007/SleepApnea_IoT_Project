@@ -12,7 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.apnea_android.R;
 import com.example.apnea_android.RetrofitClient;
+import com.example.apnea_android.info.JoinInfo;
 import com.example.apnea_android.info.LoginInfo;
+import com.example.apnea_android.info.ResponseInfo;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,9 +23,6 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     Button join_btn;    //회원가입 버튼
     Button login_btn;   //로그인 버튼
-
-    EditText id_edit;                // id 에디트
-    EditText pw_edit;                // pw 에디트
 
     private RetrofitClient retrofitClient;
     private com.example.apnea_android.initMyApi initMyApi;
@@ -50,16 +49,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.login_button1:    // 로그인 버튼을 눌렀을 때
                 LoginInfo loginUser;
 
-                id_edit = (EditText)findViewById(R.id.login_username);    // id 에디트를 찾음.
-                pw_edit = (EditText)findViewById(R.id.login_password);    // pw 에디트를 찾음
+                EditText id_edit = findViewById(R.id.login_username);    // id 에디트를 찾음.
+                EditText pw_edit = findViewById(R.id.login_password);    // pw 에디트를 찾음
+                //String token = "";
 
-                loginUser = new LoginInfo(id_edit.toString(), pw_edit.toString());
+                loginUser = new LoginInfo(id_edit.getText().toString(), pw_edit.getText().toString());
 
-//                loginResponse(loginUser);
-
-                //test용
-                Intent intent1 = new Intent(MainActivity.this, login.class);
-                startActivity(intent1);
+                loginResponse(loginUser);
                 break;
         }
     }
@@ -72,26 +68,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         //User에 저장된 데이터와 함께 init에서 정의한 getJoinResponse 함수를 실행한 후 응답을 받음
-        initMyApi.getLoginResponse(loginUser).enqueue(new Callback<String>() {
+        initMyApi.getLoginResponse(loginUser).enqueue(new Callback<ResponseInfo<JoinInfo>>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<ResponseInfo<JoinInfo>> call, Response<ResponseInfo<JoinInfo>> response) {
                 Log.d("kim", "retrofit Data Fetch success");
                 Log.d("kim", "loginResponse: " + loginUser.toString());
-                //통신 성공
-                if (response.isSuccessful() && response.body().equals("1")) {
 
-                    Log.d("kim", response.body());
-                    Toast.makeText(MainActivity.this, "로그인 되었습니다.", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(MainActivity.this, login.class);
-                    startActivity(intent);
-                } else if (response.isSuccessful() && response.body().equals("0")){
-                    Toast.makeText(MainActivity.this, "아이디 혹은 비번이 틀렸습니다.", Toast.LENGTH_LONG).show();
+                //통신 성공
+                if (response.isSuccessful() && response.body() != null) {
+
+                    ResponseInfo<JoinInfo> result = response.body();
+
+                    if(result.getStatus() == 200) {
+                        Toast.makeText(MainActivity.this, "로그인 되었습니다.", Toast.LENGTH_LONG).show();
+
+                        //프리퍼런스에 reuslt.getData로 유저 정보 저장하기 구현 필요
+
+                        Intent intent = new Intent(MainActivity.this, login.class);
+                        startActivity(intent);
+
+                    } else if(result.getStatus() == 400) {
+                        Toast.makeText(MainActivity.this, "아이디 혹은 비밀번호를 다시 학인해주세요.", Toast.LENGTH_LONG).show();
+                    }
+
                 } else {
-                    Toast.makeText(MainActivity.this, "통신이 불안정 합니다", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "예기치 못한 오류가 발생하였습니다.", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<ResponseInfo<JoinInfo>> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "통신이 불안정 합니다", Toast.LENGTH_LONG).show();
             }
         });

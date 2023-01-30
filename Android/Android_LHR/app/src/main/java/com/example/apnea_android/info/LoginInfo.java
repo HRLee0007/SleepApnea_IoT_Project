@@ -14,8 +14,7 @@ public class LoginInfo {
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "LoginInfo{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
