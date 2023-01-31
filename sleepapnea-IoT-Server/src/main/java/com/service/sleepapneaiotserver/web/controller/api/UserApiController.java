@@ -1,7 +1,6 @@
 package com.service.sleepapneaiotserver.web.controller.api;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.service.sleepapneaiotserver.domain.user.User;
+import com.service.sleepapneaiotserver.fcm.service.FCMService;
 import com.service.sleepapneaiotserver.web.dto.*;
 import com.service.sleepapneaiotserver.web.service.SmsService;
 import com.service.sleepapneaiotserver.web.service.UserService;
@@ -9,9 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpSession;
-import java.io.UnsupportedEncodingException;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -25,6 +23,8 @@ public class UserApiController {
     private final UserService userService;
     private final SmsService smsService;
     private final BCryptPasswordEncoder encoder;
+
+    private final FCMService firebaseCloudMessageService;
 
 //    @PostMapping("/api/v1/updateProc")
 //    public int updateProfile(@RequestBody User user){
@@ -50,14 +50,25 @@ public class UserApiController {
     }
 
     @GetMapping("/api/v1/userSign")
-    public int changeSign(@RequestParam("sign") int sign, @RequestParam("username") String username) throws UnsupportedEncodingException, URISyntaxException, NoSuchAlgorithmException, InvalidKeyException, JsonProcessingException {
+    public int changeSign(@RequestParam("sign") int sign, @RequestParam("username") String username) throws IOException, URISyntaxException, NoSuchAlgorithmException, InvalidKeyException {
 
+        //토큰을 먼저 불러와야함. mysql DB에서.
         if(sign == 1){ // 위험 1 : 진동
+            String token = userService.토큰확인(username);
 
+            firebaseCloudMessageService.sendMessageTo(
+                    token,
+                    "위험 1 : 진동",
+                    username + "님의 수면무호흡 발생.");
         }
-
+        //토큰을 먼저 불러와야함. mysql DB에서.
         if(sign == 2){ // 위험 2 : 소리
+            String token = userService.토큰확인(username);
 
+            firebaseCloudMessageService.sendMessageTo(
+                    token,
+                    "위험 2 : 소리",
+                    username + "님의 수면무호흡 발생.");
         }
 
         if(sign == 3){ // 위험 3 : 보호자에게 긴급 문자 전송

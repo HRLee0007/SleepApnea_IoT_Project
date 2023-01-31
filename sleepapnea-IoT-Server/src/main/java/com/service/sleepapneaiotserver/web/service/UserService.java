@@ -58,9 +58,10 @@ public class UserService {
         if(checkEqu == true){ // username, password 일치 하면
 
             Optional<UserToken> userToken = tokenRepository.findByUsername(loginDto.getUsername());
-            // username으로 UserToken 테이블에 기록 있는지 확인. (없으면 empty())
+            // username으로 UserToken 테이블에 기록 있는지 확인. ( 없으면 empty() )
 
             if(userToken.equals(Optional.empty())){
+
                 // username에 맞는 레코드 없으면 Id 새로 받아서 저장.
                 UserToken userToken1 = UserToken.builder()
                         .username(loginDto.getUsername())
@@ -73,8 +74,6 @@ public class UserService {
                 // 해당 username이 DB에 이미 있으면 업데이트.
 
                 tokenRepository.renewToken(loginDto.getToken(),loginDto.getUsername());
-//                tokenRepository.renewPassword(loginDto.getPassword(),loginDto.getUsername());
-//                비번 업데이트(필요없음)
             }
 
             return new ResponseDto<>(HttpStatus.OK.value(), userDto);
@@ -96,7 +95,6 @@ public class UserService {
         userRepository.statusOnChange(1, username);
         System.out.println("1에입장완료");
     }
-
 
 
     @Transactional
@@ -125,6 +123,11 @@ public class UserService {
     public int 현황확인(String username) {
         Optional<User> user = userRepository.findByUsername(username);
         return user.get().getStatus();
+    }
+    @Transactional
+    public String 토큰확인(String username) {
+        Optional<UserToken> userToken = tokenRepository.findByUsername(username);
+        return userToken.get().getToken();
     }
 
     @Transactional
