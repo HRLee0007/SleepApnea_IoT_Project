@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-
 public interface TokenRepository extends JpaRepository<UserToken, Long> {
     Optional<UserToken> findByUsername(String username);
 
@@ -19,7 +18,6 @@ public interface TokenRepository extends JpaRepository<UserToken, Long> {
     @Query("UPDATE UserToken m SET m.token = :token where m.username = :username")
     int renewToken(@Param(value="token") String token, @Param(value="username") String username);
     // 토큰 값 갱신
-
 
 
 }
