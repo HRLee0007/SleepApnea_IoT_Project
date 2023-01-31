@@ -1,0 +1,6 @@
+com.google.firebase.annotations.DeferredApi
+com.google.firebase.annotations.PreviewApi
+com.google.firebase.annotations.concurrent.Background
+com.google.firebase.annotations.concurrent.Blocking
+com.google.firebase.annotations.concurrent.Lightweight
+com.google.firebase.annotations.concurrent.UiThread

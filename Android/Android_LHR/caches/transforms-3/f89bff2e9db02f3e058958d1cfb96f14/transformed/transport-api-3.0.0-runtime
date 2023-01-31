@@ -1,0 +1,9 @@
+com.google.android.datatransport.AutoValue_Event
+com.google.android.datatransport.BuildConfig
+com.google.android.datatransport.Encoding
+com.google.android.datatransport.Event
+com.google.android.datatransport.Priority
+com.google.android.datatransport.Transformer
+com.google.android.datatransport.Transport
+com.google.android.datatransport.TransportFactory
+com.google.android.datatransport.TransportScheduleCallback

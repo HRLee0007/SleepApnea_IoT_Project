@@ -1,0 +1,16 @@
+com.google.firebase.encoders.DataEncoder
+com.google.firebase.encoders.Encoder
+com.google.firebase.encoders.EncodingException
+com.google.firebase.encoders.FieldDescriptor
+com.google.firebase.encoders.FieldDescriptor$1
+com.google.firebase.encoders.FieldDescriptor$Builder
+com.google.firebase.encoders.ObjectEncoder
+com.google.firebase.encoders.ObjectEncoderContext
+com.google.firebase.encoders.ValueEncoder
+com.google.firebase.encoders.ValueEncoderContext
+com.google.firebase.encoders.annotations.Encodable
+com.google.firebase.encoders.annotations.Encodable$Field
+com.google.firebase.encoders.annotations.Encodable$Ignore
+com.google.firebase.encoders.annotations.ExtraProperty
+com.google.firebase.encoders.config.Configurator
+com.google.firebase.encoders.config.EncoderConfig

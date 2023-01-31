@@ -1,0 +1,5 @@
+com.google.firebase.encoders.json.BuildConfig
+com.google.firebase.encoders.json.JsonDataEncoderBuilder
+com.google.firebase.encoders.json.JsonDataEncoderBuilder$1
+com.google.firebase.encoders.json.JsonDataEncoderBuilder$TimestampEncoder
+com.google.firebase.encoders.json.JsonValueObjectEncoderContext

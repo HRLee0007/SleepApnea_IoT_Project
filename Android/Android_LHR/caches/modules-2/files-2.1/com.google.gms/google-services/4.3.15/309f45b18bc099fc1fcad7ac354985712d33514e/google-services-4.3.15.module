@@ -1,0 +1,83 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.google.gms",
+    "module": "google-services",
+    "version": "4.3.15",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.4.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "google-services-4.3.15.jar",
+          "url": "google-services-4.3.15.jar",
+          "size": 40145,
+          "sha512": "bb6f8d74245e34ddbf530a8d26c7e471a74c16b1249a66680e1c1b1610425ae0740b04f3cdd70a25d86ff00604d7d3ff3f511c850105bd5c962fd2d460aa8d4e",
+          "sha256": "b4263c25d149d6632b0af9c5dd6cfbe18d9f68d65a1cb4c3ce9d51148cf4fd8b",
+          "sha1": "84cf5702d068b422026538ccb82c1caae9aa4642",
+          "md5": "c5f1aca24c72b0a75d403ab03e711c88"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.google.android.gms",
+          "module": "strict-version-matcher-plugin",
+          "version": {
+            "requires": "1.2.4"
+          }
+        },
+        {
+          "group": "com.google.code.gson",
+          "module": "gson",
+          "version": {
+            "requires": "2.8.5"
+          }
+        },
+        {
+          "group": "com.google.guava",
+          "module": "guava",
+          "version": {
+            "requires": "27.0.1-jre"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "google-services-4.3.15.jar",
+          "url": "google-services-4.3.15.jar",
+          "size": 40145,
+          "sha512": "bb6f8d74245e34ddbf530a8d26c7e471a74c16b1249a66680e1c1b1610425ae0740b04f3cdd70a25d86ff00604d7d3ff3f511c850105bd5c962fd2d460aa8d4e",
+          "sha256": "b4263c25d149d6632b0af9c5dd6cfbe18d9f68d65a1cb4c3ce9d51148cf4fd8b",
+          "sha1": "84cf5702d068b422026538ccb82c1caae9aa4642",
+          "md5": "c5f1aca24c72b0a75d403ab03e711c88"
+        }
+      ]
+    }
+  ]
+}

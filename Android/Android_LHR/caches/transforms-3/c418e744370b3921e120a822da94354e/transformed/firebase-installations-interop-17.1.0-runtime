@@ -1,0 +1,9 @@
+com.google.firebase.installations.AutoValue_InstallationTokenResult
+com.google.firebase.installations.AutoValue_InstallationTokenResult$1
+com.google.firebase.installations.AutoValue_InstallationTokenResult$Builder
+com.google.firebase.installations.FirebaseInstallationsApi
+com.google.firebase.installations.InstallationTokenResult
+com.google.firebase.installations.InstallationTokenResult$Builder
+com.google.firebase.installations.internal.FidListener
+com.google.firebase.installations.internal.FidListenerHandle
+com.google.firebase.installations.interop.BuildConfig

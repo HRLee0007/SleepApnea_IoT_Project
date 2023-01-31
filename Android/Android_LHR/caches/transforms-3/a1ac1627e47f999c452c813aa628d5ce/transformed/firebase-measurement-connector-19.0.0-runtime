@@ -1,0 +1,4 @@
+com.google.firebase.analytics.connector.AnalyticsConnector
+com.google.firebase.analytics.connector.AnalyticsConnector$AnalyticsConnectorHandle
+com.google.firebase.analytics.connector.AnalyticsConnector$AnalyticsConnectorListener
+com.google.firebase.analytics.connector.AnalyticsConnector$ConditionalUserProperty

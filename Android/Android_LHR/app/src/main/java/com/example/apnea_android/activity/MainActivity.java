@@ -27,6 +27,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     Button join_btn;    //회원가입 버튼
     Button login_btn;   //로그인 버튼
+    String token;
 
     private RetrofitClient retrofitClient;
     private com.example.apnea_android.initMyApi initMyApi;
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
+
+
 
         join_btn = (Button)findViewById(R.id.register_button);    // 회원가입 버튼을 찾고
         login_btn = (Button)findViewById(R.id.login_button1);  // 로그인 버튼을 찾고
@@ -53,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
 
                         // Get new FCM registration token
-                        String token = task.getResult();
+                        token = task.getResult();
 
                         // Log and toast
                         Log.d("Kim", "token = " + token);
@@ -73,9 +76,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 EditText id_edit = findViewById(R.id.login_username);    // id 에디트를 찾음.
                 EditText pw_edit = findViewById(R.id.login_password);    // pw 에디트를 찾음
-//                String token = "123";
 
-                loginUser = new LoginInfo(id_edit.getText().toString(), pw_edit.getText().toString());
+                loginUser = new LoginInfo(id_edit.getText().toString(), pw_edit.getText().toString(), token);
 
                 loginResponse(loginUser);
                 break;

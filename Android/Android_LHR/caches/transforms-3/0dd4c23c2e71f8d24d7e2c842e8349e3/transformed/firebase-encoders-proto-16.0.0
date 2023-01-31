@@ -1,0 +1,11 @@
+com.google.firebase.encoders.proto.AtProtobuf
+com.google.firebase.encoders.proto.AtProtobuf$ProtobufImpl
+com.google.firebase.encoders.proto.LengthCountingOutputStream
+com.google.firebase.encoders.proto.ProtoEnum
+com.google.firebase.encoders.proto.Protobuf
+com.google.firebase.encoders.proto.Protobuf$IntEncoding
+com.google.firebase.encoders.proto.ProtobufDataEncoderContext
+com.google.firebase.encoders.proto.ProtobufDataEncoderContext$1
+com.google.firebase.encoders.proto.ProtobufEncoder
+com.google.firebase.encoders.proto.ProtobufEncoder$Builder
+com.google.firebase.encoders.proto.ProtobufValueEncoderContext
