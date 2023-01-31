@@ -18,14 +18,14 @@ public class LoginDto {
     private String password;
     private String token;
 
-    public UserToken toEntity() {
-        UserToken userToken = UserToken.builder()
-                .username(username)
-                .password(password)
-                .token(token)
-                .build();
-        return userToken;
-    }
+//    public UserToken toEntity() {
+//        UserToken userToken = UserToken.builder()
+//                .username(username)
+//                .password(password)
+//                .token(token)
+//                .build();
+//        return userToken;
+//    }
 
 
 

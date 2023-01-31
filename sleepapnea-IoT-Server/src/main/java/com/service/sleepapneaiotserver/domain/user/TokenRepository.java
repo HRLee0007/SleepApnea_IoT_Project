@@ -21,10 +21,5 @@ public interface TokenRepository extends JpaRepository<UserToken, Long> {
     // 토큰 값 갱신
 
 
-    @Transactional
-    @Modifying(clearAutomatically = true)
-    @Query("UPDATE UserToken m SET m.password = :password where m.username = :username")
-    int renewPassword(@Param(value="password") String password, @Param(value="username") String username);
-
 
 }

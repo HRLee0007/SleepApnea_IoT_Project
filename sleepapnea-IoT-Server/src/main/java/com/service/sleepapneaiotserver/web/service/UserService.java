@@ -57,13 +57,17 @@ public class UserService {
 
         if(checkEqu == true){ // username, password 일치 하면
 
-            loginDto.setPassword(encoder.encode(loginDto.getPassword()));
             Optional<UserToken> userToken = tokenRepository.findByUsername(loginDto.getUsername());
             // username으로 UserToken 테이블에 기록 있는지 확인. (없으면 empty())
 
             if(userToken.equals(Optional.empty())){
                 // username에 맞는 레코드 없으면 Id 새로 받아서 저장.
-                tokenRepository.save(loginDto.toEntity()).getId();
+                UserToken userToken1 = UserToken.builder()
+                        .username(loginDto.getUsername())
+                        .token(loginDto.getToken())
+                        .build();
+                tokenRepository.save(userToken1).getId();
+
             }
             else{
                 // 해당 username이 DB에 이미 있으면 업데이트.
