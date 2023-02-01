@@ -4,9 +4,9 @@
 
 String testC;
 SoftwareSerial esp(2, 3);  //TX,RX
-String SSID = "the-edu5G"; //wifi ssid
+String SSID = "LHR"; //wifi ssid
 
-String PASSWORD = "1404017150"; //wifi password
+String PASSWORD = "asdf123@"; //wifi password
 
 String username = "gusfh"; // user id
 
@@ -99,6 +99,9 @@ void setup() {
   for(int i = 0; i < 200; i++){ // 장력 센서 초기 값 ( 20초 )
     rubberValue[i] = analogRead(A5);
 
+    Serial.println(i);
+    Serial.println(rubberValue[i]);
+
     // TMP_Therm_ADunits = analogRead(analogPinForTMP);
     // RV_Wind_ADunits = analogRead(analogPinForRV);
     // RV_Wind_Volts = (RV_Wind_ADunits *  0.0048828125);
@@ -113,8 +116,8 @@ void setup() {
   }
   int rubberMax = -999;
   int rubberMin = 999;
-  int windMax = -999;
-  int windMax = 999;
+  // int windMax = -999;
+  // int windMin = 999;
 
   for(int i = 0; i< 200; i++){
     if(rubberValue[i] > rubberMax) rubberMax = rubberValue[i];
@@ -135,6 +138,28 @@ void setup() {
 char result;
 char sign_result;
 unsigned long now_time;
+int rubber10Max = -999;
+    int rubber10Min = 999;
+
+    int rubber15Max = -999;
+    int rubber15Min = 999;
+
+    int rubber20Max = -999;
+    int rubber20Min = 999;
+
+    int wind10Max = -999;
+    int wind10Min = 999;
+
+    int wind15Max = -999;
+    int wind15Min = 999;
+
+    int wind20Max = -999;
+    int wind20Min = 999;
+
+    int vibrateWARNING = 0;
+    int soundWARNING = 0;
+    int familyWARNING = 0;
+    int i;
 
 void loop() {
   now_time = millis();
@@ -147,7 +172,7 @@ void loop() {
 
       testC= esp.readString();
       result = testC.charAt(0);
-      Serial.println(testC);
+      // Serial.println(testC);
 
       break;
 
@@ -156,10 +181,23 @@ void loop() {
  }
 
   if (now_time - lastMillis > 100){
-    if(no_breath_time%10 == 0)
-      Serial.println("No_Breath Time: " + String(float(no_breath_time)/10) + " secs");
+    
 
     if (result == '2') { // waiting start sign from server
+
+    while(1){
+        httpGet("52.79.222.91","/api/v1/userSign?sign=1&username="+ username);
+          if(esp.find("+IPD,1:")){
+
+          testC= esp.readString();
+          sign_result = testC.charAt(0);
+          // for(int j = 0; j < 10; j ++)
+          // Serial.print(sign_result);
+
+          break;
+
+          }
+      }      
 
       Serial.println("Waiting....");
       httpMillis = -99999;
@@ -203,35 +241,14 @@ void loop() {
       rubberValue[0] = analogRead(A5); //  장력센서 최근 값 갱신
       // windValue[0] = WindSpeed_MPH;
 
-      Serial.println("Time now : " + millis());
+      // Serial.println("Time now : " + millis());
 
     // Serial.print("rubberValue = ");
     // Serial.println(rubberValue[0]);
 
 
 
-    int rubber10Max = -999;
-    int rubber10Min = 999;
-
-    int rubber15Max = -999;
-    int rubber15Min = 999;
-
-    int rubber20Max = -999;
-    int rubber20Min = 999;
-
-    int wind10Max = -999;
-    int wind10Min = 999;
-
-    int wind15Max = -999;
-    int wind15Min = 999;
-
-    int wind20Max = -999;
-    int wind20Min = 999;
-
-    int vibrateWARNING = 0;
-    int soundWARNING = 0;
-    int familyWARNING = 0;
-    int i;
+    
 
     for(i = 0; i < 100; i++){
       if(rubberValue[i] > rubber10Max) rubber10Max = rubberValue[i];
@@ -286,14 +303,14 @@ void loop() {
 
           testC= esp.readString();
           sign_result = testC.charAt(0);
-          for(int j = 0; j < 10; j ++)
-          Serial.print(sign_result);
+          // for(int j = 0; j < 10; j ++)
+          // Serial.print(sign_result);
 
           break;
 
           }
         }
-        Serial.println("VIBRATE ON");
+        // Serial.println("VIBRATE ON");
       
     }
     else if(first_no_breath != 0){
@@ -303,8 +320,8 @@ void loop() {
 
           testC= esp.readString();
           sign_result = testC.charAt(0);
-          for(int j = 0; j < 10; j ++)
-          Serial.print(sign_result);
+          // for(int j = 0; j < 10; j ++)
+          // Serial.print(sign_result);
 
           break;
 
@@ -316,15 +333,15 @@ void loop() {
     if(soundWARNING == 1){ // 무호흡 15초 이상 OR 장력센서 무반응 15초 이상 ==> 소리 ON. (진동은 OFF)
     // if(no_breath_time > 150){ 
     
-       Serial.println("SOUND ON");
+      //  Serial.println("SOUND ON");
       while(1){
         httpGet("52.79.222.91","/api/v1/userSign?sign=2&username="+ username);
         if(esp.find("+IPD,1:")){
 
         testC= esp.readString();
         sign_result = testC.charAt(0);
-        for(int j = 0; j < 10; j ++)
-        Serial.print(sign_result);
+        // for(int j = 0; j < 10; j ++)
+        // Serial.print(sign_result);
 
         break;
         }
@@ -343,20 +360,21 @@ void loop() {
 
             testC= esp.readString();
             sign_result = testC.charAt(0);
-            for(int j = 0; j < 10; j ++)
-            Serial.print(sign_result);
+            // for(int j = 0; j < 10; j ++)
+            // Serial.print(sign_result);
 
             break;
 
             }
           }
       
-      Serial.println("WARNING!!! FAMILY_CALL");
+      // Serial.println("WARNING!!! FAMILY_CALL");
     }
 
+ lastMillis = millis();
 
  }
- lastMillis = millis();
+  
 
 
 
@@ -368,13 +386,13 @@ void loop() {
 
       while(1){
           // Serial.print(";");
-          httpGet("52.79.222.91","/api/v1/infoSave?count=" + no_breath_count + "&username="+ username);
+          httpGet("52.79.222.91","/api/v1/infoSave?count=" + String(no_breath_count) + "&username="+ username);
           // Serial.print("#");
           if(esp.find("+IPD,1:")){
 
             testC= esp.readString();  
             sign_result = testC.charAt(0);
-            Serial.println("result = " + sign_result);
+            // Serial.println("result = " + sign_result);
 
             if(sign_result == '1'){
               Serial.println("SUCCESSFUL SEND");
@@ -392,5 +410,5 @@ void loop() {
 
       }
   }
- 
 }
+ 
