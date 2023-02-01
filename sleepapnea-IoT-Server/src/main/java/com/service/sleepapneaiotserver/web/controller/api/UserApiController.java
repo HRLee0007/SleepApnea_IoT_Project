@@ -55,20 +55,24 @@ public class UserApiController {
         //토큰을 먼저 불러와야함. mysql DB에서.
         if(sign == 1){ // 위험 1 : 진동
             String token = userService.토큰확인(username);
+            List<String> userInfo = userService.유저메세지전송정보(username);
+            String realName = userInfo.get(1);
 
             firebaseCloudMessageService.sendMessageTo(
                     token,
                     "위험 1 : 진동",
-                    username + "님의 수면무호흡 발생.");
+                    realName + "님의 수면무호흡 발생.\n10초 이상 호흡을 멈춘 상태입니다.");
         }
         //토큰을 먼저 불러와야함. mysql DB에서.
         if(sign == 2){ // 위험 2 : 소리
             String token = userService.토큰확인(username);
+            List<String> userInfo = userService.유저메세지전송정보(username);
+            String realName = userInfo.get(1);
 
             firebaseCloudMessageService.sendMessageTo(
                     token,
                     "위험 2 : 소리",
-                    username + "님의 수면무호흡 발생.");
+                    realName + "님의 수면무호흡 발생.\n15초 이상 호흡을 멈춘 상태입니다.");
         }
 
         if(sign == 3){ // 위험 3 : 보호자에게 긴급 문자 전송
