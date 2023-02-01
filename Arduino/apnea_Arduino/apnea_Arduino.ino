@@ -138,7 +138,7 @@ unsigned long now_time;
 
 void loop() {
   now_time = millis();
- if (now_time - httpMillis > 30000){      // check status every 30000 ms
+ if (now_time - httpMillis > 20000){      // check status every 20000 ms
   while(1){
       Serial.print(".");
       httpMillis = millis();
@@ -202,6 +202,8 @@ void loop() {
 
       rubberValue[0] = analogRead(A5); //  장력센서 최근 값 갱신
       // windValue[0] = WindSpeed_MPH;
+
+      Serial.println("Time now : " + millis());
 
     // Serial.print("rubberValue = ");
     // Serial.println(rubberValue[0]);
