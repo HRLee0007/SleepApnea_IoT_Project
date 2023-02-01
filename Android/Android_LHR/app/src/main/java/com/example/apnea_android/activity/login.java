@@ -33,6 +33,8 @@ public class login extends AppCompatActivity implements View.OnClickListener {
 
     Button start_button;
     Button stop_button;
+    Button mainpage_button;
+
     private RetrofitClient retrofitClient;
     private com.example.apnea_android.initMyApi initMyApi;
 //    MeasureRequestInfo usr1 = new MeasureRequestInfo("gusfh", 0);
@@ -46,9 +48,11 @@ public class login extends AppCompatActivity implements View.OnClickListener {
 
         start_button = (Button) findViewById(R.id.start_button);
         stop_button = (Button) findViewById(R.id.stop_button);
+        mainpage_button = (Button) findViewById(R.id.mainpage_button);
 
         start_button.setOnClickListener(this);
         stop_button.setOnClickListener(this);
+        mainpage_button.setOnClickListener(this);
 
         SharedPreferences sp = getSharedPreferences("shared", MODE_PRIVATE);
         Gson gson = new GsonBuilder().create();
@@ -82,7 +86,7 @@ public class login extends AppCompatActivity implements View.OnClickListener {
 
                                     String msg = "test" + token;
                                     Log.d("kim", msg);
-                                    Toast.makeText(login.this, msg, Toast.LENGTH_LONG).show();
+//                                    Toast.makeText(login.this, msg, Toast.LENGTH_LONG).show();
                                 }
                             });
                     //FCM Test
@@ -98,6 +102,13 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                     Toast.makeText(login.this, "이미 측정 종료 상태 입니다.", Toast.LENGTH_LONG).show();
                 }
                 break;
+            case R.id.mainpage_button:
+                System.out.println("메인페이지 클릭");
+                Toast.makeText(login.this, "로그아웃 - 메인페이지 미구현", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(login.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+
         }
     }
 
@@ -121,7 +132,7 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                     } else if (response.body() == 0) {
                         Toast.makeText(login.this, "측정 종료", Toast.LENGTH_LONG).show();
                     } else if (response.body() == -1) {
-                        Toast.makeText(login.this, "??? 뭐함 ㅋ", Toast.LENGTH_LONG).show();
+                        Toast.makeText(login.this, "? 오류 발생 ?", Toast.LENGTH_LONG).show();
                     }
                     statusUser.setStatus(response.body());
                 } else {
