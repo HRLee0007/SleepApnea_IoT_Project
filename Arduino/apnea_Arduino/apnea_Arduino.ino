@@ -324,7 +324,6 @@ void loop() {
         Serial.print(sign_result);
 
         break;
-
         }
       }
     }
