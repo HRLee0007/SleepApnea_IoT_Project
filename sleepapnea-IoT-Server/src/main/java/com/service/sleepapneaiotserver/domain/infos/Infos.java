@@ -2,19 +2,19 @@ package com.service.sleepapneaiotserver.domain.infos;
 
 
 import com.service.sleepapneaiotserver.domain.user.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+@DynamicInsert
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Data
 public class Infos {
 
     @Id

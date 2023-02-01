@@ -28,7 +28,7 @@ int TMP_Therm_ADunits;  //temp termistor value from wind sensor
 float RV_Wind_ADunits;  //RV output from wind sensor
 float RV_Wind_Volts;
 unsigned long lastMillis;
-unsigned long httpMillis = 99999;
+unsigned long httpMillis = -99999;
 int TempCtimes100;
 float zeroWind_ADunits;
 float zeroWind_volts;
@@ -159,11 +159,12 @@ void loop() {
     if(no_breath_time%10 == 0)
       Serial.println("No_Breath Time: " + String(float(no_breath_time)/10) + " secs");
 
-      if (result == '2') { // waiting start sign from server
+    if (result == '2') { // waiting start sign from server
 
-        Serial.println("Waiting....");
-       }
-  else if (result == '1') { // start
+      Serial.println("Waiting....");
+      httpMillis = -99999;
+      }
+    else if (result == '1') { // start
 
     //  Serial.println("START....");
      // read every 100 ms - printing slows this down further
@@ -187,20 +188,20 @@ void loop() {
     // Serial.print("   WindSpeed MPH ");
     // Serial.println((float)WindSpeed_MPH);
 
-    if(WindSpeed_MPH < wind_no_breath_value){
-      no_breath_time++; // 무호흡 지속시간 갱신
-    }
-    else no_breath_time = 0;                              // 호흡 발견 시 무호흡 지속시간 0으로 초기화.
+      if(WindSpeed_MPH < wind_no_breath_value){
+        no_breath_time++; // 무호흡 지속시간 갱신
+      }
+      else no_breath_time = 0;                              // 호흡 발견 시 무호흡 지속시간 0으로 초기화.
 
 
 
-    for(int i = 199; i > 0; i--){ // 
-      rubberValue[i] = rubberValue[i-1];
-      windValue[i] = windValue[i-1];
-    }
+      for(int i = 199; i > 0; i--){ // 
+        rubberValue[i] = rubberValue[i-1];
+        windValue[i] = windValue[i-1];
+      }
 
-    rubberValue[0] = analogRead(A5); //  장력센서 최근 값 갱신
-    windValue[0] = WindSpeed_MPH;
+      rubberValue[0] = analogRead(A5); //  장력센서 최근 값 갱신
+      windValue[0] = WindSpeed_MPH;
 
     // Serial.print("rubberValue = ");
     // Serial.println(rubberValue[0]);
@@ -382,7 +383,6 @@ void loop() {
               break;
             }
           } 
-
         }
       //총 무호흡 횟수 http.begin(~~~~);
       Serial.println("EXIT");
