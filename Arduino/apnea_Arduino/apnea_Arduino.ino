@@ -99,16 +99,16 @@ void setup() {
   for(int i = 0; i < 200; i++){ // 장력 센서 초기 값 ( 20초 )
     rubberValue[i] = analogRead(A5);
 
-    TMP_Therm_ADunits = analogRead(analogPinForTMP);
-    RV_Wind_ADunits = analogRead(analogPinForRV);
-    RV_Wind_Volts = (RV_Wind_ADunits *  0.0048828125);
+    // TMP_Therm_ADunits = analogRead(analogPinForTMP);
+    // RV_Wind_ADunits = analogRead(analogPinForRV);
+    // RV_Wind_Volts = (RV_Wind_ADunits *  0.0048828125);
 
 
-    TempCtimes100 = (0.005 *((float)TMP_Therm_ADunits * (float)TMP_Therm_ADunits)) - (16.862 * (float)TMP_Therm_ADunits) + 9075.4;  
-    zeroWind_ADunits = -0.0006*((float)TMP_Therm_ADunits * (float)TMP_Therm_ADunits) + 1.0727 * (float)TMP_Therm_ADunits + 47.172;  //  13.0C  553  482.39
-    zeroWind_volts = (zeroWind_ADunits * 0.0048828125) - zeroWindAdjustment;
+    // TempCtimes100 = (0.005 *((float)TMP_Therm_ADunits * (float)TMP_Therm_ADunits)) - (16.862 * (float)TMP_Therm_ADunits) + 9075.4;  
+    // zeroWind_ADunits = -0.0006*((float)TMP_Therm_ADunits * (float)TMP_Therm_ADunits) + 1.0727 * (float)TMP_Therm_ADunits + 47.172;  //  13.0C  553  482.39
+    // zeroWind_volts = (zeroWind_ADunits * 0.0048828125) - zeroWindAdjustment;
  
-    windValue[i] =  pow(((RV_Wind_Volts - zeroWind_volts) /.2300) , 2.7265);   
+    // windValue[i] =  pow(((RV_Wind_Volts - zeroWind_volts) /.2300) , 2.7265);   
     delay(100);
   }
   int rubberMax = -999;
@@ -119,14 +119,14 @@ void setup() {
   for(int i = 0; i< 200; i++){
     if(rubberValue[i] > rubberMax) rubberMax = rubberValue[i];
     if(rubberValue[i] < rubberMin) rubberMin = rubberValue[i];
-    if(windValue[i] > windMax) windMax = windValue[i];
-    if(windValue[i] < windMin) windMin = windValue[i];
+    // if(windValue[i] > windMax) windMax = windValue[i];
+    // if(windValue[i] < windMin) windMin = windValue[i];
 
   }
 
 
   rubber_no_breath_value = (rubberMax - rubberMin) * (4/10);
-  wind_no_breath_value = (windMax - windMin) * (4/10);
+  // wind_no_breath_value = (windMax - windMin) * (4/10);
 
   Serial.print("Serial start");
 
@@ -170,38 +170,38 @@ void loop() {
      // read every 100 ms - printing slows this down further
     
 
-    TMP_Therm_ADunits = analogRead(analogPinForTMP);
-    RV_Wind_ADunits = analogRead(analogPinForRV);
-    RV_Wind_Volts = (RV_Wind_ADunits *  0.0048828125);
+    // TMP_Therm_ADunits = analogRead(analogPinForTMP);
+    // RV_Wind_ADunits = analogRead(analogPinForRV);
+    // RV_Wind_Volts = (RV_Wind_ADunits *  0.0048828125);
 
 
-    TempCtimes100 = (0.005 *((float)TMP_Therm_ADunits * (float)TMP_Therm_ADunits)) - (16.862 * (float)TMP_Therm_ADunits) + 9075.4;  
-    zeroWind_ADunits = -0.0006*((float)TMP_Therm_ADunits * (float)TMP_Therm_ADunits) + 1.0727 * (float)TMP_Therm_ADunits + 47.172;  //  13.0C  553  482.39
-    zeroWind_volts = (zeroWind_ADunits * 0.0048828125) - zeroWindAdjustment;
+    // TempCtimes100 = (0.005 *((float)TMP_Therm_ADunits * (float)TMP_Therm_ADunits)) - (16.862 * (float)TMP_Therm_ADunits) + 9075.4;  
+    // zeroWind_ADunits = -0.0006*((float)TMP_Therm_ADunits * (float)TMP_Therm_ADunits) + 1.0727 * (float)TMP_Therm_ADunits + 47.172;  //  13.0C  553  482.39
+    // zeroWind_volts = (zeroWind_ADunits * 0.0048828125) - zeroWindAdjustment;
  
  
 
     
 
-    WindSpeed_MPH =  pow(((RV_Wind_Volts - zeroWind_volts) /.2300) , 2.7265);   
+    // WindSpeed_MPH =  pow(((RV_Wind_Volts - zeroWind_volts) /.2300) , 2.7265);   
 
     // Serial.print("   WindSpeed MPH ");
     // Serial.println((float)WindSpeed_MPH);
 
-      if(WindSpeed_MPH < wind_no_breath_value){
-        no_breath_time++; // 무호흡 지속시간 갱신
-      }
-      else no_breath_time = 0;                              // 호흡 발견 시 무호흡 지속시간 0으로 초기화.
+      // if(WindSpeed_MPH < wind_no_breath_value){
+      //   no_breath_time++; // 무호흡 지속시간 갱신
+      // }
+      // else no_breath_time = 0;                              // 호흡 발견 시 무호흡 지속시간 0으로 초기화.
 
 
 
       for(int i = 199; i > 0; i--){ // 
         rubberValue[i] = rubberValue[i-1];
-        windValue[i] = windValue[i-1];
+        // windValue[i] = windValue[i-1];
       }
 
       rubberValue[0] = analogRead(A5); //  장력센서 최근 값 갱신
-      windValue[0] = WindSpeed_MPH;
+      // windValue[0] = WindSpeed_MPH;
 
     // Serial.print("rubberValue = ");
     // Serial.println(rubberValue[0]);
@@ -235,8 +235,8 @@ void loop() {
       if(rubberValue[i] > rubber10Max) rubber10Max = rubberValue[i];
       if(rubberValue[i] < rubber10Min) rubber10Min = rubberValue[i];
 
-      if(windValue[i] > wind10Max) wind10Max = windValue[i];
-      if(windValue[i] < wind10Min) wind10Min = windValue[i];
+      // if(windValue[i] > wind10Max) wind10Max = windValue[i];
+      // if(windValue[i] < wind10Min) wind10Min = windValue[i];
 
     }
 
@@ -244,34 +244,35 @@ void loop() {
       if(rubberValue[i] > rubber15Max) rubber15Max = rubberValue[i];
       if(rubberValue[i] < rubber15Min) rubber15Min = rubberValue[i];
 
-      if(windValue[i] > wind15Max) wind15Max = windValue[i];
-      if(windValue[i] < wind15Min) wind15Min = windValue[i];
+      // if(windValue[i] > wind15Max) wind15Max = windValue[i];
+      // if(windValue[i] < wind15Min) wind15Min = windValue[i];
     }
 
     for(i = 0; i < 200; i++){
       if(rubberValue[i] > rubber20Max) rubber20Max = rubberValue[i];
       if(rubberValue[i] < rubber20Min) rubber20Min = rubberValue[i];
 
-      if(windValue[i] > wind20Max) wind20Max = windValue[i];
-      if(windValue[i] < wind20Min) wind20Min = windValue[i];
+      // if(windValue[i] > wind20Max) wind20Max = windValue[i];
+      // if(windValue[i] < wind20Min) wind20Min = windValue[i];
     }
 
 
 
     if(rubber10Max - rubber10Min < rubber_no_breath_value) vibrateWARNING = 1;
-    else if(wind10Max - wind10Min < wind_no_breath_value) vibrateWARNING = 1;
+    // else if(wind10Max - wind10Min < wind_no_breath_value) vibrateWARNING = 1;
     else vibrateWARNING = 0;
 
     if(rubber15Max - rubber15Min < rubber_no_breath_value) soundWARNING = 1;
-    else if(wind15Max - wind15Min < wind_no_breath_value) soundWARNING = 1;
+    // else if(wind15Max - wind15Min < wind_no_breath_value) soundWARNING = 1;
     else soundWARNING = 0;
 
     if(rubber20Max - rubber20Min < rubber_no_breath_value) familyWARNING = 1;
-    else if(wind20Max - wind20Min < wind_no_breath_value) familyWARNING = 1;
+    // else if(wind20Max - wind20Min < wind_no_breath_value) familyWARNING = 1;
     else familyWARNING = 0;
 
 ////////////////////
     if (vibrateWARNING == 1){ 
+      
       // 무호흡 10초 이상 OR 장력센서 무반응 10초 이상 ==> 진동 ON.
         if(first_no_breath == 0){
           first_no_breath = 1;
@@ -306,8 +307,8 @@ void loop() {
           break;
 
           }
-        }      
-        first_no_breath = 0;
+      }      
+      first_no_breath = 0;
     }
 
     if(soundWARNING == 1){ // 무호흡 15초 이상 OR 장력센서 무반응 15초 이상 ==> 소리 ON. (진동은 OFF)
@@ -365,7 +366,7 @@ void loop() {
 
       while(1){
           // Serial.print(";");
-          httpGet("52.79.222.91","/api/v1/infoSave?count=999&username="+ username);
+          httpGet("52.79.222.91","/api/v1/infoSave?count=" + no_breath_count + "&username="+ username);
           // Serial.print("#");
           if(esp.find("+IPD,1:")){
 
