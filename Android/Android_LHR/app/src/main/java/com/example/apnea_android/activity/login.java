@@ -103,11 +103,16 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                 }
                 break;
             case R.id.mainpage_button:
-                System.out.println("메인페이지 클릭");
-                Toast.makeText(login.this, "로그아웃 - 메인페이지 미구현", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(login.this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+                if(usr1.getStatus() == 1){
+                    Toast.makeText(login.this, "측정 중입니다. 메인페이지로 가시려면\n          측정 종료를 눌러주세요.", Toast.LENGTH_LONG).show();
+                }
+                else if(usr1.getStatus() == 0) {
+                    System.out.println("메인페이지 클릭");
+                    Toast.makeText(login.this, "로그아웃 - 메인페이지 미구현", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(login.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }
 
         }
     }
