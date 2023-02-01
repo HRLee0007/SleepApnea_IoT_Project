@@ -57,6 +57,8 @@ public class UserService {
 
         if(checkEqu == true){ // username, password 일치 하면
 
+            statusReady(loginDto.getUsername()); // status = 2 로 변경 ( 아두이노에서 대기상태 )
+
             Optional<UserToken> userToken = tokenRepository.findByUsername(loginDto.getUsername());
             // username으로 UserToken 테이블에 기록 있는지 확인. ( 없으면 empty() )
 
@@ -101,6 +103,12 @@ public class UserService {
     public void statusOff(String username) {
         userRepository.statusOnChange(0, username);
         System.out.println("0에입장완료");
+    }
+
+    @Transactional
+    public void statusReady(String username) {
+        userRepository.statusOnChange(2, username);
+        System.out.println("2에입장완료");
     }
 
     @Transactional

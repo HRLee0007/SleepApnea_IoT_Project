@@ -4,9 +4,9 @@
 
 String testC;
 SoftwareSerial esp(2, 3);  //TX,RX
-String SSID = "LHR"; //wifi ssid
+String SSID = "the-edu5G"; //wifi ssid
 
-String PASSWORD = "asdf123@"; //wifi password
+String PASSWORD = "1404017150"; //wifi password
 
 String username = "gusfh"; // user id
 
