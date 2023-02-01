@@ -1,6 +1,7 @@
 package com.example.apnea_android.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.apnea_android.R;
+import com.example.apnea_android.info.JoinInfo;
 import com.example.apnea_android.info.LoginInfo;
 import com.example.apnea_android.info.MeasureRequestInfo;
 import com.example.apnea_android.initMyApi;
@@ -20,6 +22,8 @@ import com.example.apnea_android.RetrofitClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,7 +35,8 @@ public class login extends AppCompatActivity implements View.OnClickListener {
     Button stop_button;
     private RetrofitClient retrofitClient;
     private com.example.apnea_android.initMyApi initMyApi;
-    MeasureRequestInfo usr1 = new MeasureRequestInfo("gusfh", 0);
+//    MeasureRequestInfo usr1 = new MeasureRequestInfo("gusfh", 0);
+    static MeasureRequestInfo usr1;
 
 
     @Override
@@ -44,6 +49,17 @@ public class login extends AppCompatActivity implements View.OnClickListener {
 
         start_button.setOnClickListener(this);
         stop_button.setOnClickListener(this);
+
+        SharedPreferences sp = getSharedPreferences("shared", MODE_PRIVATE);
+        Gson gson = new GsonBuilder().create();
+        String jsonJoinInfo = sp.getString("jsonJoinInfo", "");
+
+        if (!jsonJoinInfo.equals("")) {
+            JoinInfo joinInfo = gson.fromJson(jsonJoinInfo, JoinInfo.class);
+            Log.d("kim", "username = " + joinInfo.getUsername());
+            usr1 = new MeasureRequestInfo(joinInfo.getUsername(), 0);
+        }
+
     }
 
     public void onClick(View v) {

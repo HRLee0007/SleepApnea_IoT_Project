@@ -1,6 +1,7 @@
 package com.example.apnea_android.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +20,8 @@ import com.example.apnea_android.info.ResponseInfo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -106,7 +109,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if(result.getStatus() == 200) {
                         Toast.makeText(MainActivity.this, "로그인 되었습니다.", Toast.LENGTH_LONG).show();
 
-                        //프리퍼런스에 reuslt.getData로 유저 정보 저장하기 구현 필요
+                        //프리퍼런스에 reuslt.getData로 유저 정보 저장하기 구현
+                        JoinInfo joinInfo = new JoinInfo(result.getData().getUsername(), result.getData().getPassword(), result.getData().getRealname(),
+                                result.getData().getEmail(), result.getData().getAddress(), result.getData().getPhoneNum(), result.getData().getC_phoneNum(), result.getData().getRole());
+
+                        saveJoinInfo(joinInfo);
 
                         Intent intent = new Intent(MainActivity.this, login.class);
                         startActivity(intent);
@@ -125,6 +132,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+
+    //sharedPreference에 유저 정보 저장
+    public void saveJoinInfo(JoinInfo joinInfo) {
+        Gson gson = new GsonBuilder().create();
+        SharedPreferences sp;
+
+        sp = getSharedPreferences("shared", MODE_PRIVATE);
+
+        String jsonJoinInfo = gson.toJson(joinInfo, JoinInfo.class);
+
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("jsonJoinInfo", jsonJoinInfo);
+        editor.commit();
+
+    }
+
+
 
 
 }
