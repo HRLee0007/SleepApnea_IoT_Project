@@ -1,13 +1,14 @@
 package com.service.sleepapneaiotserver.web.dto;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Getter
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Getter
+@Setter
 public class InfosRequestDto {
 
     private int count;
