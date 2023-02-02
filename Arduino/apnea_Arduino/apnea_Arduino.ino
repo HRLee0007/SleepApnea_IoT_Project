@@ -85,6 +85,9 @@ void httpGet(String server, String uri) {
   
 }
 
+int rubberMax = -999;
+int rubberMin = 999;
+
 void setup() {
 
  
@@ -99,7 +102,8 @@ void setup() {
   for(int i = 0; i < 200; i++){ // 장력 센서 초기 값 ( 20초 )
     rubberValue[i] = analogRead(A5);
 
-    Serial.println(i);
+    Serial.print(i + ": ");
+    
     Serial.println(rubberValue[i]);
 
     // TMP_Therm_ADunits = analogRead(analogPinForTMP);
@@ -114,8 +118,7 @@ void setup() {
     // windValue[i] =  pow(((RV_Wind_Volts - zeroWind_volts) /.2300) , 2.7265);   
     delay(100);
   }
-  int rubberMax = -999;
-  int rubberMin = 999;
+  
   // int windMax = -999;
   // int windMin = 999;
 
@@ -139,27 +142,27 @@ char result;
 char sign_result;
 unsigned long now_time;
 int rubber10Max = -999;
-    int rubber10Min = 999;
+int rubber10Min = 999;
 
-    int rubber15Max = -999;
-    int rubber15Min = 999;
+int rubber15Max = -999;
+int rubber15Min = 999;
 
-    int rubber20Max = -999;
-    int rubber20Min = 999;
+int rubber20Max = -999;
+int rubber20Min = 999;
 
-    int wind10Max = -999;
-    int wind10Min = 999;
+int wind10Max = -999;
+int wind10Min = 999;
 
-    int wind15Max = -999;
-    int wind15Min = 999;
+int wind15Max = -999;
+int wind15Min = 999;
 
-    int wind20Max = -999;
-    int wind20Min = 999;
+int wind20Max = -999;
+int wind20Min = 999;
 
-    int vibrateWARNING = 0;
-    int soundWARNING = 0;
-    int familyWARNING = 0;
-    int i;
+int vibrateWARNING = 0;
+int soundWARNING = 0;
+int familyWARNING = 0;
+int i;
 
 void loop() {
   now_time = millis();
@@ -181,6 +184,8 @@ void loop() {
  }
 
   if (now_time - lastMillis > 100){
+
+    lastMillis = millis();
     
 
     if (result == '2') { // waiting start sign from server
@@ -233,12 +238,12 @@ void loop() {
 
 
 
-      for(int i = 199; i > 0; i--){ // 
-        rubberValue[i] = rubberValue[i-1];
+      for(int i = 0; i < 200; i++){ // 
+        rubberValue[i] = rubberValue[i+1];
         // windValue[i] = windValue[i-1];
       }
 
-      rubberValue[0] = analogRead(A5); //  장력센서 최근 값 갱신
+      rubberValue[199] = analogRead(A5); //  장력센서 최근 값 갱신
       // windValue[0] = WindSpeed_MPH;
 
       // Serial.println("Time now : " + millis());
@@ -250,7 +255,7 @@ void loop() {
 
     
 
-    for(i = 0; i < 100; i++){
+    for(i = 100; i < 200; i++){
       if(rubberValue[i] > rubber10Max) rubber10Max = rubberValue[i];
       if(rubberValue[i] < rubber10Min) rubber10Min = rubberValue[i];
 
@@ -259,7 +264,7 @@ void loop() {
 
     }
 
-    for(i = 0; i < 150; i++){
+    for(i = 50; i < 200; i++){
       if(rubberValue[i] > rubber15Max) rubber15Max = rubberValue[i];
       if(rubberValue[i] < rubber15Min) rubber15Min = rubberValue[i];
 
@@ -371,7 +376,7 @@ void loop() {
       // Serial.println("WARNING!!! FAMILY_CALL");
     }
 
- lastMillis = millis();
+ 
 
  }
   
@@ -410,5 +415,6 @@ void loop() {
 
       }
   }
+  
 }
  
