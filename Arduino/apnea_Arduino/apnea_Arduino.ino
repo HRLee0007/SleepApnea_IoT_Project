@@ -4,9 +4,9 @@
 
 String testC;
 SoftwareSerial esp(2, 3);  //TX,RX
-String SSID = "LHR"; //wifi ssid
+String SSID = "KDY"; //wifi ssid
 
-String PASSWORD = "asdf123@"; //wifi password
+String PASSWORD = "2018111658"; //wifi password
 
 String username = "gusfh"; // user id
 
@@ -28,7 +28,7 @@ int TMP_Therm_ADunits;  //temp termistor value from wind sensor
 float RV_Wind_ADunits;  //RV output from wind sensor
 float RV_Wind_Volts;
 unsigned long lastMillis;
-unsigned long httpMillis = -99999;
+unsigned long httpMillis = 0;
 int TempCtimes100;
 float zeroWind_ADunits;
 float zeroWind_volts;
@@ -37,18 +37,19 @@ float WindSpeed_MPH;
 
 
 //장력 센서 초기화
-int rubberValue[200] = {0,};
-int rubber_no_breath_value = 0;
+float rubberValue[200] = {0,};
+float rubber_no_breath_value = 999;
 
 void connectWifi() {
 
   String cmd = "AT+CWMODE=3";
 
   esp.println(cmd);
-
+  
   cmd = "AT+CWJAP=\"" + SSID + "\",\"" + PASSWORD + "\"";
 
   while(1){
+
     esp.println(cmd);
 
 
@@ -85,8 +86,9 @@ void httpGet(String server, String uri) {
   
 }
 
-int rubberMax = -999;
-int rubberMin = 999;
+float rubberMax = -999;
+float rubberMin = 999;
+
 
 void setup() {
 
@@ -99,12 +101,12 @@ void setup() {
   connectWifi();
 
 
-  for(int i = 0; i < 200; i++){ // 장력 센서 초기 값 ( 20초 )
-    rubberValue[i] = analogRead(A5);
 
-    Serial.print(i + ": ");
+  for(int k = 0; k < 200; k++){ // 장력 센서 초기 값 ( 20초 )
+    rubberValue[k] = analogRead(A5);
+
     
-    Serial.println(rubberValue[i]);
+    Serial.println(rubberValue[k]);
 
     // TMP_Therm_ADunits = analogRead(analogPinForTMP);
     // RV_Wind_ADunits = analogRead(analogPinForRV);
@@ -141,16 +143,16 @@ void setup() {
 char result;
 char sign_result;
 unsigned long now_time;
-int rubber10Max = -999;
-int rubber10Min = 999;
+float rubber10Max = -999;
+float rubber10Min = 999;
 
-int rubber15Max = -999;
-int rubber15Min = 999;
+float rubber15Max = -999;
+float rubber15Min = 999;
 
-int rubber20Max = -999;
-int rubber20Min = 999;
+float rubber20Max = -999;
+float rubber20Min = 999;
 
-int wind10Max = -999;
+float wind10Max = -999;
 int wind10Min = 999;
 
 int wind15Max = -999;
@@ -164,12 +166,17 @@ int soundWARNING = 0;
 int familyWARNING = 0;
 int i;
 
+int loop_first = 1;
+
 void loop() {
+
+
   now_time = millis();
- if (now_time - httpMillis > 20000){      // check status every 20000 ms
+ if (now_time - httpMillis > 20000){
+   httpMillis = millis();      // check status every 20000 ms
   while(1){
       Serial.print(".");
-      httpMillis = millis();
+      
       httpGet("52.79.222.91","/api/v1/user?username=" + username );
       if(esp.find("+IPD,1:")){
 
@@ -282,6 +289,8 @@ void loop() {
 
 
 
+
+
     if(rubber10Max - rubber10Min < rubber_no_breath_value) vibrateWARNING = 1;
     // else if(wind10Max - wind10Min < wind_no_breath_value) vibrateWARNING = 1;
     else vibrateWARNING = 0;
@@ -293,6 +302,16 @@ void loop() {
     if(rubber20Max - rubber20Min < rubber_no_breath_value) familyWARNING = 1;
     // else if(wind20Max - wind20Min < wind_no_breath_value) familyWARNING = 1;
     else familyWARNING = 0;
+
+    Serial.println("---------------");
+
+Serial.println(rubber10Max);
+Serial.println(rubber10Min);
+Serial.println(rubber_no_breath_value);
+Serial.println("---------------");
+Serial.println(vibrateWARNING);
+Serial.println("---------------");
+
 
 ////////////////////
     if (vibrateWARNING == 1){ 
