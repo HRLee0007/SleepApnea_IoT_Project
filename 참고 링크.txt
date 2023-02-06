@@ -51,3 +51,7 @@ https://todaycode.tistory.com/8
 Mysql 암호화 - 복호화
 https://stricky.tistory.com/330
 
+아두이노 Wifi Rev2 사용법
+https://docs.arduino.cc/tutorials/uno-wifi-rev2/uno-wifi-r2-web-server-ap-mode
+
+https://verybutter.tistory.com/42
