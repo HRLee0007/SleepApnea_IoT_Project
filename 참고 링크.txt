@@ -55,3 +55,11 @@ https://stricky.tistory.com/330
 https://docs.arduino.cc/tutorials/uno-wifi-rev2/uno-wifi-r2-web-server-ap-mode
 
 https://verybutter.tistory.com/42
+
+
+안드로이드 스크롤뷰
+https://kitesoft.tistory.com/104
+
+
+WIFININA 사용법
+https://github.com/arduino-libraries/WiFiNINA/blob/master/docs/api.md
