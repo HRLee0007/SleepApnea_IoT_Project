@@ -1,0 +1,47 @@
+{\rtf1\ansi\ansicpg949\cocoartf2512
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 .SFNSMono-Regular;}
+{\colortbl;\red255\green255\blue255;\red27\green31\blue35;}
+{\*\expandedcolortbl;;\cssrgb\c14118\c16078\c18431;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\sl380\partightenfactor0
+
+\f0\fs27\fsmilli13600 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 #include <SPI.h>\
+#include <WiFiNINA.h>\
+\
+char ssid[] = "myNetwork";          //  your network SSID (name)\
+char pass[] = "myPassword";   // your network password\
+\
+int status = WL_IDLE_STATUS;\
+char servername[]="google.com";  // remote server we will connect to\
+\
+WiFiClient client;\
+\
+void setup() \{\
+  Serial.begin(9600);\
+  Serial.println("Attempting to connect to WPA network...");\
+  Serial.print("SSID: ");\
+  Serial.println(ssid);\
+\
+  status = WiFi.begin(ssid, pass);\
+  if ( status != WL_CONNECTED) \{\
+    Serial.println("Couldn't get a WiFi connection");\
+    // don't do anything else:\
+    while(true);\
+  \}\
+  else \{\
+    Serial.println("Connected to WiFi");\
+    Serial.println("\\nStarting connection...");\
+    // if you get a connection, report back via serial:\
+    if (client.connect(servername, 80)) \{\
+      Serial.println("connected");\
+      // Make a HTTP request:\
+      client.println("GET /search?q=arduino HTTP/1.0");\
+      client.println();\
+    \}\
+  \}\
+\}\
+\
+void loop() \{\
+}
