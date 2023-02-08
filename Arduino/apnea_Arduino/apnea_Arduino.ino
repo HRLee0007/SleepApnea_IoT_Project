@@ -120,6 +120,10 @@ void connectWifi() {
 float rubberMax = -999;
 float rubberMin = 999;
 
+int vibrateControl = 1;
+int soundControl = 1;
+int smsControl = 1;
+
 
 void setup() {
 
@@ -301,18 +305,35 @@ void loop() {
 
 
 
-    if(rubber10Max - rubber10Min < rubber_no_breath_value) vibrateWARNING = 1;
+    if(rubber10Max - rubber10Min < rubber_no_breath_value) {
+      vibrateControl--;
+      vibrateWARNING = 1;
+      soundWARNING = 0;
+      familyWARNING = 0;
+    }
     // else if(wind10Max - wind10Min < wind_no_breath_value) vibrateWARNING = 1;
-    else vibrateWARNING = 0;
+    else {
+      vibrateWARNING = 0;
+      soundWARNING = 0;
+      familyWARNING = 0;
+      vibrateControl = 1;
+    }
 
     if(rubber15Max - rubber15Min < rubber_no_breath_value) {
+      soundControl--;
       vibrateWARNING = 0;
       soundWARNING = 1;
+      familyWARNING = 0;
     }
     // else if(wind15Max - wind15Min < wind_no_breath_value) soundWARNING = 1;
-    else soundWARNING = 0;
+    else {
+      soundWARNING = 0;
+      soundControl = 1;
+      familyWARNING = 0;
+    }
 
     if(rubber20Max - rubber20Min < rubber_no_breath_value) {
+      smsControl--;
       vibrateWARNING = 0;
       soundWARNING = 0;
       familyWARNING = 1;
@@ -327,12 +348,14 @@ Serial.println(rubber10Min);
 Serial.println(rubber_no_breath_value);
 Serial.println("---------------");
 Serial.println(vibrateWARNING);
+Serial.println(soundWARNING);
+Serial.println(familyWARNING);
 Serial.println("---------------");
 
 
 ////////////////////
-    if (vibrateWARNING == 1){ 
-      
+    if (vibrateWARNING == 1 && vibrateControl == 0){ 
+      vibrateControl = 10;
       // 무호흡 10초 이상 OR 장력센서 무반응 10초 이상 ==> 진동 ON.
         if(first_no_breath == 0){
           first_no_breath = 1;
@@ -347,9 +370,9 @@ Serial.println("---------------");
       first_no_breath = 0;
     }
 
-    if(soundWARNING == 1){ // 무호흡 15초 이상 OR 장력센서 무반응 15초 이상 ==> 소리 ON. (진동은 OFF)
+    if(soundWARNING == 1 && soundControl == 0){ // 무호흡 15초 이상 OR 장력센서 무반응 15초 이상 ==> 소리 ON. (진동은 OFF)
     // if(no_breath_time > 150){ 
-    
+      soundControl = 10;
       //  Serial.println("SOUND ON");
       httpGet("/api/v1/userSign?sign=2&username="+ username);
         
@@ -358,10 +381,13 @@ Serial.println("---------------");
 
     }
 
-    if(familyWARNING == 1){// 무호흡 20초 이상 OR 장력센서 무반응 20초 이상
+    if(familyWARNING == 1 && smsControl == 0){// 무호흡 20초 이상 OR 장력센서 무반응 20초 이상
     // if(no_breath_time > 200){ 
       // 보호자 문자 알림 서비스;
-        httpGet("/api/v1/userSign?sign=3&username="+ username);
+      smsControl = 100;
+      httpGet("/api/v1/userSign?sign=3&username="+ username);
+
+
             
       // Serial.println("WARNING!!! FAMILY_CALL");
     }
