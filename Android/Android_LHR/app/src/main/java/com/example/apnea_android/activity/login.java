@@ -37,8 +37,7 @@ public class login extends AppCompatActivity implements View.OnClickListener {
 
     private RetrofitClient retrofitClient;
     private com.example.apnea_android.initMyApi initMyApi;
-//    MeasureRequestInfo usr1 = new MeasureRequestInfo("gusfh", 0);
-    static MeasureRequestInfo usr1;
+    static MeasureRequestInfo measureRequestInfo;
 
 
     @Override
@@ -61,7 +60,7 @@ public class login extends AppCompatActivity implements View.OnClickListener {
         if (!jsonJoinInfo.equals("")) {
             JoinInfo joinInfo = gson.fromJson(jsonJoinInfo, JoinInfo.class);
             Log.d("kim", "username = " + joinInfo.getUsername());
-            usr1 = new MeasureRequestInfo(joinInfo.getUsername(), 0);
+            measureRequestInfo = new MeasureRequestInfo(joinInfo.getUsername(), 0);
         }
 
     }
@@ -70,8 +69,8 @@ public class login extends AppCompatActivity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.start_button:     // 측정 시작 버튼
                 System.out.println("측정 시작 클릭");
-                if(usr1.getStatus() == 0) {
-                    statusResponse(usr1);
+                if(measureRequestInfo.getStatus() == 0) {
+                    statusResponse(measureRequestInfo);
 
                     //FCM Test
                     FirebaseMessaging.getInstance().getToken()
@@ -90,23 +89,23 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                                 }
                             });
                     //FCM Test
-                } else if(usr1.getStatus() == 1) {
+                } else if(measureRequestInfo.getStatus() == 1) {
                     Toast.makeText(login.this, "이미 측정중 입니다.", Toast.LENGTH_LONG).show();
                 }
                 break;
             case R.id.stop_button:    // 측정 종료 버튼
                 System.out.println("측정 종료 클릭");
-                if(usr1.getStatus() == 1) {
-                    statusResponse(usr1);
-                } else if(usr1.getStatus() == 0) {
+                if(measureRequestInfo.getStatus() == 1) {
+                    statusResponse(measureRequestInfo);
+                } else if(measureRequestInfo.getStatus() == 0) {
                     Toast.makeText(login.this, "이미 측정 종료 상태 입니다.", Toast.LENGTH_LONG).show();
                 }
                 break;
             case R.id.mainpage_button:
-                if(usr1.getStatus() == 1){
+                if(measureRequestInfo.getStatus() == 1){
                     Toast.makeText(login.this, "측정 중입니다. 메인페이지로 가시려면\n          측정 종료를 눌러주세요.", Toast.LENGTH_LONG).show();
                 }
-                else if(usr1.getStatus() == 0) {
+                else if(measureRequestInfo.getStatus() == 0) {
                     System.out.println("메인페이지 클릭");
                     Toast.makeText(login.this, "로그아웃 - 메인페이지 미구현", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(login.this, MainActivity.class);
@@ -140,6 +139,8 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                         Toast.makeText(login.this, "? 오류 발생 ?", Toast.LENGTH_LONG).show();
                     }
                     statusUser.setStatus(response.body());
+                    //preference status 값 최신화
+                    saveJoinInfo(statusUser);
                 } else {
                     Toast.makeText(login.this, "0.통신 오류로 인한 측정 시작 실패", Toast.LENGTH_LONG).show();
                 }
@@ -149,5 +150,20 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                 Toast.makeText(login.this, "1.통신 오류로 인한 측정 시작 실패", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    //sharedPreference에 MeasureRequestInfo 저장
+    public void saveJoinInfo(MeasureRequestInfo measureRequestInfo) {
+        Gson gson = new GsonBuilder().create();
+        SharedPreferences sp;
+
+        sp = getSharedPreferences("shared", MODE_PRIVATE);
+
+        String jsonMeasureRequestInfo = gson.toJson(measureRequestInfo, MeasureRequestInfo.class);
+
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("jsonMeasureRequestInfo", jsonMeasureRequestInfo);
+        editor.commit();
+
     }
 }
