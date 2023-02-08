@@ -123,12 +123,22 @@ public class UserIndexController {
         if(measureRequestDto.getStatus() == 0) { //
             userService.statusOn(measureRequestDto.getUsername());
 
+            LocalDateTime localDateTimeNow = LocalDateTime.now();
+            String parsedLocalDateTimeNow = localDateTimeNow.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
+            userService.측정시작시간(measureRequestDto.getUsername(), parsedLocalDateTimeNow);
+
             // mysql DB에서
             // return (안드로이드에서 필요한 유저정보들);
             return 1;
         }
         else if(measureRequestDto.getStatus() == 1){
             userService.statusOff(measureRequestDto.getUsername());
+
+            LocalDateTime localDateTimeNow = LocalDateTime.now();
+            String parsedLocalDateTimeNow = localDateTimeNow.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
+            userService.측정종료시간(measureRequestDto.getUsername(), parsedLocalDateTimeNow);
 
             return 0;
         }
