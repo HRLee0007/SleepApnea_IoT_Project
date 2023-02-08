@@ -1,15 +1,23 @@
 #include <Wire.h>
-#include <SoftwareSerial.h>
+#include <SPI.h>
+#include <WiFiNINA.h>
 
+#include "arduino_secrets.h" 
+///////please enter your sensitive data in the Secret tab/arduino_secrets.h
+char ssid[] = SECRET_SSID;        // your network SSID (name)
+char pass[] = SECRET_PASS;    // your network password (use for WPA, or use as key for WEP)
+String username = "gusfh";
+int keyIndex = 0;            // your network key index number (needed only for WEP)
 
-String testC;
-SoftwareSerial esp(2, 3);  //TX,RX
-String SSID = "KDY"; //wifi ssid
+int wifi_status = WL_IDLE_STATUS;
+// if you don't want to use DNS (and reduce your sketch size)
+// use the numeric IP instead of the name for the server:
+IPAddress server(52,79,222,91);
 
-String PASSWORD = "2018111658"; //wifi password
-
-String username = "gusfh"; // user id
-
+// Initialize the Ethernet client library
+// with the IP address and port of the server
+// that you want to connect to (port 80 is default for HTTP):
+WiFiClient client;
 
 #define analogPinForRV    1   // change to pins you the analog pins are using
 #define analogPinForTMP   0
@@ -27,7 +35,7 @@ const float zeroWindAdjustment =  .2; // negative numbers yield smaller wind spe
 int TMP_Therm_ADunits;  //temp termistor value from wind sensor
 float RV_Wind_ADunits;  //RV output from wind sensor
 float RV_Wind_Volts;
-unsigned long lastMillis;
+unsigned long lastMillis = 0;
 unsigned long httpMillis = 0;
 int TempCtimes100;
 float zeroWind_ADunits;
@@ -40,51 +48,74 @@ float WindSpeed_MPH;
 float rubberValue[200] = {0,};
 float rubber_no_breath_value = 999;
 
-void connectWifi() {
 
-  String cmd = "AT+CWMODE=3";
-
-  esp.println(cmd);
+void httpGet(String uri) {
   
-  cmd = "AT+CWJAP=\"" + SSID + "\",\"" + PASSWORD + "\"";
-
-  while(1){
-
-    esp.println(cmd);
-
-
-    if (esp.find("OK")) {
-
-      Serial.println("Wifi connected");
-      break;
-
-    } else {
-
-      Serial.println(" Cannot connect to Wifi" + esp);
-    }
+  if (client.connect(server, 8080)) {
+    Serial.println("GET Request: Succeeded");
+    // Make a HTTP request:
+    
+    client.println("GET " + uri + " HTTP/1.0");
+    client.println();
   }
 }
 
-void httpGet(String server, String uri) {
 
-  String connect_server_cmd = "AT+CIPSTART=\"TCP\",\"" + server + "\",8080";
+char getStatus() {
+  char stat;
+  
+  httpGet("/api/v1/user?username=gusfh");    
+    // client.println("Host: 52.97.222.91");
+    // client.println("Connection: close");
+  
+  delay(500);
 
-  esp.print("AT+CIPSTART=\"TCP\",\"52.79.222.91\",8080");
-  esp.println();
+  while (client.available()) {
+    stat = client.read();
+    Serial.write(stat);
+  }
+
+  Serial.println("status now : "+stat);
+  return stat;
+}
 
 
-  String httpCmd = "GET " + uri;
 
-  int length = httpCmd.length() + 2;
-  String cmd = "AT+CIPSEND="+String(length);
+void connectWifi() {
 
-  esp.print(cmd);
-  esp.println();
+  while (!Serial) {
+    ; // wait for serial port to connect. Needed for native USB port only
+  }
 
-  esp.print(httpCmd);
-  esp.println();
+  // check for the WiFi module:
+  if (WiFi.status() == WL_NO_MODULE) {
+    Serial.println("Communication with WiFi module failed!");
+    // don't continue
+    while (true);
+  }
+
+  String fv = WiFi.firmwareVersion();
+  if (fv < WIFI_FIRMWARE_LATEST_VERSION) {
+    Serial.println("Please upgrade the firmware");
+  }
+
+  // attempt to connect to WiFi network:
+  while (wifi_status != WL_CONNECTED) {
+    Serial.print("Attempting to connect to SSID: ");
+    Serial.println(ssid);
+    // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
+    wifi_status = WiFi.begin(ssid, pass);
+
+    // wait 10 seconds for connection:
+    delay(2000);
+  }
+  Serial.println("Connected to WiFi");
+  // printWifiStatus();
+
   
 }
+
+
 
 float rubberMax = -999;
 float rubberMin = 999;
@@ -94,7 +125,6 @@ void setup() {
 
  
  // wifi 연결;
-  esp.begin(9600);
 
   Serial.begin(9600);
 
@@ -105,7 +135,6 @@ void setup() {
   for(int k = 0; k < 200; k++){ // 장력 센서 초기 값 ( 20초 )
     rubberValue[k] = analogRead(A5);
 
-    
     Serial.println(rubberValue[k]);
 
     // TMP_Therm_ADunits = analogRead(analogPinForTMP);
@@ -133,14 +162,14 @@ void setup() {
   }
 
 
-  rubber_no_breath_value = (rubberMax - rubberMin) * (4/10);
+  rubber_no_breath_value = (rubberMax - rubberMin) * 0.4;
   // wind_no_breath_value = (windMax - windMin) * (4/10);
 
   Serial.print("Serial start");
 
 }
 
-char result;
+char status;
 char sign_result;
 unsigned long now_time;
 float rubber10Max = -999;
@@ -172,49 +201,25 @@ void loop() {
 
 
   now_time = millis();
- if (now_time - httpMillis > 20000){
-   httpMillis = millis();      // check status every 20000 ms
-  while(1){
-      Serial.print(".");
-      
-      httpGet("52.79.222.91","/api/v1/user?username=" + username );
-      if(esp.find("+IPD,1:")){
+ if (now_time - httpMillis > 10000){
+   httpMillis = millis();      // check status every 10000 ms
+  
+    status = getStatus();
+    Serial.print(status);
 
-      testC= esp.readString();
-      result = testC.charAt(0);
-      // Serial.println(testC);
-
-      break;
-
-      }
-    }
  }
 
   if (now_time - lastMillis > 100){
-
     lastMillis = millis();
     
-
-    if (result == '2') { // waiting start sign from server
-
-    while(1){
-        httpGet("52.79.222.91","/api/v1/userSign?sign=1&username="+ username);
-          if(esp.find("+IPD,1:")){
-
-          testC= esp.readString();
-          sign_result = testC.charAt(0);
-          // for(int j = 0; j < 10; j ++)
-          // Serial.print(sign_result);
-
-          break;
-
-          }
-      }      
+    if (status == '2') { // waiting start sign from server
 
       Serial.println("Waiting....");
-      httpMillis = -99999;
-      }
-    else if (result == '1') { // start
+      status = getStatus();
+      Serial.print(status);
+      
+    }
+    else if (status == '1') { // start
 
     //  Serial.println("START....");
      // read every 100 ms - printing slows this down further
@@ -260,7 +265,12 @@ void loop() {
 
 
 
-    
+    rubber10Max = 0;
+    rubber10Min = 999;
+    rubber15Max = 0;
+    rubber15Min = 999;
+    rubber20Max = 0;
+    rubber20Min = 999;
 
     for(i = 100; i < 200; i++){
       if(rubberValue[i] > rubber10Max) rubber10Max = rubberValue[i];
@@ -295,11 +305,18 @@ void loop() {
     // else if(wind10Max - wind10Min < wind_no_breath_value) vibrateWARNING = 1;
     else vibrateWARNING = 0;
 
-    if(rubber15Max - rubber15Min < rubber_no_breath_value) soundWARNING = 1;
+    if(rubber15Max - rubber15Min < rubber_no_breath_value) {
+      vibrateWARNING = 0;
+      soundWARNING = 1;
+    }
     // else if(wind15Max - wind15Min < wind_no_breath_value) soundWARNING = 1;
     else soundWARNING = 0;
 
-    if(rubber20Max - rubber20Min < rubber_no_breath_value) familyWARNING = 1;
+    if(rubber20Max - rubber20Min < rubber_no_breath_value) {
+      vibrateWARNING = 0;
+      soundWARNING = 0;
+      familyWARNING = 1;
+    }
     // else if(wind20Max - wind20Min < wind_no_breath_value) familyWARNING = 1;
     else familyWARNING = 0;
 
@@ -321,36 +338,12 @@ Serial.println("---------------");
           first_no_breath = 1;
           no_breath_count++;
         }
-        while(1){
-        httpGet("52.79.222.91","/api/v1/userSign?sign=1&username="+ username);
-          if(esp.find("+IPD,1:")){
-
-          testC= esp.readString();
-          sign_result = testC.charAt(0);
-          // for(int j = 0; j < 10; j ++)
-          // Serial.print(sign_result);
-
-          break;
-
-          }
-        }
+        httpGet("/api/v1/userSign?sign=1&username=" + username);
         // Serial.println("VIBRATE ON");
       
     }
     else if(first_no_breath != 0){
-      while(1){
-        httpGet("52.79.222.91","/api/v1/userSign?sign=0&username="+ username);
-          if(esp.find("+IPD,1:")){
-
-          testC= esp.readString();
-          sign_result = testC.charAt(0);
-          // for(int j = 0; j < 10; j ++)
-          // Serial.print(sign_result);
-
-          break;
-
-          }
-      }      
+      // httpGet("/api/v1/userSign?sign=0&username=" + username);   
       first_no_breath = 0;
     }
 
@@ -358,18 +351,8 @@ Serial.println("---------------");
     // if(no_breath_time > 150){ 
     
       //  Serial.println("SOUND ON");
-      while(1){
-        httpGet("52.79.222.91","/api/v1/userSign?sign=2&username="+ username);
-        if(esp.find("+IPD,1:")){
-
-        testC= esp.readString();
-        sign_result = testC.charAt(0);
-        // for(int j = 0; j < 10; j ++)
-        // Serial.print(sign_result);
-
-        break;
-        }
-      }
+      httpGet("/api/v1/userSign?sign=2&username="+ username);
+        
     }
     else{ // 15초 사이에 호흡 발생 시 소리 OFF
 
@@ -378,56 +361,23 @@ Serial.println("---------------");
     if(familyWARNING == 1){// 무호흡 20초 이상 OR 장력센서 무반응 20초 이상
     // if(no_breath_time > 200){ 
       // 보호자 문자 알림 서비스;
-          while(1){
-            httpGet("52.79.222.91","/api/v1/userSign?sign=3&username="+ username);
-            if(esp.find("+IPD,1:")){
-
-            testC= esp.readString();
-            sign_result = testC.charAt(0);
-            // for(int j = 0; j < 10; j ++)
-            // Serial.print(sign_result);
-
-            break;
-
-            }
-          }
-      
+        httpGet("/api/v1/userSign?sign=3&username="+ username);
+            
       // Serial.println("WARNING!!! FAMILY_CALL");
     }
 
- 
-
  }
   
-
-
-
-
-  else if (result == '0') { // end
+  else if (status == '0') { // end
 
       Serial.println("FINISH....");
 
 
-      while(1){
-          // Serial.print(";");
-          httpGet("52.79.222.91","/api/v1/infoSave?count=" + String(no_breath_count) + "&username="+ username);
-          // Serial.print("#");
-          if(esp.find("+IPD,1:")){
+      httpGet("/api/v1/infoSave?count=" + String(no_breath_count) + "&username="+ username);
+      
+      Serial.println("Total no_breath_count = " + no_breath_count);
+      Serial.println("Program exit");
 
-            testC= esp.readString();  
-            sign_result = testC.charAt(0);
-            // Serial.println("result = " + sign_result);
-
-            if(sign_result == '1'){
-              Serial.println("SUCCESSFUL SEND");
-
-              Serial.println("Total no_breath_count = " + no_breath_count);
-              Serial.println("Program exit");
-
-              break;
-            }
-          } 
-        }
       //총 무호흡 횟수 http.begin(~~~~);
       Serial.println("EXIT");
       exit(0);
@@ -436,4 +386,3 @@ Serial.println("---------------");
   }
   
 }
- 
