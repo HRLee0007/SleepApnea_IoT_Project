@@ -1,5 +1,6 @@
 package com.example.apnea_android.activity;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import com.example.apnea_android.R;
 import com.example.apnea_android.RetrofitClient;
 import com.example.apnea_android.info.JoinInfo;
 import com.example.apnea_android.info.LoginInfo;
+import com.example.apnea_android.info.MeasureRequestInfo;
 import com.example.apnea_android.info.ResponseInfo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -39,8 +41,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
-
-
 
         join_btn = (Button)findViewById(R.id.register_button);    // 회원가입 버튼을 찾고
         login_btn = (Button)findViewById(R.id.login_button1);  // 로그인 버튼을 찾고
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    //sharedPreference에 유저 정보 저장
+    //sharedPreference에 유저 정보 저장 + measureRequestInfo 저장
     public void saveJoinInfo(JoinInfo joinInfo) {
         Gson gson = new GsonBuilder().create();
         SharedPreferences sp;
@@ -146,6 +146,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editor.putString("jsonJoinInfo", jsonJoinInfo);
         editor.commit();
 
+        //MeasureRequestInfo 프리퍼런스에 저장, usernamer이랑 status
+        MeasureRequestInfo measureRequestInfo = new MeasureRequestInfo(joinInfo.getUsername(), 0);
+        String jsonMeasureRequestInfo = gson.toJson(measureRequestInfo, MeasureRequestInfo.class);
+        
+        editor.putString("jsonMeasureRequestInfo", jsonMeasureRequestInfo);
+        editor.commit();
     }
 
 
