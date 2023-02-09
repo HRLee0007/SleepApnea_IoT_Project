@@ -56,13 +56,15 @@ public class login extends AppCompatActivity implements View.OnClickListener {
         SharedPreferences sp = getSharedPreferences("shared", MODE_PRIVATE);
         Gson gson = new GsonBuilder().create();
         String jsonJoinInfo = sp.getString("jsonJoinInfo", "");
+        String jsonMeasureRequestInfo = sp.getString("jsonMeasureRequestInfo", "");
 
-        if (!jsonJoinInfo.equals("")) {
+        if (!jsonJoinInfo.equals("") && !jsonMeasureRequestInfo.equals("")) {
             JoinInfo joinInfo = gson.fromJson(jsonJoinInfo, JoinInfo.class);
             Log.d("kim", "username = " + joinInfo.getUsername());
-            measureRequestInfo = new MeasureRequestInfo(joinInfo.getUsername(), 0);
-        }
 
+            measureRequestInfo = gson.fromJson(jsonMeasureRequestInfo, MeasureRequestInfo.class);
+            Log.d("kim", "user status = " + measureRequestInfo.getStatus());
+        }
     }
 
     public void onClick(View v) {
