@@ -72,9 +72,9 @@ char getStatus() {
 
   while (client.available()) {
     stat = client.read();
-    Serial.write(stat);
+    
   }
-
+  // Serial.write(stat);
   Serial.println("status now : "+stat);
   return stat;
 }
@@ -313,10 +313,11 @@ void loop() {
     }
     // else if(wind10Max - wind10Min < wind_no_breath_value) vibrateWARNING = 1;
     else {
+      vibrateControl = 1;
+
       vibrateWARNING = 0;
       soundWARNING = 0;
       familyWARNING = 0;
-      vibrateControl = 1;
     }
 
     if(rubber15Max - rubber15Min < rubber_no_breath_value) {
@@ -327,8 +328,9 @@ void loop() {
     }
     // else if(wind15Max - wind15Min < wind_no_breath_value) soundWARNING = 1;
     else {
-      soundWARNING = 0;
       soundControl = 1;
+
+      soundWARNING = 0;
       familyWARNING = 0;
     }
 
@@ -339,7 +341,11 @@ void loop() {
       familyWARNING = 1;
     }
     // else if(wind20Max - wind20Min < wind_no_breath_value) familyWARNING = 1;
-    else familyWARNING = 0;
+    else {
+      smsControl = 1;
+
+      familyWARNING = 0;
+    }
 
     Serial.println("---------------");
 
@@ -375,6 +381,7 @@ Serial.println("---------------");
       soundControl = 10;
       //  Serial.println("SOUND ON");
       httpGet("/api/v1/userSign?sign=2&username="+ username);
+        
     }
     else{ // 15초 사이에 호흡 발생 시 소리 OFF
 
