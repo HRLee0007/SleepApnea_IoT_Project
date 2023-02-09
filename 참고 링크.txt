@@ -63,3 +63,7 @@ https://kitesoft.tistory.com/104
 
 WIFININA 사용법
 https://github.com/arduino-libraries/WiFiNINA/blob/master/docs/api.md
+
+
+안드로이드 소리 울리기
+https://wolfy.tistory.com/57

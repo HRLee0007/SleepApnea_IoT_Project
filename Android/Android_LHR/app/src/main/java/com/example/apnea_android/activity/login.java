@@ -90,7 +90,7 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                             });
                     //FCM Test
                 } else if(measureRequestInfo.getStatus() == 1) {
-                    Toast.makeText(login.this, "이미 측정중 입니다.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(login.this, "이미 측정중 입니다.", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.stop_button:    // 측정 종료 버튼
@@ -98,16 +98,16 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                 if(measureRequestInfo.getStatus() == 1) {
                     statusResponse(measureRequestInfo);
                 } else if(measureRequestInfo.getStatus() == 0) {
-                    Toast.makeText(login.this, "이미 측정 종료 상태 입니다.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(login.this, "이미 측정 종료 상태 입니다.", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.mainpage_button:
                 if(measureRequestInfo.getStatus() == 1){
-                    Toast.makeText(login.this, "측정 중입니다. 메인페이지로 가시려면\n          측정 종료를 눌러주세요.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(login.this, "측정 중입니다. 메인페이지로 가시려면\n          측정 종료를 눌러주세요.", Toast.LENGTH_SHORT).show();
                 }
                 else if(measureRequestInfo.getStatus() == 0) {
                     System.out.println("메인페이지 클릭");
-                    Toast.makeText(login.this, "로그아웃 - 메인페이지 미구현", Toast.LENGTH_LONG).show();
+                    Toast.makeText(login.this, "로그아웃 - 메인페이지 미구현", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(login.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
@@ -132,22 +132,22 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                 if (response.isSuccessful()) {
                     Log.d("kim", response.body().toString());
                     if (response.body() == 1) {
-                        Toast.makeText(login.this, "측정 시작", Toast.LENGTH_LONG).show();
+                        Toast.makeText(login.this, "측정 시작", Toast.LENGTH_SHORT).show();
                     } else if (response.body() == 0) {
-                        Toast.makeText(login.this, "측정 종료", Toast.LENGTH_LONG).show();
+                        Toast.makeText(login.this, "측정 종료", Toast.LENGTH_SHORT).show();
                     } else if (response.body() == -1) {
-                        Toast.makeText(login.this, "? 오류 발생 ?", Toast.LENGTH_LONG).show();
+                        Toast.makeText(login.this, "? 오류 발생 ?", Toast.LENGTH_SHORT).show();
                     }
                     statusUser.setStatus(response.body());
                     //preference status 값 최신화
                     saveJoinInfo(statusUser);
                 } else {
-                    Toast.makeText(login.this, "0.통신 오류로 인한 측정 시작 실패", Toast.LENGTH_LONG).show();
+                    Toast.makeText(login.this, "0.통신 오류로 인한 측정 시작 실패", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
-                Toast.makeText(login.this, "1.통신 오류로 인한 측정 시작 실패", Toast.LENGTH_LONG).show();
+                Toast.makeText(login.this, "1.통신 오류로 인한 측정 시작 실패", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -164,6 +164,5 @@ public class login extends AppCompatActivity implements View.OnClickListener {
         SharedPreferences.Editor editor = sp.edit();
         editor.putString("jsonMeasureRequestInfo", jsonMeasureRequestInfo);
         editor.commit();
-
     }
 }

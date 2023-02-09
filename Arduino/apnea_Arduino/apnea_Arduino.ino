@@ -375,7 +375,6 @@ Serial.println("---------------");
       soundControl = 10;
       //  Serial.println("SOUND ON");
       httpGet("/api/v1/userSign?sign=2&username="+ username);
-        
     }
     else{ // 15초 사이에 호흡 발생 시 소리 OFF
 
