@@ -48,8 +48,11 @@ public class FCMService {
                                 .title(title)
                                 .body(body)
                                 .image(null)
-                                .build()
-                        ).build()).validateOnly(false).build();
+                                .build())
+                        .data(FcmMessage.Data.builder()
+                                .sound("http://testcampaign.instance.com/r/?id=s1685a5,d57fd6,d57ff5")
+                                .build())
+                        .build()).validateOnly(false).build();
 
         return objectMapper.writeValueAsString(fcmMessage);
     }
