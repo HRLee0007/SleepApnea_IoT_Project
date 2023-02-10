@@ -19,7 +19,8 @@ public class FcmMessage {
         private Notification notification;
         private String token;
 
-        private Data data;
+        private Android android;
+
     }
 
     @Builder
@@ -35,8 +36,20 @@ public class FcmMessage {
     @Builder
     @AllArgsConstructor
     @Getter
-    public static class Data {
+    public static class Android {
+        private String ttl;
 
-        private String sound;
+        private AndroidNotification notification;
+
     }
+
+    @Builder
+    @AllArgsConstructor
+    @Getter
+    public static class AndroidNotification {
+        private String sound;
+        private String click_action;
+
+    }
+
 }

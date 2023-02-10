@@ -20,6 +20,11 @@
         <activity
             android:name=".activity.login"
             android:exported="true">
+            <intent-filter>
+                <action android:name="push_activity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -27,10 +32,12 @@
         <activity
             android:name=".activity.join"
             android:exported="true">
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
             android:name=".activity.MainActivity"
             android:exported="true">

@@ -49,8 +49,12 @@ public class FCMService {
                                 .body(body)
                                 .image(null)
                                 .build())
-                        .data(FcmMessage.Data.builder()
-                                .sound("http://testcampaign.instance.com/r/?id=s1685a5,d57fd6,d57ff5")
+                        .android(FcmMessage.Android.builder()
+                                .ttl("1s")
+                                .notification(FcmMessage.AndroidNotification.builder()
+                                        .sound("defualt")
+                                        .click_action("push_activity")
+                                        .build())
                                 .build())
                         .build()).validateOnly(false).build();
 
