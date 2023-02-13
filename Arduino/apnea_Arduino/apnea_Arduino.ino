@@ -390,7 +390,7 @@ Serial.println("---------------");
     if(familyWARNING == 1 && smsControl == 0){// 무호흡 20초 이상 OR 장력센서 무반응 20초 이상
     // if(no_breath_time > 200){ 
       // 보호자 문자 알림 서비스;
-      smsControl = 100;
+      smsControl = 10000;
       httpGet("/api/v1/userSign?sign=3&username="+ username);
 
 
