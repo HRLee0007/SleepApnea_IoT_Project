@@ -52,7 +52,7 @@ public class FCMService {
                         .android(FcmMessage.Android.builder()
                                 .ttl("1s")
                                 .notification(FcmMessage.AndroidNotification.builder()
-                                        .sound("defualt")
+                                        .sound("alert_sound1.mp3")
                                         .click_action("push_activity")
                                         .build())
                                 .build())
