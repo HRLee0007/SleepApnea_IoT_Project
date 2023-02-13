@@ -74,3 +74,7 @@ https://bacassf.tistory.com/119
 
 알림 사운드 파일 모음
 https://pgtd.tistory.com/157
+
+
+안드로이드 채널
+https://stackoverflow.com/questions/61142155/custom-sound-in-firebase-push-notification

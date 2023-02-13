@@ -64,7 +64,7 @@ void httpGet(String uri) {
 char getStatus() {
   char stat;
   
-  httpGet("/api/v1/user?username=gusfh");    
+  httpGet("/api/v1/user?username=" + username);    
     // client.println("Host: 52.97.222.91");
     // client.println("Connection: close");
   
