@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
 import com.example.apnea_android.activity.login;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,9 +24,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-
-import java.util.Arrays;
-import java.util.Map;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
@@ -47,6 +43,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage message) {
         long[] pattern = {0, 500, 200, 400, 100};
 
+<<<<<<< HEAD
         Map<String, String> data = message.getData();
         String title = data.get("title");
         String body = data.get("body");
@@ -101,16 +98,17 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             // Play the sound
             Uri soundUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.alert_sound1);
             Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), soundUri);
+=======
+        Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Ringtone ringㅋtone = RingtoneManager.getRingtone(getApplicationContext(), sound);
+
+// pattern 을 진동의 패턴 -1은 패턴의 반복은 한번
+        if(message.getNotification().getTitle() == "위험 1 : 진동") {
+            vibe.vibrate(pattern, -1);
+        }
+        else if(message.getNotification().getTitle() == "위험 2 : 소리"){
+>>>>>>> 6a906a951808d61321b90fabf27a630f7f766c23
             ringtone.play();
-
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "1")
-                    .setSmallIcon(R.drawable.notification_icon)
-                    .setContentTitle(title)
-                    .setContentText(body)
-                    .setPriority(NotificationCompat.PRIORITY_HIGH);
-
-            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-            notificationManager.notify(0, builder.build());
         }
 
         //푸쉬 알림 클릭 시, 바로 로그인 완료 화면으로 넘기는 부분
