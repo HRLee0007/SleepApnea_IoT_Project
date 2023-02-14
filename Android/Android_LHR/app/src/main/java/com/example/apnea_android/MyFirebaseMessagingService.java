@@ -109,19 +109,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             /*// Play the sound
             Uri soundUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.alert_sound1);
             Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), soundUri);
-<<<<<<< Updated upstream
-=======
-=======
-        Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        Ringtone ringㅋtone = RingtoneManager.getRingtone(getApplicationContext(), sound);
-
-// pattern 을 진동의 패턴 -1은 패턴의 반복은 한번
-        if(message.getNotification().getTitle() == "위험 1 : 진동") {
-            vibe.vibrate(pattern, -1);
-        }
-        else if(message.getNotification().getTitle() == "위험 2 : 소리"){
->>>>>>> 6a906a951808d61321b90fabf27a630f7f766c23a906a951808d61321b90fabf27a630f7f766c23
->>>>>>> Stashed changes
             ringtone.play();
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "1")
