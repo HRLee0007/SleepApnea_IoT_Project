@@ -4,6 +4,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -98,7 +99,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 //        else if(message.getNotification().getTitle() == "위험 2 : 소리"){
         else if(title.equals("위험 2 : 소리")){
 
-            // Play the sound
+            Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+            Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), uri);
+            AudioAttributes audioAttributes = new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_ALARM).build();
+
+            ringtone.setAudioAttributes(audioAttributes);
+            ringtone.play();
+
+            /*// Play the sound
             Uri soundUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.alert_sound1);
             Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), soundUri);
             ringtone.play();
@@ -110,7 +118,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     .setPriority(NotificationCompat.PRIORITY_HIGH);
 
             NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-            notificationManager.notify(0, builder.build());
+            notificationManager.notify(0, builder.build());*/
         }
 
         //푸쉬 알림 클릭 시, 바로 로그인 완료 화면으로 넘기는 부분
