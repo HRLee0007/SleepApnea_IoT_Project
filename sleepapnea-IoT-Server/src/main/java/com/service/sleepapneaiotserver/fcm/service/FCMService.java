@@ -41,6 +41,9 @@ public class FCMService {
     }
 
     private String makeMessage(String targetToken, String title, String body) throws JsonParseException, JsonProcessingException {
+
+
+
         FcmMessage fcmMessage = FcmMessage.builder()
                 .message(FcmMessage.Message.builder()
                         .token(targetToken)
@@ -49,10 +52,15 @@ public class FCMService {
                                 .body(body)
                                 .image(null)
                                 .build())
+                        .data(FcmMessage.Data.builder()
+                                .title(title)
+                                .body(body)
+                                .sound("default")
+                                .build())
                         .android(FcmMessage.Android.builder()
                                 .ttl("1s")
+                                .priority("high")
                                 .notification(FcmMessage.AndroidNotification.builder()
-                                        .sound("alert_sound1")
                                         .click_action("push_activity")
                                         .build())
                                 .build())

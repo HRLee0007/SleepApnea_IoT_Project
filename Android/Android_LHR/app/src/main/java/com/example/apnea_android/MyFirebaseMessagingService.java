@@ -6,11 +6,15 @@ import android.content.Intent;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.PowerManager;
+import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.example.apnea_android.activity.login;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -18,6 +22,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
+import java.util.Arrays;
+import java.util.Map;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
@@ -38,15 +45,65 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         long[] pattern = {0, 500, 200, 400, 100};
         Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
-        Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), sound);
+        Map<String, String> data = message.getData();
+        String title = data.get("title");
+        String body = data.get("body");
+//        String vibrate = data.get("vibrate");
+        String sound = data.get("sound");
+
+        Uri soundUri = Uri.parse(sound);
+        Ringtone ringtone = RingtoneManager.getRingtone(this, soundUri);
+
+//        long[] vib_pattern = Arrays.stream(vibrate.split(","))
+//                .mapToLong(Long::parseLong)
+//                .toArray();
+
+//        Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+//        Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), sound);
 
 // pattern 을 진동의 패턴 -1은 패턴의 반복은 한번
-        if(message.getNotification().getTitle() == "위험 1 : 진동") {
-            vibe.vibrate(pattern, -1);
+//        if(message.getNotification().getTitle() == "위험 1 : 진동") {
+        if(title == "위험 1 : 진동") {
+            VibrationEffect effect = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                effect = VibrationEffect.createWaveform(pattern, VibrationEffect.DEFAULT_AMPLITUDE);
+            }
+
+            // Get the system vibration service
+            Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+            // Vibrate the device
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(effect);
+            } else {
+                vibrator.vibrate(pattern, -1);
+            }
+
+
+            // Show the notification
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "1")
+                    .setSmallIcon(R.drawable.notification_icon)
+                    .setContentTitle(title)
+                    .setContentText(body)
+                    .setPriority(NotificationCompat.PRIORITY_HIGH);
+
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+            notificationManager.notify(0, builder.build());
         }
-        else if(message.getNotification().getTitle() == "위험 2 : 소리"){
+//        else if(message.getNotification().getTitle() == "위험 2 : 소리"){
+        else if(title == "위험 2 : 소리"){
+
+            // Play the sound
             ringtone.play();
+
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "1")
+                    .setSmallIcon(R.drawable.notification_icon)
+                    .setContentTitle(title)
+                    .setContentText(body)
+                    .setPriority(NotificationCompat.PRIORITY_HIGH);
+
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+            notificationManager.notify(0, builder.build());
         }
 
         //푸쉬 알림 클릭 시, 바로 로그인 완료 화면으로 넘기는 부분
