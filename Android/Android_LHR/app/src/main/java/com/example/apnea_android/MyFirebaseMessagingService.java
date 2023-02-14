@@ -1,8 +1,10 @@
 package com.example.apnea_android;
 
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -11,6 +13,7 @@ import android.os.PowerManager;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
@@ -43,16 +46,17 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(@NonNull RemoteMessage message) {
         long[] pattern = {0, 500, 200, 400, 100};
-        Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         Map<String, String> data = message.getData();
         String title = data.get("title");
         String body = data.get("body");
 //        String vibrate = data.get("vibrate");
-        String sound = data.get("sound");
+//        String sound = data.get("sound");
+//
+//        Uri soundUri = Uri.parse(sound);
+//        Ringtone ringtone = RingtoneManager.getRingtone(this, soundUri);
 
-        Uri soundUri = Uri.parse(sound);
-        Ringtone ringtone = RingtoneManager.getRingtone(this, soundUri);
+        Log.d("Kim", "onMessageReceived title" + title);
 
 //        long[] vib_pattern = Arrays.stream(vibrate.split(","))
 //                .mapToLong(Long::parseLong)
@@ -63,7 +67,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 // pattern 을 진동의 패턴 -1은 패턴의 반복은 한번
 //        if(message.getNotification().getTitle() == "위험 1 : 진동") {
-        if(title == "위험 1 : 진동") {
+        if(title.equals("위험 1 : 진동")) {
+            Log.d("Kim", "진동 타이틀");
             VibrationEffect effect = null;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 effect = VibrationEffect.createWaveform(pattern, VibrationEffect.DEFAULT_AMPLITUDE);
@@ -91,9 +96,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             notificationManager.notify(0, builder.build());
         }
 //        else if(message.getNotification().getTitle() == "위험 2 : 소리"){
-        else if(title == "위험 2 : 소리"){
+        else if(title.equals("위험 2 : 소리")){
 
             // Play the sound
+            Uri soundUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.alert_sound1);
+            Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), soundUri);
             ringtone.play();
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "1")
