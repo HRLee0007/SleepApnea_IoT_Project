@@ -19,25 +19,25 @@ public class FcmMessage {
 
         private String token;
 
-        private Notification notification;
+//        private Notification notification;
 
         private Data data;
 
         private Android android;
 
     }
-
-    @Builder
-    @AllArgsConstructor
-    @Getter
-    public static class Notification {
-        private String title;
-        private String body;
-        private String image;
-
-
-
-    }
+//
+//    @Builder
+//    @AllArgsConstructor
+//    @Getter
+//    public static class Notification {
+//        private String title;
+//        private String body;
+//        private String image;
+//
+//
+//
+//    }
 
     @Builder
     @AllArgsConstructor
@@ -50,7 +50,7 @@ public class FcmMessage {
 
         private String sound;
     }
-
+//
     @Builder
     @AllArgsConstructor
     @Getter
