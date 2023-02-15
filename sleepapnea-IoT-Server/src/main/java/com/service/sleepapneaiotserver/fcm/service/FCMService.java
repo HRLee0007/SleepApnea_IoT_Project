@@ -54,14 +54,15 @@ public class FCMService {
                                 .title(title)
                                 .body(body)
                                 .sound("alert_sound1")
+                                .click_action("push_activity")
                                 .build())
-                        .android(FcmMessage.Android.builder()
-                                .ttl("1s")
-                                .priority("high")
-                                .notification(FcmMessage.AndroidNotification.builder()
-                                        .click_action("push_activity")
-                                        .build())
-                                .build())
+//                        .android(FcmMessage.Android.builder()
+//                                .ttl("1s")
+//                                .priority("high")
+//                                .notification(FcmMessage.AndroidNotification.builder()
+//                                        .click_action("push_activity")
+//                                        .build())
+//                                .build())
                         .build()).validateOnly(false).build();
 
         return objectMapper.writeValueAsString(fcmMessage);

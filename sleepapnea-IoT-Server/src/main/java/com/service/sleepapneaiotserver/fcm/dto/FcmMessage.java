@@ -23,7 +23,7 @@ public class FcmMessage {
 
         private Data data;
 
-        private Android android;
+//        private Android android;
 
     }
 //
@@ -49,26 +49,28 @@ public class FcmMessage {
         private String body;
 
         private String sound;
+
+        private String click_action;
     }
 //
-    @Builder
-    @AllArgsConstructor
-    @Getter
-    public static class Android {
-        private String ttl;
-
-        private AndroidNotification notification;
-
-        private String priority;
-
-    }
-
-    @Builder
-    @AllArgsConstructor
-    @Getter
-    public static class AndroidNotification {
-        private String click_action;
-
-    }
+//    @Builder
+//    @AllArgsConstructor
+//    @Getter
+//    public static class Android {
+//        private String ttl;
+//
+//        private AndroidNotification notification;
+//
+//        private String priority;
+//
+//    }
+//
+//    @Builder
+//    @AllArgsConstructor
+//    @Getter
+//    public static class AndroidNotification {
+//        private String click_action;
+//
+//    }
 
 }
