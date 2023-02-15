@@ -90,6 +90,12 @@ public class UserApiController {
                     .build();
             smsService.sendSms(messageDto);
         }
+
+        if(sign == 4){ // sign 4 : 와이파이 연결 완료
+            String token = userService.토큰확인(username);
+
+            firebaseCloudMessageService.sendMessageTo2(token);
+        }
         return userService.사인변경(sign, username);
 
     }

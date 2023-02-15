@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         saveJoinInfo(joinInfo);
 
-                        Intent intent = new Intent(MainActivity.this, login.class);
+                        Intent intent = new Intent(MainActivity.this, ConnectWifiActivity.class);
                         startActivity(intent);
 
                     } else if(result.getStatus() == 400) {

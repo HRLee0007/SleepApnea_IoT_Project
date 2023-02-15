@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.common.net.HttpHeaders;
 import com.google.gson.JsonParseException;
+import com.service.sleepapneaiotserver.fcm.dto.WiFiConnectedFCM;
 import lombok.RequiredArgsConstructor;
 import okhttp3.*;
 import org.springframework.core.io.ClassPathResource;
@@ -56,6 +57,50 @@ public class FCMService {
                                 .sound("alert_sound1")
                                 .click_action("push_activity")
                                 .build())
+//                        .android(FcmMessage.Android.builder()
+//                                .ttl("1s")
+//                                .priority("high")
+//                                .notification(FcmMessage.AndroidNotification.builder()
+//                                        .click_action("push_activity")
+//                                        .build())
+//                                .build())
+                        .build()).validateOnly(false).build();
+
+        return objectMapper.writeValueAsString(fcmMessage);
+    }
+
+    public void sendMessageTo2(String targetToken) throws IOException {
+        String message = makeMessage2(targetToken);
+
+        OkHttpClient client = new OkHttpClient();
+        RequestBody requestBody = RequestBody.create(message,
+                MediaType.get("application/json; charset=utf-8"));
+        Request request = new Request.Builder()
+                .url(API_URL)
+                .post(requestBody)
+                .addHeader(HttpHeaders.AUTHORIZATION, "Bearer " + getAccessToken())
+                .addHeader(HttpHeaders.CONTENT_TYPE, "application/json; UTF-8")
+                .build();
+
+        Response response = client.newCall(request).execute();
+
+        System.out.println(response.body().string());
+    }
+
+    private String makeMessage2(String targetToken) throws JsonParseException, JsonProcessingException {
+
+        WiFiConnectedFCM fcmMessage = WiFiConnectedFCM.builder()
+                .message(WiFiConnectedFCM.Message.builder()
+                        .token(targetToken)
+                        .notification(WiFiConnectedFCM.Notification.builder()
+                                .click_action("wifi_connected")
+                                .build())
+//                        .data(FcmMessage.Data.builder()
+//                                .title(title)
+//                                .body(body)
+//                                .sound("alert_sound1")
+//                                .click_action("push_activity")
+//                                .build())
 //                        .android(FcmMessage.Android.builder()
 //                                .ttl("1s")
 //                                .priority("high")
