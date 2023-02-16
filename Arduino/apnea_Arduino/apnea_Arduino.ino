@@ -1,12 +1,14 @@
 #include <Wire.h>
 #include <SPI.h>
 #include <WiFiNINA.h>
+#include <SoftwareSerial.h>
 
-#include "arduino_secrets.h" 
+SoftwareSerial bluetooth(2, 3);
+
 ///////please enter your sensitive data in the Secret tab/arduino_secrets.h
-char ssid[] = SECRET_SSID;        // your network SSID (name)
-char pass[] = SECRET_PASS;    // your network password (use for WPA, or use as key for WEP)
-String username = "gusfh";
+String ssid;      // your network SSID (name)
+String pass; // your network password (use for WPA, or use as key for WEP)
+String username;
 int keyIndex = 0;            // your network key index number (needed only for WEP)
 
 int wifi_status = WL_IDLE_STATUS;
@@ -48,6 +50,10 @@ float WindSpeed_MPH;
 float rubberValue[200] = {0,};
 float rubber_no_breath_value = 999;
 
+float rubberMax = -999;
+float rubberMin = 999;
+
+
 
 void httpGet(String uri) {
   
@@ -64,7 +70,7 @@ void httpGet(String uri) {
 char getStatus() {
   char stat;
   
-  httpGet("/api/v1/user?username=" + username);    
+  httpGet("/api/v1/user?username=gusfh");    
     // client.println("Host: 52.97.222.91");
     // client.println("Connection: close");
   
@@ -80,8 +86,18 @@ char getStatus() {
 }
 
 
+int wifiStatus = 0;
 
 void connectWifi() {
+
+  char* wifi_ssid;
+  char* wifi_pass;
+
+  wifi_ssid = ssid.c_str();
+  wifi_pass = pass.c_str();
+  wifi_pass[strlen(wifi_pass)-1] = (char) NULL;
+
+  Serial.println(wifi_pass);
 
   while (!Serial) {
     ; // wait for serial port to connect. Needed for native USB port only
@@ -104,38 +120,24 @@ void connectWifi() {
     Serial.print("Attempting to connect to SSID: ");
     Serial.println(ssid);
     // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
-    wifi_status = WiFi.begin(ssid, pass);
+    wifi_status = WiFi.begin(wifi_ssid, wifi_pass);
+    
+
 
     // wait 10 seconds for connection:
     delay(2000);
   }
+  
+  wifiStatus = 1;
   Serial.println("Connected to WiFi");
+
   // printWifiStatus();
 
   
 }
 
-
-
-float rubberMax = -999;
-float rubberMin = 999;
-
-int vibrateControl = 1;
-int soundControl = 1;
-int smsControl = 1;
-
-
-void setup() {
-
- 
- // wifi 연결;
-
-  Serial.begin(9600);
-
-  connectWifi();
-
-
-
+void firstMeasure()
+{
   for(int k = 0; k < 200; k++){ // 장력 센서 초기 값 ( 20초 )
     rubberValue[k] = analogRead(A5);
 
@@ -169,7 +171,72 @@ void setup() {
   rubber_no_breath_value = (rubberMax - rubberMin) * 0.4;
   // wind_no_breath_value = (windMax - windMin) * (4/10);
 
-  Serial.print("Serial start");
+
+
+
+}
+
+
+
+int vibrateControl = 1;
+int soundControl = 1;
+int smsControl = 1;
+
+
+int bluetooth_OnOff = 1;
+int firstMeasureCheck = 0;
+int wifiConnectCheck = 0;
+
+void setup() {
+
+ 
+ // wifi 연결;
+
+  Serial.begin(9600);
+  Serial.println("Serial start");
+
+
+  bluetooth.begin(9600);
+  Serial.println("bluetooth start");
+
+  while(bluetooth_OnOff == 1){
+    if (bluetooth.available()) {
+      String data = bluetooth.readString();
+
+      // Extract the username, SSID, and password from the received data
+      int commaIndex1 = data.indexOf(',');
+      int commaIndex2 = data.indexOf(',', commaIndex1 + 1);
+      if (commaIndex1 > -1 && commaIndex2 > -1) {
+        username = data.substring(0, commaIndex1);
+        ssid = data.substring(commaIndex1 + 1, commaIndex2);
+        pass = data.substring(commaIndex2 + 1);
+
+        // Print the received data to the serial monitor
+        Serial.print("Username: ");
+        Serial.println(username);
+        Serial.print("SSID: ");
+        Serial.println(ssid);
+        Serial.print("Password: ");
+        Serial.println(pass);
+
+        bluetooth_OnOff = 0;
+
+        break;
+
+        
+      }
+    }
+  }
+
+  if(wifiConnectCheck == 0){
+    connectWifi();
+    delay(1000);
+
+    //if WiFi connected
+    httpGet("/api/v1/userSign?sign=4&username="+ username); // send FCM Sign that change Android's Activity (측정 시작/종료)
+
+    wifiConnectCheck = 1;
+  }
 
 }
 
@@ -201,8 +268,10 @@ int i;
 
 int loop_first = 1;
 
+
 void loop() {
 
+  
 
   now_time = millis();
  if (now_time - httpMillis > 10000){
@@ -213,7 +282,7 @@ void loop() {
 
  }
 
-  if (now_time - lastMillis > 100){
+  if (now_time - lastMillis > 150){
     lastMillis = millis();
     
     if (status == '2') { // waiting start sign from server
@@ -224,6 +293,28 @@ void loop() {
       
     }
     else if (status == '1') { // start
+
+
+      if(firstMeasureCheck == 0){
+        
+        
+        Serial.println("3...");
+        delay(1000);
+        Serial.println("2...");
+        delay(1000);
+        Serial.println("1...");
+        delay(1000);
+
+        firstMeasure();
+        firstMeasureCheck = 1;
+
+        Serial.println("MAX : " + String(rubberMax));
+        Serial.println("MIN : " + String(rubberMin));
+        Serial.println("NEED : " + String(rubber_no_breath_value));
+        delay(1000);
+        Serial.println("START!!!");
+        delay(1000);
+      }
 
     //  Serial.println("START....");
      // read every 100 ms - printing slows this down further
@@ -347,16 +438,15 @@ void loop() {
       familyWARNING = 0;
     }
 
-    Serial.println("---------------");
-
-Serial.println(rubber10Max);
-Serial.println(rubber10Min);
-Serial.println(rubber_no_breath_value);
-Serial.println("---------------");
-Serial.println(vibrateWARNING);
-Serial.println(soundWARNING);
-Serial.println(familyWARNING);
-Serial.println("---------------");
+// Serial.println("---------------");
+// Serial.println(rubber10Max);
+// Serial.println(rubber10Min);
+// Serial.println(rubber_no_breath_value);
+// Serial.println("---------------");
+// Serial.println(vibrateWARNING);
+// Serial.println(soundWARNING);
+// Serial.println(familyWARNING);
+// Serial.println("---------------");
 
 
 ////////////////////
@@ -390,7 +480,7 @@ Serial.println("---------------");
     if(familyWARNING == 1 && smsControl == 0){// 무호흡 20초 이상 OR 장력센서 무반응 20초 이상
     // if(no_breath_time > 200){ 
       // 보호자 문자 알림 서비스;
-      smsControl = 10000;
+      smsControl = 100;
       httpGet("/api/v1/userSign?sign=3&username="+ username);
 
 
