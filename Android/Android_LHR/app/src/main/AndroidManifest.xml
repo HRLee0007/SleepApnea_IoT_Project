@@ -26,7 +26,9 @@
 
         <activity
             android:name=".activity.login"
+            android:launchMode="singleTask"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="push_activity" />
 
@@ -45,19 +47,26 @@
 <!--            <intent-filter>-->
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
 <!--            </intent-filter>-->
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
 
         </activity>
 
         <activity
             android:name=".activity.WifiConnected"
+            android:launchMode="singleTask"
             android:exported="true">
+
 
             <intent-filter>
                 <action android:name="wifi_connected" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
         </activity>
 
 

@@ -51,6 +51,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Map<String, String> data = message.getData();
         String title = data.get("title");
         String body = data.get("body");
+        String activity = data.get("activity");
+
 //        String vibrate = data.get("vibrate");
 //        String sound = data.get("sound");
 //
@@ -87,7 +89,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
             // Show the notification
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "1")
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "0")
                     .setSmallIcon(R.drawable.notification_icon)
                     .setContentTitle(title)
                     .setContentText(body)
@@ -121,15 +123,19 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             notificationManager.notify(0, builder.build());*/
         }
 
-        //푸쉬 알림 클릭 시, 바로 로그인 완료 화면으로 넘기는 부분
-        Intent quickIntent = new Intent(this, login.class);
-        quickIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        if(activity.equals("measure")) {
+
+            //푸쉬 알림 클릭 시, 바로 로그인 완료 화면으로 넘기는 부분
+            Intent quickIntent = new Intent(this, login.class);
+            quickIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //        quickIntent.putExtra() //메인에서 로그인 화면으로 값 넘길때 사용하면 됨
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, quickIntent, PendingIntent.FLAG_MUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, quickIntent, PendingIntent.FLAG_MUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
 
-        startActivity(quickIntent);
+            startActivity(quickIntent);
 
-        Log.d("Kim", "message = " + message.getNotification().getTitle());
+            Log.d("Kim", "message = " + message.getNotification().getTitle());
+        }
     }
 
 

@@ -18,6 +18,10 @@ public class WiFiConnectedFCM {
 
         private String token;
 
+        private Android android;
+
+        private Data data;
+
         private Notification notification;
 
     }
@@ -26,6 +30,42 @@ public class WiFiConnectedFCM {
     @AllArgsConstructor
     @Getter
     public static class Notification {
+        private String title;
+        private String body;
+        private String image;
+
+
+
+    }
+    @Builder
+    @AllArgsConstructor
+    @Getter
+    public static class Data {
+        private String title;
+        private String body;
+        private String activity;
+
+
+    }
+
+    @Builder
+    @AllArgsConstructor
+    @Getter
+    public static class Android {
+        private String ttl;
+
+        private AndroidNotification notification;
+
+
+    }
+
+    @Builder
+    @AllArgsConstructor
+    @Getter
+    public static class AndroidNotification {
+
+        private String sound;
+
         private String click_action;
 
     }

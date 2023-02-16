@@ -50,6 +50,8 @@ public class FcmMessage {
 
         private String sound;
 
+        private String activity;
+
         private String click_action;
     }
 //
