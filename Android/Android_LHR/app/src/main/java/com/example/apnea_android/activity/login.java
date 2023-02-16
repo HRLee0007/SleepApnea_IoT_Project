@@ -40,6 +40,8 @@ public class login extends AppCompatActivity implements View.OnClickListener {
     static MeasureRequestInfo measureRequestInfo;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,9 +73,9 @@ public class login extends AppCompatActivity implements View.OnClickListener {
 
         }
 
-//        if(measureRequestInfo.getStatus() == 2) {
+        if(measureRequestInfo.getStatus() == 2) {
             Toast.makeText(login.this, "연결되었습니다.", Toast.LENGTH_SHORT).show();
-//        }
+        }
 
 
     }

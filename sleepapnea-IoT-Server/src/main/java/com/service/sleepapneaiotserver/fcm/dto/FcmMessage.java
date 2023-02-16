@@ -19,25 +19,27 @@ public class FcmMessage {
 
         private String token;
 
-//        private Notification notification;
+        private Notification notification;
 
         private Data data;
 
-//        private Android android;
+        private Android android;
 
     }
 //
-//    @Builder
-//    @AllArgsConstructor
-//    @Getter
-//    public static class Notification {
-//        private String title;
-//        private String body;
-//        private String image;
-//
-//
-//
-//    }
+    @Builder
+    @AllArgsConstructor
+    @Getter
+    public static class Notification {
+        private String title;
+        private String body;
+        private String image;
+
+//        private String sound;
+
+
+
+    }
 
     @Builder
     @AllArgsConstructor
@@ -55,24 +57,26 @@ public class FcmMessage {
         private String click_action;
     }
 //
-//    @Builder
-//    @AllArgsConstructor
-//    @Getter
-//    public static class Android {
-//        private String ttl;
+    @Builder
+    @AllArgsConstructor
+    @Getter
+    public static class Android {
+        private String ttl;
+
+        private AndroidNotification notification;
+
+        private String priority;
+
+    }
 //
-//        private AndroidNotification notification;
-//
-//        private String priority;
-//
-//    }
-//
-//    @Builder
-//    @AllArgsConstructor
-//    @Getter
-//    public static class AndroidNotification {
-//        private String click_action;
-//
-//    }
+    @Builder
+    @AllArgsConstructor
+    @Getter
+    public static class AndroidNotification {
+        private String click_action;
+
+        private String sound;
+
+    }
 
 }

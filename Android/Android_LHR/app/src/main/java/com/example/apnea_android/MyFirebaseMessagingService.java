@@ -101,16 +101,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 //        else if(message.getNotification().getTitle() == "위험 2 : 소리"){
         else if(title.equals("위험 2 : 소리")){
 
-            Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-            Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), uri);
-            AudioAttributes audioAttributes = new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_ALARM).build();
+            Uri soundUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.alert_sound1);
+            Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), soundUri);
+            
+
+            AudioAttributes audioAttributes = new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA).build();
 
             ringtone.setAudioAttributes(audioAttributes);
             ringtone.play();
 
             /*// Play the sound
-            Uri soundUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.alert_sound1);
-            Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), soundUri);
+            Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+            Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), uri);
             ringtone.play();
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "1")
