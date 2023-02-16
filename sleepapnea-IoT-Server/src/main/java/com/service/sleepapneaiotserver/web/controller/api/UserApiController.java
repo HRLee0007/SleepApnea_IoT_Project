@@ -96,7 +96,7 @@ public class UserApiController {
 
             firebaseCloudMessageService.sendMessageTo2(token);
         }
-        return userService.사인변경(sign, username);
+        return 4;
 
     }
     // 로그인 처리 - 반환 유저 객체

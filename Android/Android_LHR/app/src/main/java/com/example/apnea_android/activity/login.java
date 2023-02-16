@@ -45,6 +45,9 @@ public class login extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.measure_start_stop);
 
+        Toast.makeText(login.this, "연결되었습니다.", Toast.LENGTH_SHORT).show();
+
+
         start_button = (Button) findViewById(R.id.start_button);
         stop_button = (Button) findViewById(R.id.stop_button);
         mainpage_button = (Button) findViewById(R.id.mainpage_button);
@@ -152,6 +155,11 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                 Toast.makeText(login.this, "1.통신 오류로 인한 측정 시작 실패", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
     }
 
     //sharedPreference에 MeasureRequestInfo 저장
