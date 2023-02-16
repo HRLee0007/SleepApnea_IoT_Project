@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     ResponseInfo<JoinInfo> result = response.body();
 
                     if(result.getStatus() == 200) {
-                        Toast.makeText(MainActivity.this, "로그인 되었습니다.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
 
                         //프리퍼런스에 reuslt.getData로 유저 정보 저장하기 구현
                         JoinInfo joinInfo = new JoinInfo(result.getData().getUsername(), result.getData().getPassword(), result.getData().getRealname(),
@@ -119,16 +119,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         startActivity(intent);
 
                     } else if(result.getStatus() == 400) {
-                        Toast.makeText(MainActivity.this, "아이디 혹은 비밀번호를 다시 학인해주세요.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "아이디 혹은 비밀번호를 다시 학인해주세요.", Toast.LENGTH_SHORT).show();
                     }
 
                 } else {
-                    Toast.makeText(MainActivity.this, "예기치 못한 오류가 발생하였습니다.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "예기치 못한 오류가 발생하였습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<ResponseInfo<JoinInfo>> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "통신이 불안정 합니다", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "통신이 불안정 합니다", Toast.LENGTH_SHORT).show();
             }
         });
     }

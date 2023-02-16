@@ -53,6 +53,8 @@ public class ConnectWifiActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.connect_wifi_page);
 
+        Toast.makeText(this, "유저네임, WiFi ID, WiFi 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
+
 
         // Initialize the UI elements
         usernameEditText = findViewById(R.id.username_edit_text);
@@ -102,6 +104,8 @@ public class ConnectWifiActivity extends AppCompatActivity {
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             // Get the selected device
                             BluetoothDevice device = pairedDevicesList.get(position);
+
+                            Toast.makeText(ConnectWifiActivity.this, device.getName() + "에 연결을 시도합니다.", Toast.LENGTH_SHORT).show();
 
                             // Attempt to connect to the device
                             connectToDevice(device);

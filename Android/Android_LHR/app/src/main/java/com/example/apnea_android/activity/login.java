@@ -45,7 +45,7 @@ public class login extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.measure_start_stop);
 
-        Toast.makeText(login.this, "연결되었습니다.", Toast.LENGTH_SHORT).show();
+
 
 
         start_button = (Button) findViewById(R.id.start_button);
@@ -67,7 +67,15 @@ public class login extends AppCompatActivity implements View.OnClickListener {
 
             measureRequestInfo = gson.fromJson(jsonMeasureRequestInfo, MeasureRequestInfo.class);
             Log.d("kim", "user status = " + measureRequestInfo.getStatus());
+
+
         }
+
+//        if(measureRequestInfo.getStatus() == 2) {
+            Toast.makeText(login.this, "연결되었습니다.", Toast.LENGTH_SHORT).show();
+//        }
+
+
     }
 
     public void onClick(View v) {
@@ -108,7 +116,7 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                 break;
             case R.id.mainpage_button:
                 if(measureRequestInfo.getStatus() == 1){
-                    Toast.makeText(login.this, "측정 중입니다. 메인페이지로 가시려면\n          측정 종료를 눌러주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(login.this, "측정 중입니다.\n메인페이지로 가시려면 측정 종료를 눌러주세요.", Toast.LENGTH_SHORT).show();
                 }
                 else if(measureRequestInfo.getStatus() == 0) {
                     System.out.println("메인페이지 클릭");
