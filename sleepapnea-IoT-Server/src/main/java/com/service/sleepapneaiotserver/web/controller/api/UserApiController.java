@@ -105,6 +105,7 @@ public class UserApiController {
     public ResponseDto<UserDto> loginProcAndroid(@RequestBody LoginDto loginDto){
         //기존 유저인지 확인.
         ResponseDto<UserDto> checkedUserInfo = userService.로그인(loginDto);
+        userService.statusReady(loginDto.getUsername());
         /* 해당되는 아이디가 없으면 반환값
         {
             "status": 400,
