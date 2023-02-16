@@ -70,7 +70,7 @@ void httpGet(String uri) {
 char getStatus() {
   char stat;
   
-  httpGet("/api/v1/user?username=gusfh");    
+  httpGet("/api/v1/user?username="+username);    
     // client.println("Host: 52.97.222.91");
     // client.println("Connection: close");
   
@@ -221,7 +221,6 @@ void setup() {
 
         bluetooth_OnOff = 0;
 
-        break;
 
         
       }
@@ -234,6 +233,7 @@ void setup() {
 
     //if WiFi connected
     httpGet("/api/v1/userSign?sign=4&username="+ username); // send FCM Sign that change Android's Activity (측정 시작/종료)
+    delay(1000);
 
     wifiConnectCheck = 1;
   }
@@ -282,7 +282,7 @@ void loop() {
 
  }
 
-  if (now_time - lastMillis > 150){
+  if (now_time - lastMillis > 100){
     lastMillis = millis();
     
     if (status == '2') { // waiting start sign from server
@@ -490,21 +490,20 @@ void loop() {
 
  }
   
-  else if (status == '0') { // end
+    else if (status == '0') { // end
 
-      Serial.println("FINISH....");
+    Serial.println("FINISH....");
 
 
-      httpGet("/api/v1/infoSave?count=" + String(no_breath_count) + "&username="+ username);
-      
-      Serial.println("Total no_breath_count = " + no_breath_count);
-      Serial.println("Program exit");
+    httpGet("/api/v1/infoSave?count=" + String(no_breath_count) + "&username="+ username);
+    
+    Serial.println("Total no_breath_count = " + no_breath_count);
+    Serial.println("Program exit");
 
-      //총 무호흡 횟수 http.begin(~~~~);
-      Serial.println("EXIT");
-      exit(0);
+    //총 무호흡 횟수 http.begin(~~~~);
+    Serial.println("EXIT");
+    exit(0);
 
-      }
+    }
   }
-  
 }
