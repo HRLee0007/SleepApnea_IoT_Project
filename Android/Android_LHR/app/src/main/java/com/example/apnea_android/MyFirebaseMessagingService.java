@@ -1,11 +1,12 @@
 package com.example.apnea_android;
 
+import android.annotation.SuppressLint;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.AudioAttributes;
-import android.media.AudioManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -14,20 +15,15 @@ import android.os.PowerManager;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import com.example.apnea_android.activity.login;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.messaging.FirebaseMessaging;
+import com.example.apnea_android.activity.MeasureControlActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-import java.util.Arrays;
 import java.util.Map;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
@@ -46,6 +42,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(@NonNull RemoteMessage message) {
+
+//        PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE );
+//        @SuppressLint("InvalidWakeLockTag")
+//        PowerManager.WakeLock wakeLock = pm.newWakeLock( PowerManager.SCREEN_DIM_WAKE_LOCK
+//                | PowerManager.ACQUIRE_CAUSES_WAKEUP, "TAG" );
+
+
         long[] pattern = {0, 500, 200, 400, 100};
 
         Map<String, String> data = message.getData();
@@ -72,13 +75,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 //        if(message.getNotification().getTitle() == "위험 1 : 진동") {
         if(title.equals("위험 1 : 진동")) {
             Log.d("Kim", "진동 타이틀");
+
+            Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
             VibrationEffect effect = null;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 effect = VibrationEffect.createWaveform(pattern, VibrationEffect.DEFAULT_AMPLITUDE);
             }
 
             // Get the system vibration service
-            Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
             // Vibrate the device
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -86,29 +91,34 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             } else {
                 vibrator.vibrate(pattern, -1);
             }
+//
+//
+//            // Show the notification
+//            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "0")
+//                    .setSmallIcon(R.drawable.notification_icon)
+//                    .setContentTitle(title)
+//                    .setContentText(body)
+//                    .setPriority(NotificationCompat.PRIORITY_HIGH);
 
-
-            // Show the notification
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "0")
-                    .setSmallIcon(R.drawable.notification_icon)
-                    .setContentTitle(title)
-                    .setContentText(body)
-                    .setPriority(NotificationCompat.PRIORITY_HIGH);
-
-            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-            notificationManager.notify(0, builder.build());
+//            wakeLock.acquire(3000);
+//            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+//            notificationManager.notify(0, builder.build());
         }
 //        else if(message.getNotification().getTitle() == "위험 2 : 소리"){
         else if(title.equals("위험 2 : 소리")){
 
+//            wakeLock.acquire(3000);
+
             Uri soundUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.alert_sound1);
             Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), soundUri);
-            
+
 
             AudioAttributes audioAttributes = new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA).build();
 
             ringtone.setAudioAttributes(audioAttributes);
             ringtone.play();
+
+//            sendNotification(title, body);
 
             /*// Play the sound
             Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
@@ -129,7 +139,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if(activity.equals("measure")) {
 
             //푸쉬 알림 클릭 시, 바로 로그인 완료 화면으로 넘기는 부분
-            Intent quickIntent = new Intent(this, login.class);
+            Intent quickIntent = new Intent(this, MeasureControlActivity.class);
             quickIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //        quickIntent.putExtra() //메인에서 로그인 화면으로 값 넘길때 사용하면 됨
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, quickIntent, PendingIntent.FLAG_MUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
@@ -140,6 +150,35 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
     }
 
+
+    private void sendNotification(String title, String body) {
+
+
+
+        Intent intent = new Intent(this, MeasureControlActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+                PendingIntent.FLAG_ONE_SHOT);
+
+        Uri soundUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.alert_sound1);
+        Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), soundUri);
+
+        Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(title)
+                .setContentText(body)
+                .setAutoCancel(true)
+                .setSound(soundUri)
+                .setVibrate(new long[]{1000, 1000})
+                .setLights(Color.BLUE,1,1)
+                .setContentIntent(pendingIntent);
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+
+    }
 
 
 }

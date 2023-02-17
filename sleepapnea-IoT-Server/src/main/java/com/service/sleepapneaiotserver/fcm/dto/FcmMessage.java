@@ -50,7 +50,7 @@ public class FcmMessage {
 
         private String body;
 
-        private String sound;
+//        private String sound;
 
         private String activity;
 
@@ -74,7 +74,7 @@ public class FcmMessage {
     @Getter
     public static class AndroidNotification {
         private String click_action;
-
+//
         private String sound;
 
     }

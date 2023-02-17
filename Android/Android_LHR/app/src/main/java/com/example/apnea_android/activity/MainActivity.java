@@ -1,6 +1,5 @@
 package com.example.apnea_android.activity;
 
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -33,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button join_btn;    //회원가입 버튼
     Button login_btn;   //로그인 버튼
     String token;
+    EditText id_edit;
 
     private RetrofitClient retrofitClient;
     private com.example.apnea_android.initMyApi initMyApi;
@@ -71,13 +71,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.register_button:     // 회원가입 버튼을 눌렀을 때
-                Intent intent = new Intent(MainActivity.this, join.class);
+                Intent intent = new Intent(MainActivity.this, JoinActivity.class);
                 startActivity(intent);  // 새 액티비티를 열어준다.
                 break;
             case R.id.login_button1:    // 로그인 버튼을 눌렀을 때
                 LoginInfo loginUser;
 
-                EditText id_edit = findViewById(R.id.login_username);    // id 에디트를 찾음.
+                id_edit = findViewById(R.id.login_username);    // id 에디트를 찾음.
                 EditText pw_edit = findViewById(R.id.login_password);    // pw 에디트를 찾음
 
                 loginUser = new LoginInfo(id_edit.getText().toString(), pw_edit.getText().toString(), token);
@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         saveJoinInfo(joinInfo);
 
                         Intent intent = new Intent(MainActivity.this, ConnectWifiActivity.class);
+                        intent.putExtra("username", id_edit.getText().toString());
                         startActivity(intent);
 
                     } else if(result.getStatus() == 400) {

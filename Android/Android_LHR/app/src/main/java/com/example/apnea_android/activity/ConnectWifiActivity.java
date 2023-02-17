@@ -47,17 +47,23 @@ public class ConnectWifiActivity extends AppCompatActivity {
 
     private List<BluetoothDevice> pairedDevicesList;
 
+    private String username;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.connect_wifi_page);
 
+        Intent intent = getIntent();
+
+        username = intent.getStringExtra("username");
+
         Toast.makeText(this, "유저네임, WiFi ID, WiFi 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
 
 
         // Initialize the UI elements
-        usernameEditText = findViewById(R.id.username_edit_text);
+//        usernameEditText = findViewById(R.id.username_edit_text);
         ssidEditText = findViewById(R.id.ssid_edit_text);
         passwordEditText = findViewById(R.id.password_edit_text);
         sendButton = findViewById(R.id.send_button);
@@ -81,7 +87,7 @@ public class ConnectWifiActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Get the data from the input fields
-                String username = usernameEditText.getText().toString();
+//                String username = usernameEditText.getText().toString();
                 String ssid = ssidEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
 
@@ -105,7 +111,7 @@ public class ConnectWifiActivity extends AppCompatActivity {
                             // Get the selected device
                             BluetoothDevice device = pairedDevicesList.get(position);
 
-                            Toast.makeText(ConnectWifiActivity.this, device.getName() + "에 연결을 시도합니다.", Toast.LENGTH_SHORT).show();
+                           Toast.makeText(ConnectWifiActivity.this, device.getName() + "에 연결을 시도합니다.", Toast.LENGTH_SHORT).show();
 
                             // Attempt to connect to the device
                             connectToDevice(device);
@@ -205,7 +211,7 @@ public class ConnectWifiActivity extends AppCompatActivity {
                     socket.connect();
 
                     // Send the data to the device
-                    String username = ((EditText) findViewById(R.id.username_edit_text)).getText().toString();
+//                    String username = ((EditText) findViewById(R.id.username_edit_text)).getText().toString();
                     String ssid = ((EditText) findViewById(R.id.ssid_edit_text)).getText().toString();
                     String password = ((EditText) findViewById(R.id.password_edit_text)).getText().toString();
                     String data = username + "," + ssid + "," + password + "\n";

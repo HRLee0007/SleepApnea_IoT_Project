@@ -25,7 +25,7 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name=".activity.login"
+            android:name=".activity.MeasureControlActivity"
             android:launchMode="singleTask"
             android:exported="true">
 
@@ -71,7 +71,7 @@
 
 
         <activity
-            android:name=".activity.join"
+            android:name=".activity.JoinActivity"
             android:exported="true">
 
             <meta-data

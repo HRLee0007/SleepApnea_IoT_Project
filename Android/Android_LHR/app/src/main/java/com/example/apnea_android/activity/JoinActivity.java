@@ -15,13 +15,12 @@ import com.example.apnea_android.R;
 import com.example.apnea_android.RetrofitClient;
 import com.example.apnea_android.Role;
 import com.example.apnea_android.info.JoinInfo;
-import com.example.apnea_android.info.LoginInfo;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class join extends AppCompatActivity  implements View.OnClickListener {
+public class JoinActivity extends AppCompatActivity  implements View.OnClickListener {
     Button join_ok_btn;
     Button join_cancel_btn;
     private RetrofitClient retrofitClient;
@@ -63,7 +62,7 @@ public class join extends AppCompatActivity  implements View.OnClickListener {
                     join_address.getText().toString().trim().length() == 0 ||
                     join_myphone.getText().toString().trim().length() == 0 ||
                     join_pphone.getText().toString().trim().length() == 0 ) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(join.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(JoinActivity.this);
                 builder.setTitle("알림")
                         .setMessage("회원가입 정보를 입력바랍니다.")
                         .setPositiveButton("확인", null)
@@ -80,7 +79,7 @@ public class join extends AppCompatActivity  implements View.OnClickListener {
 
             }
         } else if(v.getId() == R.id.join_cancel_btn) {
-            Intent intent = new Intent(join.this, MainActivity.class);
+            Intent intent = new Intent(JoinActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
@@ -103,18 +102,18 @@ public class join extends AppCompatActivity  implements View.OnClickListener {
                 if (response.isSuccessful()) {
 
                     Log.d("kim", response.body());
-                    Toast.makeText(join.this, "회원가입이 완료 되었습니다.", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(join.this, MainActivity.class);
+                    Toast.makeText(JoinActivity.this, "회원가입이 완료 되었습니다.", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(JoinActivity.this, MainActivity.class);
                     //이전에 생성된 intent 전부 삭제
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     } else {
-                        Toast.makeText(join.this, "0.회원가입을 실패 했습니다.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(JoinActivity.this, "0.회원가입을 실패 했습니다.", Toast.LENGTH_LONG).show();
                     }
                 }
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(join.this, "1.회원가입을 실패 했습니다.", Toast.LENGTH_LONG).show();
+                Toast.makeText(JoinActivity.this, "1.회원가입을 실패 했습니다.", Toast.LENGTH_LONG).show();
             }
         });
     }

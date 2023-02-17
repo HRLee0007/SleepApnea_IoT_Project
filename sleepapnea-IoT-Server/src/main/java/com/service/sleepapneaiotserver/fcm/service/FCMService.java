@@ -54,7 +54,7 @@ public class FCMService {
                         .data(FcmMessage.Data.builder()
                                 .title(title)
                                 .body(body)
-                                .sound("alert_sound1.mp3")
+//                                .sound("alert_sound1.mp3")
                                 .activity("measure")
                                 .click_action("push_activity")
                                 .build())
@@ -63,7 +63,7 @@ public class FCMService {
                                 .priority("high")
                                 .notification(FcmMessage.AndroidNotification.builder()
                                         .click_action("push_activity")
-                                        .sound("alert_sound1.mp3")
+                                        .sound("alert_sound1")
                                         .build())
                                 .build())
                         .build()).validateOnly(false).build();
