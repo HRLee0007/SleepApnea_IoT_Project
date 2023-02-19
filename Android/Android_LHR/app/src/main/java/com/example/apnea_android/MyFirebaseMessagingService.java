@@ -11,15 +11,18 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Handler;
 import android.os.PowerManager;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.example.apnea_android.activity.MainActivity;
 import com.example.apnea_android.activity.MeasureControlActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -75,6 +78,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 //        if(message.getNotification().getTitle() == "위험 1 : 진동") {
         if(title.equals("위험 1 : 진동")) {
             Log.d("Kim", "진동 타이틀");
+//            Toast toast = Toast.makeText(MeasureControlActivity.class , "무호흡 발생 : 10초 경과", Toast.LENGTH_SHORT);
+//            toast.show();
+//
+//            Handler handler = new Handler();
+//            handler.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    toast.cancel();
+//                }
+//            }, 1000);
 
             Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
@@ -108,6 +121,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         else if(title.equals("위험 2 : 소리")){
 
 //            wakeLock.acquire(3000);
+//            Toast toast = Toast.makeText(MyFirebaseMessagingService.this, "무호흡 발생 : 15초 경과", Toast.LENGTH_SHORT);
+//            toast.show();
+//
+//            Handler handler = new Handler();
+//            handler.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    toast.cancel();
+//                }
+//            }, 1000);
 
             Uri soundUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.alert_sound1);
             Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), soundUri);
@@ -140,7 +163,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             //푸쉬 알림 클릭 시, 바로 로그인 완료 화면으로 넘기는 부분
             Intent quickIntent = new Intent(this, MeasureControlActivity.class);
-            quickIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            quickIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//
+//            if(title.equals("WiFi 연결 완료")){
+//                quickIntent.putExtra("toast", "wifi");
+//            }
+//            else{
+//                quickIntent.putExtra("toast", "wifi_no");
+//
+//            }
 //        quickIntent.putExtra() //메인에서 로그인 화면으로 값 넘길때 사용하면 됨
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, quickIntent, PendingIntent.FLAG_MUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
 

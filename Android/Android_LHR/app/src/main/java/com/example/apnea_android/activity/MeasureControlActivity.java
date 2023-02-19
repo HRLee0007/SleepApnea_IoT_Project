@@ -1,11 +1,13 @@
 package com.example.apnea_android.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,6 +33,10 @@ public class MeasureControlActivity extends AppCompatActivity implements View.On
     Button stop_button;
     Button mainpage_button;
 
+    String wifi;
+
+    TextView status_text;
+
     private RetrofitClient retrofitClient;
     private com.example.apnea_android.initMyApi initMyApi;
     static MeasureRequestInfo measureRequestInfo;
@@ -38,13 +44,22 @@ public class MeasureControlActivity extends AppCompatActivity implements View.On
 
 
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.measure_start_stop);
 
+//        Intent intent = getIntent();
+//
+//        wifi = intent.getStringExtra("toast");
+//
+//        if(wifi.equals("wifi")){
+//            Toast.makeText(MeasureControlActivity.this, "연결되었습니다.", Toast.LENGTH_SHORT).show();
+//        }
 
 
+        status_text = (TextView) findViewById(R.id.status_textview);
 
         start_button = (Button) findViewById(R.id.start_button);
         stop_button = (Button) findViewById(R.id.stop_button);
@@ -71,6 +86,7 @@ public class MeasureControlActivity extends AppCompatActivity implements View.On
 
         if(measureRequestInfo.getStatus() == 2) {
             Toast.makeText(MeasureControlActivity.this, "연결되었습니다.", Toast.LENGTH_SHORT).show();
+
         }
 
 
@@ -80,6 +96,8 @@ public class MeasureControlActivity extends AppCompatActivity implements View.On
         switch (v.getId()) {
             case R.id.start_button:     // 측정 시작 버튼
                 System.out.println("측정 시작 클릭");
+                status_text.setText("현재 상태 : 측정 중");
+
                 if(measureRequestInfo.getStatus() == 0) {
                     statusResponse(measureRequestInfo);
 
@@ -106,6 +124,8 @@ public class MeasureControlActivity extends AppCompatActivity implements View.On
                 break;
             case R.id.stop_button:    // 측정 종료 버튼
                 System.out.println("측정 종료 클릭");
+                status_text.setText("현재 상태 : 측정 종료");
+
                 if(measureRequestInfo.getStatus() == 1) {
                     statusResponse(measureRequestInfo);
                 } else if(measureRequestInfo.getStatus() == 0) {
