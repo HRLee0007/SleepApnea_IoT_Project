@@ -163,7 +163,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             //푸쉬 알림 클릭 시, 바로 로그인 완료 화면으로 넘기는 부분
             Intent quickIntent = new Intent(this, MeasureControlActivity.class);
-//            quickIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            quickIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //
 //            if(title.equals("WiFi 연결 완료")){
 //                quickIntent.putExtra("toast", "wifi");
@@ -173,6 +173,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 //
 //            }
 //        quickIntent.putExtra() //메인에서 로그인 화면으로 값 넘길때 사용하면 됨
+
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, quickIntent, PendingIntent.FLAG_MUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
 
             startActivity(quickIntent);
@@ -183,8 +184,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
     private void sendNotification(String title, String body) {
-
-
 
         Intent intent = new Intent(this, MeasureControlActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
