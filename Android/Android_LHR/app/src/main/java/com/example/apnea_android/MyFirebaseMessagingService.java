@@ -16,6 +16,7 @@ import android.os.PowerManager;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,6 +35,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private PowerManager powerManager;
     private PowerManager.WakeLock wakeLock;
 
+
     @Override
     public void onNewToken(String token){
         System.out.println("MyFirebaseMessagingService.onNewToken");
@@ -43,13 +45,23 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
 
+    @SuppressLint("InvalidWakeLockTag")
     @Override
     public void onMessageReceived(@NonNull RemoteMessage message) {
 
-//        PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE );
-//        @SuppressLint("InvalidWakeLockTag")
-//        PowerManager.WakeLock wakeLock = pm.newWakeLock( PowerManager.SCREEN_DIM_WAKE_LOCK
-//                | PowerManager.ACQUIRE_CAUSES_WAKEUP, "TAG" );
+
+//        powerManager = (PowerManager)getSystemService(Context.POWER_SERVICE);
+//        wakeLock = powerManager.newWakeLock(
+//                PowerManager.SCREEN_BRIGHT_WAKE_LOCK |
+//                        PowerManager.ACQUIRE_CAUSES_WAKEUP |
+//                        PowerManager.ON_AFTER_RELEASE,
+//                "WAKELOCK");
+//
+//        wakeLock.acquire();
+//
+//        wakeLock.release();
+
+
 
 
         long[] pattern = {0, 500, 200, 400, 100};

@@ -80,3 +80,6 @@ https://pgtd.tistory.com/157
 https://stackoverflow.com/questions/61142155/custom-sound-in-firebase-push-notification
 
 https://kkh0977.tistory.com/1293
+
+안드로이드 막대 그래프
+https://stickode.tistory.com/372
