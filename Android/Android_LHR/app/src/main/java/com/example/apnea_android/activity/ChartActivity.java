@@ -25,7 +25,6 @@ import java.util.ArrayList;
 
 public class ChartActivity extends AppCompatActivity implements View.OnClickListener{
 
-    //선 그래프
     private BarChart barChart;
 
     Button mainpage_button;
@@ -63,6 +62,7 @@ public class ChartActivity extends AppCompatActivity implements View.OnClickList
         barChart.setData(barData); // 차트에 위의 DataSet 을 넣는다.
 
         barChart.invalidate(); // 차트 업데이트
+
 //        barChart.setTouchEnabled(false); // 차트 터치 불가능하게
 
     }
