@@ -32,10 +32,16 @@ public class InfosApiController {
         InfosRequestDto infosRequestDto = new InfosRequestDto(count, username);
         return infosService.저장하기(infosRequestDto);
     }
-
     @GetMapping("/api/v1/info")
     public List<Infos> findall(@RequestParam("username") String username){
         return infosService.모두찾기(username);
     }
+
+    @GetMapping("/api/v1/count")
+    public List<Infos> findCount(@RequestParam("username") String username){
+        return infosService.무호흡횟수찾기(username);
+    }
+
+
 
 }

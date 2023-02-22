@@ -45,4 +45,11 @@ public class InfosService {
         Optional<User> user = userRepository.findByUsername(username);
         return infosRepository.findAllByUserId(user.get().getId());
     }
+
+    @Transactional
+    public List<Infos> 무호흡횟수찾기(String username) {
+        Optional<User> user = userRepository.findByUsername(username);
+        return infosRepository.findCountByUserId(user.get().getId());
+    }
+
 }

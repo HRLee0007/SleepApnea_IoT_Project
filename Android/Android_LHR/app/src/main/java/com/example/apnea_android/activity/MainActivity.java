@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editor.putString("jsonJoinInfo", jsonJoinInfo);
         editor.commit();
 
-        //MeasureRequestInfo 프리퍼런스에 저장, usernamer이랑 status
+        //MeasureRequestInfo 프리퍼런스에 저장, username이랑 status
         MeasureRequestInfo measureRequestInfo = new MeasureRequestInfo(joinInfo.getUsername(), 0);
         String jsonMeasureRequestInfo = gson.toJson(measureRequestInfo, MeasureRequestInfo.class);
         

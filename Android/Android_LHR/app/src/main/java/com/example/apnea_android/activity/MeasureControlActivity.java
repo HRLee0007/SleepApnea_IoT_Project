@@ -136,7 +136,7 @@ public class MeasureControlActivity extends AppCompatActivity implements View.On
                 break;
             case R.id.history_button:
                 if(measureRequestInfo.getStatus() == 1){
-                    Toast.makeText(MeasureControlActivity.this, "측정 중입니다.\n메인페이지로 가시려면 측정 종료를 눌러주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MeasureControlActivity.this, "측정 중입니다.\n다른 페이지로 가시려면 측정 종료를 눌러주세요.", Toast.LENGTH_SHORT).show();
                 }
                 else if(measureRequestInfo.getStatus() == 0) {
                     System.out.println("메인페이지 클릭");
