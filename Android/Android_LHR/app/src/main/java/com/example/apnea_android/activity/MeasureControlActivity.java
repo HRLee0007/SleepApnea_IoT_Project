@@ -14,15 +14,21 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.apnea_android.R;
+import com.example.apnea_android.info.CountInfo;
 import com.example.apnea_android.info.JoinInfo;
+import com.example.apnea_android.info.LoginInfo;
 import com.example.apnea_android.info.MeasureRequestInfo;
 import com.example.apnea_android.RetrofitClient;
+import com.example.apnea_android.info.ResponseInfo;
 import com.github.mikephil.charting.charts.Chart;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,6 +47,7 @@ public class MeasureControlActivity extends AppCompatActivity implements View.On
     private RetrofitClient retrofitClient;
     private com.example.apnea_android.initMyApi initMyApi;
     static MeasureRequestInfo measureRequestInfo;
+    static JoinInfo joinInfo;
 
 
 
@@ -76,7 +83,7 @@ public class MeasureControlActivity extends AppCompatActivity implements View.On
         String jsonMeasureRequestInfo = sp.getString("jsonMeasureRequestInfo", "");
 
         if (!jsonJoinInfo.equals("") && !jsonMeasureRequestInfo.equals("")) {
-            JoinInfo joinInfo = gson.fromJson(jsonJoinInfo, JoinInfo.class);
+            joinInfo = gson.fromJson(jsonJoinInfo, JoinInfo.class);
             Log.d("kim", "username = " + joinInfo.getUsername());
 
             measureRequestInfo = gson.fromJson(jsonMeasureRequestInfo, MeasureRequestInfo.class);
@@ -141,6 +148,7 @@ public class MeasureControlActivity extends AppCompatActivity implements View.On
                 else if(measureRequestInfo.getStatus() == 0) {
                     System.out.println("메인페이지 클릭");
                     Toast.makeText(MeasureControlActivity.this, "최근 일주일 간 측정 현황입니다.", Toast.LENGTH_SHORT).show();
+
                     Intent intent = new Intent(MeasureControlActivity.this, ChartActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
