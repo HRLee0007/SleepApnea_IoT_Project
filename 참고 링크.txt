@@ -86,3 +86,5 @@ https://stickode.tistory.com/372
 
 조건절이 있는 mysql CRUD
 https://blog.hyunsub.kim/Spring/Spring-Jpa/#6-%EC%A1%B0%EA%B1%B4%EC%A0%88%EC%9D%B4-%EC%9E%88%EB%8A%94-CRUD
+
+https://jeongupark-study-house.tistory.com/159

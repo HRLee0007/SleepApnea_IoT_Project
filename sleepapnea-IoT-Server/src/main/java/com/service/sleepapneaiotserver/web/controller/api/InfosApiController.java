@@ -2,18 +2,12 @@ package com.service.sleepapneaiotserver.web.controller.api;
 
 
 import com.service.sleepapneaiotserver.domain.infos.Infos;
-import com.service.sleepapneaiotserver.domain.infos.InfosRepository;
-import com.service.sleepapneaiotserver.domain.user.User;
-import com.service.sleepapneaiotserver.domain.user.UserRepository;
 import com.service.sleepapneaiotserver.web.dto.InfosRequestDto;
-import com.service.sleepapneaiotserver.web.dto.ResponseDto;
 import com.service.sleepapneaiotserver.web.service.InfosService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -41,7 +35,5 @@ public class InfosApiController {
     public List<Infos> findCount(@RequestParam("username") String username){
         return infosService.무호흡횟수찾기(username);
     }
-
-
 
 }
