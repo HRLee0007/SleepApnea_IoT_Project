@@ -132,6 +132,10 @@ public class ChartActivity extends AppCompatActivity implements View.OnClickList
 
                     barChart.setData(barData); // 차트에 위의 DataSet 을 넣는다.
 
+                    barChart.animateY(1000);
+
+                    barChart.animateX(1000);
+
                     barChart.invalidate(); // 차트 업데이트
 
 
