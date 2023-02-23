@@ -12,11 +12,11 @@ public interface InfosRepository extends JpaRepository<Infos, Long> , JpaSpecifi
 
     List<Infos> findCountByUserId(Long userId);
 
+
 //    @Query(value =
-////            "select a.username as username, b.count as count, b.createDate as date " +
-//            "select b " +
+//            "select a.username as username, b.count as count, b.createDate as date " +
 //            "from User a, Infos b " +
-//            "where a.id = b.userId AND a.username= :username" +
+//            "where a.id = b.userId AND a.username=" + username +
 //            " limit 7",
 //            countQuery = "SELECT count(*) from Infos",
 //            nativeQuery = true)

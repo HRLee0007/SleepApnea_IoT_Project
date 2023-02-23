@@ -25,7 +25,7 @@ public class Infos {
     private int count;
 
     //infos : N, user : 1
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="userId")
     private User user;
 
