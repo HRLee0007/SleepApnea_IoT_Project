@@ -31,9 +31,8 @@ public class InfosApiController {
         return infosService.모두찾기(username);
     }
 
-    @PostMapping("/api/v1/count")
-    @ResponseBody
-    public List<Infos> findCount(@RequestBody String username){
+    @GetMapping("/api/v1/count")
+    public List<Infos> findCount(@RequestParam("username") String username){
         return infosService.무호흡횟수찾기(username);
     }
 
