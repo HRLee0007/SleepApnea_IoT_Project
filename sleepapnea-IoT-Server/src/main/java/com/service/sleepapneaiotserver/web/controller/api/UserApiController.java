@@ -96,6 +96,12 @@ public class UserApiController {
 
             firebaseCloudMessageService.sendMessageTo2(token);
         }
+
+        if(sign == 5){ // sign 5 : 초기측정 완료
+            String token = userService.토큰확인(username);
+
+            firebaseCloudMessageService.sendMessageTo3(token);
+        }
         return 4;
 
     }

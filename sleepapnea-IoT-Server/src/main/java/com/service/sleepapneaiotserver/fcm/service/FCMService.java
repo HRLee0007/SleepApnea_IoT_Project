@@ -121,6 +121,56 @@ public class FCMService {
         return objectMapper.writeValueAsString(fcmMessage);
     }
 
+    public void sendMessageTo3(String targetToken) throws IOException {
+        String message = makeMessage3(targetToken);
+
+        OkHttpClient client = new OkHttpClient();
+        RequestBody requestBody = RequestBody.create(message,
+                MediaType.get("application/json; charset=utf-8"));
+        Request request = new Request.Builder()
+                .url(API_URL)
+                .post(requestBody)
+                .addHeader(HttpHeaders.AUTHORIZATION, "Bearer " + getAccessToken())
+                .addHeader(HttpHeaders.CONTENT_TYPE, "application/json; UTF-8")
+                .build();
+
+        Response response = client.newCall(request).execute();
+
+        System.out.println(response.body().string());
+    }
+
+    private String makeMessage3(String targetToken) throws JsonParseException, JsonProcessingException {
+
+        WiFiConnectedFCM fcmMessage = WiFiConnectedFCM.builder()
+                .message(WiFiConnectedFCM.Message.builder()
+                        .token(targetToken)
+                        .notification(WiFiConnectedFCM.Notification.builder()
+                                .title("초기측정 완료")
+                                .body("클릭 시 측정 페이지로 이동합니다.")
+                                .image(null)
+                                .build())
+                        .data(WiFiConnectedFCM.Data.builder()
+                                .title("초기측정 완료")
+                                .body("클릭 시 측정 페이지로 이동합니다.")
+                                .activity("measure")
+                                .build())
+                        .android(WiFiConnectedFCM.Android.builder()
+                                .ttl("1s")
+                                .notification(WiFiConnectedFCM.AndroidNotification.builder()
+                                        .click_action("wifi_connected")
+                                        .build())
+                                .build())
+//                        .data(FcmMessage.Data.builder()
+//                                .title(title)
+//                                .body(body)
+//                                .sound("alert_sound1")
+//                                .click_action("push_activity")
+//                                .build())
+                        .build()).validateOnly(false).build();
+
+        return objectMapper.writeValueAsString(fcmMessage);
+    }
+
     private String getAccessToken() throws IOException {
         String firebaseConfigPath = "firebase/firebase_service_key.json";
 
