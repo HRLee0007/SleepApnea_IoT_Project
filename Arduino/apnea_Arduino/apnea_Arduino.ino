@@ -282,7 +282,7 @@ void loop() {
 
  }
 
-  if (now_time - lastMillis > 100){
+  if (now_time - lastMillis > 80){
     lastMillis = millis();
     
     if (status == '2') { // waiting start sign from server
@@ -356,7 +356,7 @@ void loop() {
       // Serial.println("Time now : " + millis());
 
     // Serial.print("rubberValue = ");
-    // Serial.println(rubberValue[0]);
+    Serial.println(rubberValue[199]);
 
 
 
