@@ -19,6 +19,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
+import com.JounCamp.apnea_android.activity.ChartActivity;
 import com.JounCamp.apnea_android.activity.MeasureControlActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -172,6 +173,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             notificationManager.notify(0, builder.build());*/
         }
 
+        if (title.equals("초기측정 완료")) {
+            Log.d("kim", "sign5 일때 초기측정 완료");
+            Intent intent = new Intent(MyFirebaseMessagingService.this, MeasureControlActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.putExtra("statusTitle", "초기측정 완료");
+            startActivity(intent);
+        }
 
         if(activity.equals("measure")) {
 
@@ -192,8 +200,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             startActivity(quickIntent);
 
-            Log.d("Kim", "message = " + message.getNotification().getTitle());
+            Log.d("Kim", "measure message = " + message.getNotification().getTitle());
         }
+
+
     }
 
 

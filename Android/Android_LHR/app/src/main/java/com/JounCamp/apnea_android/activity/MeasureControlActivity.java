@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -88,6 +89,13 @@ public class MeasureControlActivity extends AppCompatActivity implements View.On
         if(measureRequestInfo.getStatus() == 2) {
             Toast.makeText(MeasureControlActivity.this, "연결되었습니다.", Toast.LENGTH_SHORT).show();
 
+        }
+
+        Intent statusIntent = getIntent();
+
+        if(!TextUtils.isEmpty(statusIntent.getStringExtra("statusTitle"))){
+            status_text.setText("현재 상태 : 초기측정 완료");
+            Log.d("kim", "statusIntent 값 잘 받았음!");
         }
 
 
