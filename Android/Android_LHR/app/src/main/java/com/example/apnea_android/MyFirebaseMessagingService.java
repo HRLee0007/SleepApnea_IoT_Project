@@ -36,6 +36,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private PowerManager.WakeLock wakeLock;
 
 
+
+
     @Override
     public void onNewToken(String token){
         System.out.println("MyFirebaseMessagingService.onNewToken");
@@ -144,6 +146,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 //                }
 //            }, 1000);
 
+
+//            ringtone.stop();
+
             Uri soundUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.alert_sound1);
             Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), soundUri);
 
@@ -152,6 +157,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             ringtone.setAudioAttributes(audioAttributes);
             ringtone.play();
+
+
 
 //            sendNotification(title, body);
 

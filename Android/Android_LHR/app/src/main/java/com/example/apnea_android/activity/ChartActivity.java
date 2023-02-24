@@ -159,8 +159,8 @@ public class ChartActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.mainpage_button:
 
-                Toast.makeText(ChartActivity.this, "로그아웃 - 메인페이지 미구현", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ChartActivity.this, MainActivity.class);
+//                Toast.makeText(ChartActivity.this, "로그아웃 - 메인페이지 미구현", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ChartActivity.this, MeasureControlActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
 
