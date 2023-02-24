@@ -20,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FCMService {
 
-    private final String API_URL = "https://fcm.googleapis.com/v1/projects/sleepiot-dce72/messages:send";
+    private final String API_URL = "https://fcm.googleapis.com/v1/projects/sleepapnea-24608/messages:send";
     private final ObjectMapper objectMapper;
 
     public void sendMessageTo(String targetToken, String title, String body) throws IOException {
