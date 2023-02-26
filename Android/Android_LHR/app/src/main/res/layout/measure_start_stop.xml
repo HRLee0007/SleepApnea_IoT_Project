@@ -7,6 +7,25 @@
     android:background="@color/white"
     tools:context=".activity.MeasureControlActivity">
 
+    <Button
+        android:id="@+id/logout_button"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:background="@drawable/button_white"
+        android:text="로그아웃"
+        android:textColor="#8792AC"
+        android:textSize="23dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
 
         <TextView
             android:id="@+id/measure_page"

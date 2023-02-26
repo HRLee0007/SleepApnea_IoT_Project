@@ -33,6 +33,7 @@ public class MeasureControlActivity extends AppCompatActivity implements View.On
     Button start_button;
     Button stop_button;
     Button history_button;
+    Button logout_button;
 
     String wifi;
 
@@ -66,10 +67,12 @@ public class MeasureControlActivity extends AppCompatActivity implements View.On
         start_button = (Button) findViewById(R.id.start_button);
         stop_button = (Button) findViewById(R.id.stop_button);
         history_button = (Button) findViewById(R.id.history_button);
+        logout_button = (Button) findViewById(R.id.logout_button);
 
         start_button.setOnClickListener(this);
         stop_button.setOnClickListener(this);
         history_button.setOnClickListener(this);
+        logout_button.setOnClickListener(this);
 
         SharedPreferences sp = getSharedPreferences("shared", MODE_PRIVATE);
         Gson gson = new GsonBuilder().create();
@@ -151,10 +154,27 @@ public class MeasureControlActivity extends AppCompatActivity implements View.On
                     Toast.makeText(MeasureControlActivity.this, "최근 일주일 간 측정 현황입니다.", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(MeasureControlActivity.this, ChartActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }
+            case R.id.logout_button:
 
+                SharedPreferences sp = getSharedPreferences("shared", MODE_PRIVATE);
+
+                SharedPreferences.Editor editor = sp.edit();
+                editor.clear();
+                editor.commit();
+
+                String jsonJoinInfo = sp.getString("jsonJoinInfo", "");
+                String jsonMeasureRequestInfo = sp.getString("jsonMeasureRequestInfo", "");
+
+                if (jsonJoinInfo.equals("") && jsonMeasureRequestInfo.equals("")) {
+                    Log.d("kim", "jsonJoinInfo, jsonMeasureRequestInfo 프리퍼런스 정보 삭제 완료");
+                }
+
+                Toast.makeText(MeasureControlActivity.this, joinInfo.getUsername()+"님 로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MeasureControlActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
         }
     }
 
