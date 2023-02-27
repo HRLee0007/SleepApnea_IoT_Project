@@ -69,23 +69,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         String body = data.get("body");
         String activity = data.get("activity");
 
-//        String vibrate = data.get("vibrate");
-//        String sound = data.get("sound");
-//
-//        Uri soundUri = Uri.parse(sound);
-//        Ringtone ringtone = RingtoneManager.getRingtone(this, soundUri);
+        if(title.equals("위험 0 : 정상 호흡")) {
+            Log.d("kim", "sign0 일때 정상 호흡");
+            Intent intent = new Intent(MyFirebaseMessagingService.this, MeasureControlActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.putExtra("statusTitle", "정상 호흡");
+            startActivity(intent);
+        }
 
         Log.d("Kim", "onMessageReceived title" + title);
 
-//        long[] vib_pattern = Arrays.stream(vibrate.split(","))
-//                .mapToLong(Long::parseLong)
-//                .toArray();
-
-//        Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-//        Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), sound);
-
-// pattern 을 진동의 패턴 -1은 패턴의 반복은 한번
-//        if(message.getNotification().getTitle() == "위험 1 : 진동") {
         if(title.equals("위험 1 : 진동")) {
             Log.d("Kim", "진동 타이틀");
 //            Toast toast = Toast.makeText(MeasureControlActivity.class , "무호흡 발생 : 10초 경과", Toast.LENGTH_SHORT);
@@ -114,6 +107,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             } else {
                 vibrator.vibrate(pattern, -1);
             }
+
+            Log.d("kim", "sign1 일때 진동 울림");
+            Intent intent = new Intent(MyFirebaseMessagingService.this, MeasureControlActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.putExtra("statusTitle", "진동");
+            startActivity(intent);
 //
 //
 //            // Show the notification
@@ -153,6 +152,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             ringtone.setAudioAttributes(audioAttributes);
             ringtone.play();
+
+            Log.d("kim", "sign2 일때 소리 울림");
+            Intent intent = new Intent(MyFirebaseMessagingService.this, MeasureControlActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.putExtra("statusTitle", "소리");
+            startActivity(intent);
 
 
 

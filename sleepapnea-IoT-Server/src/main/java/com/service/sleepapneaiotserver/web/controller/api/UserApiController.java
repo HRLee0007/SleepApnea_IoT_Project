@@ -53,6 +53,18 @@ public class UserApiController {
     public int changeSign(@RequestParam("sign") int sign, @RequestParam("username") String username) throws IOException, URISyntaxException, NoSuchAlgorithmException, InvalidKeyException {
 
         //토큰을 먼저 불러와야함. mysql DB에서.
+
+        if(sign == 0){ // 위험 0 : 정상 호흡
+            String token = userService.토큰확인(username);
+            List<String> userInfo = userService.유저메세지전송정보(username);
+            String realName = userInfo.get(1);
+
+            firebaseCloudMessageService.sendMessageTo(
+                    token,
+                    "위험 0 : 정상 호흡",
+                    realName + "님의 호흡이 정상으로 회복되었습니다.");
+        }
+
         if(sign == 1){ // 위험 1 : 진동
             String token = userService.토큰확인(username);
             List<String> userInfo = userService.유저메세지전송정보(username);

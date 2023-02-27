@@ -171,6 +171,8 @@ void firstMeasure()
   rubber_no_breath_value = (rubberMax - rubberMin) * 0.4;
   // wind_no_breath_value = (windMax - windMin) * (4/10);
 
+  httpGet("/api/v1/userSign?sign=5&username="+ username);
+  // 안드로이드 앱에 초기측정 완료 표시
 
 
 
@@ -464,6 +466,7 @@ void loop() {
     else if(first_no_breath != 0){
       // httpGet("/api/v1/userSign?sign=0&username=" + username);   
       first_no_breath = 0;
+      httpGet("/api/v1/userSign?sign=0&username=" + username); 
     }
 
     if(soundWARNING == 1 && soundControl == 0){ // 무호흡 15초 이상 OR 장력센서 무반응 15초 이상 ==> 소리 ON. (진동은 OFF)

@@ -97,8 +97,31 @@ public class MeasureControlActivity extends AppCompatActivity implements View.On
         Intent statusIntent = getIntent();
 
         if(!TextUtils.isEmpty(statusIntent.getStringExtra("statusTitle"))){
-            status_text.setText("현재 상태 : 초기측정 완료");
-            Log.d("kim", "statusIntent 값 잘 받았음!");
+            if(statusIntent.getStringExtra("statusTitle").equals("정상 호흡")) {
+                status_text.setText("현재 상태 : 정상 호흡");
+                Log.d("kim", "statusIntent - 정상 호흡");
+            }
+        }
+
+        if(!TextUtils.isEmpty(statusIntent.getStringExtra("statusTitle"))){
+            if(statusIntent.getStringExtra("statusTitle").equals("초기측정 완료")) {
+                status_text.setText("현재 상태 : 무호흡 감지 시작");
+                Log.d("kim", "statusIntent - 초기측정 완료");
+            }
+        }
+
+        if(!TextUtils.isEmpty(statusIntent.getStringExtra("statusTitle"))){
+            if(statusIntent.getStringExtra("statusTitle").equals("진동")) {
+                status_text.setText("현재 상태 : 무호흡 발생 (5~7초)");
+                Log.d("kim", "statusIntent - 진동 울림");
+            }
+        }
+
+        if(!TextUtils.isEmpty(statusIntent.getStringExtra("statusTitle"))){
+            if(statusIntent.getStringExtra("statusTitle").equals("소리")) {
+                status_text.setText("현재 상태 : 무호흡 발생 (7~10초)");
+                Log.d("kim", "statusIntent - 소리 울림");
+            }
         }
 
 
