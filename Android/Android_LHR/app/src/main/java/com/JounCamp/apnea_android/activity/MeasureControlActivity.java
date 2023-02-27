@@ -156,6 +156,7 @@ public class MeasureControlActivity extends AppCompatActivity implements View.On
                     Intent intent = new Intent(MeasureControlActivity.this, ChartActivity.class);
                     startActivity(intent);
                 }
+                break;
             case R.id.logout_button:
 
                 SharedPreferences sp = getSharedPreferences("shared", MODE_PRIVATE);
