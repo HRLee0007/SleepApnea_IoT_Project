@@ -11,8 +11,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://52.79.222.91:3306/sleepapnea?serverTimezone=UTC&characterEncoding=UTF-8
-    username: gusfh
-    password: gusfh1234
+    username: 아이디
+    password: 비밀번호
 
   jpa:
     open-in-view: true

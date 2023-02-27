@@ -28,19 +28,10 @@ public class UserToken {
     @Column(name = "username", nullable = false, length = 50, unique = true)
     private String username;
 
-    //유저비밀번호
-//    @Column(nullable = false, length = 100)
-//    private String password;
 
     @Column(nullable = true, length = 200)
     private String token;
 
-//    @Builder
-//    public UserToken(String username, String password, String token){
-//        this.username = username;
-//        this.password = password;
-//        this.token = token;
-//    }
 
     @Builder
     public UserToken(String username, String token){
