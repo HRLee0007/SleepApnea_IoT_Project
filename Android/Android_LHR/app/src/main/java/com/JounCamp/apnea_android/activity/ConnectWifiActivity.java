@@ -61,9 +61,6 @@ public class ConnectWifiActivity extends AppCompatActivity {
 
         Toast.makeText(this, "유저네임, WiFi ID, WiFi 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
 
-
-        // Initialize the UI elements
-//        usernameEditText = findViewById(R.id.username_edit_text);
         ssidEditText = findViewById(R.id.ssid_edit_text);
         passwordEditText = findViewById(R.id.password_edit_text);
         sendButton = findViewById(R.id.send_button);
@@ -86,12 +83,8 @@ public class ConnectWifiActivity extends AppCompatActivity {
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Get the data from the input fields
-//                String username = usernameEditText.getText().toString();
                 String ssid = ssidEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
-
-
 
                 if (ContextCompat.checkSelfPermission(ConnectWifiActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)
                         == PackageManager.PERMISSION_GRANTED) {
@@ -164,8 +157,6 @@ public class ConnectWifiActivity extends AppCompatActivity {
                             new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                             MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION);
                 }
-
-
 
             }
         });

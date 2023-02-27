@@ -23,7 +23,7 @@ public interface initMyApi {
     Call<ResponseInfo<JoinInfo>> getLoginResponse(@Body LoginInfo user);
 
     @POST("auth/statusAndroid") // 측정 시작
-    Call<Integer> getStatusResponse(@Body MeasureRequestInfo user); // 유저네임만 넘겨줘도 됨
+    Call<Integer> getStatusResponse(@Body MeasureRequestInfo user);
 
     @GET("/api/v1/count") //무호흡 측정 현황
     Call<List<CountInfo>> getUserCount(@Query("username") String username);
