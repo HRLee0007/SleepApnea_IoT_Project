@@ -7,21 +7,23 @@
     android:background="@color/white"
     tools:context=".activity.MeasureControlActivity">
 
+
+
     <Button
         android:id="@+id/logout_button"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:layout_marginBottom="30dp"
+        android:layout_height="71dp"
         android:gravity="center"
-        android:background="@drawable/button_white"
-        android:text="로그아웃"
-        android:textColor="#8792AC"
-        android:textSize="23dp"
+        android:drawableLeft="@drawable/logout_icon"
+        android:background="@drawable/button_nocolor"
+        android:text="로그아웃                                                       "
+        android:textColor="@color/colorGray"
+        android:textSize="20dp"
         android:textStyle="bold"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="14dp"
         tools:ignore="MissingConstraints"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />
@@ -30,16 +32,16 @@
         <TextView
             android:id="@+id/measure_page"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="160dp"
             android:textAlignment="center"
             android:gravity="center"
             android:text="측정 시작/종료"
             android:textColor="#8792AC"
             android:textStyle=""
             android:textSize="30dp"
+            android:elevation="10dp"
             android:background="@drawable/button_half_round"
-            android:elevation="20dp"
-
+            android:layout_marginTop="70dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
@@ -71,7 +73,7 @@
 
             app:layout_constraintEnd_toStartOf="@id/stop_button"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/measure_page"
+            app:layout_constraintTop_toBottomOf="@id/status_textview"
             app:layout_constraintBottom_toTopOf="@id/history_button"
 
             tools:ignore="MissingConstraints" />
@@ -85,7 +87,7 @@
             android:src="@drawable/stop_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/start_button"
-            app:layout_constraintTop_toBottomOf="@id/measure_page"
+            app:layout_constraintTop_toBottomOf="@id/status_textview"
             app:layout_constraintBottom_toTopOf="@id/history_button"
             tools:ignore="MissingConstraints"
 
