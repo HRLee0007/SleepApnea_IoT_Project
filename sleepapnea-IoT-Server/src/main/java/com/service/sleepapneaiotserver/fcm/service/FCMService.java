@@ -110,12 +110,6 @@ public class FCMService {
                                         .click_action("wifi_connected")
                                         .build())
                                 .build())
-//                        .data(FcmMessage.Data.builder()
-//                                .title(title)
-//                                .body(body)
-//                                .sound("alert_sound1")
-//                                .click_action("push_activity")
-//                                .build())
                         .build()).validateOnly(false).build();
 
         return objectMapper.writeValueAsString(fcmMessage);
@@ -160,12 +154,6 @@ public class FCMService {
                                         .click_action("wifi_connected")
                                         .build())
                                 .build())
-//                        .data(FcmMessage.Data.builder()
-//                                .title(title)
-//                                .body(body)
-//                                .sound("alert_sound1")
-//                                .click_action("push_activity")
-//                                .build())
                         .build()).validateOnly(false).build();
 
         return objectMapper.writeValueAsString(fcmMessage);
