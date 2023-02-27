@@ -48,7 +48,6 @@ public class ChartActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chart_page);
 
-//        barChart = (BarChart) findViewById(R.id.chart);
         mainpage_button = (Button) findViewById(R.id.mainpage_button);
 
         mainpage_button.setOnClickListener(this);
@@ -64,38 +63,12 @@ public class ChartActivity extends AppCompatActivity implements View.OnClickList
 
         //무호흡 측정 현황 리스트 받기
         findCountResponse(joinInfo.getUsername());
-
-        /*BarData barData = new BarData(); // 차트에 담길 데이터
-
-        entry_chart.add(new BarEntry(1, 1)); //entry_chart1에 좌표 데이터를 담는다.
-        entry_chart.add(new BarEntry(2, 2));
-        entry_chart.add(new BarEntry(3, 3));
-        entry_chart.add(new BarEntry(4, 4));
-        entry_chart.add(new BarEntry(5, 2));
-        entry_chart.add(new BarEntry(6, 8));
-        entry_chart.add(new BarEntry(7, 12));
-
-
-        BarDataSet barDataSet = new BarDataSet(entry_chart, "무호흡 횟수"); // 데이터가 담긴 Arraylist 를 BarDataSet 으로 변환한다.
-
-        barDataSet.setColor(Color.BLUE); // 해당 BarDataSet 색 설정 :: 각 막대 과 관련된 세팅은 여기서 설정한다.
-
-        barData.addDataSet(barDataSet); // 해당 BarDataSet 을 적용될 차트에 들어갈 DataSet 에 넣는다.
-
-        barChart.setData(barData); // 차트에 위의 DataSet 을 넣는다.
-
-        barChart.invalidate(); // 차트 업데이트*/
-
-//        barChart.setTouchEnabled(false); // 차트 터치 불가능하게
-
     }
 
     public void findCountResponse(String username) {
         //retrofit 생성
         retrofitClient = RetrofitClient.getInstance();
         initMyApi = RetrofitClient.getRetrofitInterface();
-
-
 
         //User에 저장된 데이터와 함께 init에서 정의한 getJoinResponse 함수를 실행한 후 응답을 받음
         initMyApi.getUserCount(username).enqueue(new Callback<List<CountInfo>>() {
@@ -108,32 +81,20 @@ public class ChartActivity extends AppCompatActivity implements View.OnClickList
                 if (response.isSuccessful() && response.body() != null) {
 
                     userCountInfo = response.body();
-
                     barChart = (BarChart) findViewById(R.id.chart);
-
                     BarData barData = new BarData(); // 차트에 담길 데이터
 
                     for (int i = 0; i < userCountInfo.size(); i++){
                         Log.d("kim", "findCountResponse count: " + userCountInfo.get(i).getCount());
                         entry_chart.add(new BarEntry(i+1, userCountInfo.get(i).getCount()));
                     }
-
                     BarDataSet barDataSet = new BarDataSet(entry_chart, "무호흡 횟수"); // 데이터가 담긴 Arraylist 를 BarDataSet 으로 변환한다.
-
                     barDataSet.setColor(Color.BLUE); // 해당 BarDataSet 색 설정 :: 각 막대 과 관련된 세팅은 여기서 설정한다.
-
                     barData.addDataSet(barDataSet); // 해당 BarDataSet 을 적용될 차트에 들어갈 DataSet 에 넣는다.
-
                     barChart.setData(barData); // 차트에 위의 DataSet 을 넣는다.
-
                     barChart.animateY(1000);
-
                     barChart.animateX(1000);
-
                     barChart.invalidate(); // 차트 업데이트
-
-
-
                 } else {
                     Toast.makeText(ChartActivity.this, "예기치 못한 오류가 발생하였습니다.", Toast.LENGTH_SHORT).show();
                 }
@@ -143,21 +104,15 @@ public class ChartActivity extends AppCompatActivity implements View.OnClickList
                 Toast.makeText(ChartActivity.this, "통신이 불안정 합니다", Toast.LENGTH_SHORT).show();
             }
         });
-
-        Log.d("kim", "findCountResponse end");
-
     }
 
     public void onClick(View v) {
         switch (v.getId()) {
 
             case R.id.mainpage_button:
-
-//                Toast.makeText(ChartActivity.this, "로그아웃 - 메인페이지 미구현", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ChartActivity.this, MeasureControlActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
-
         }
     }
 }

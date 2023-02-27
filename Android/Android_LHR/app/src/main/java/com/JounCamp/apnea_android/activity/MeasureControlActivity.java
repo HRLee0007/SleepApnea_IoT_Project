@@ -44,23 +44,11 @@ public class MeasureControlActivity extends AppCompatActivity implements View.On
     static MeasureRequestInfo measureRequestInfo;
     static JoinInfo joinInfo;
 
-
-
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.measure_start_stop);
-
-//        Intent intent = getIntent();
-//
-//        wifi = intent.getStringExtra("toast");
-//
-//        if(wifi.equals("wifi")){
-//            Toast.makeText(MeasureControlActivity.this, "연결되었습니다.", Toast.LENGTH_SHORT).show();
-//        }
-
 
         status_text = (TextView) findViewById(R.id.status_textview);
 
@@ -85,7 +73,6 @@ public class MeasureControlActivity extends AppCompatActivity implements View.On
 
             measureRequestInfo = gson.fromJson(jsonMeasureRequestInfo, MeasureRequestInfo.class);
             Log.d("kim", "user status = " + measureRequestInfo.getStatus());
-
 
         }
 
@@ -129,8 +116,6 @@ public class MeasureControlActivity extends AppCompatActivity implements View.On
                 Log.d("kim", "statusIntent - 소리 울림");
             }
         }
-
-
     }
 
     public void onClick(View v) {

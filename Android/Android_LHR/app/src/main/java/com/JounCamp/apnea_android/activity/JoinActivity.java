@@ -90,8 +90,6 @@ public class JoinActivity extends AppCompatActivity  implements View.OnClickList
         retrofitClient = RetrofitClient.getInstance();
         initMyApi = RetrofitClient.getRetrofitInterface();
 
-
-
         //User에 저장된 데이터와 함께 init에서 정의한 getJoinResponse 함수를 실행한 후 응답을 받음
         initMyApi.getJoinResponse(joinUser).enqueue(new Callback<String>() {
             @Override
@@ -117,22 +115,4 @@ public class JoinActivity extends AppCompatActivity  implements View.OnClickList
             }
         });
     }
-
-    /*//화면 터치 시 키보드 내려감
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        View focusView = getCurrentFocus();
-        if (focusView != null) {
-            Rect rect = new Rect();
-            focusView.getGlobalVisibleRect(rect);
-            int x = (int) ev.getX(), y = (int) ev.getY();
-            if (!rect.contains(x, y)) {
-                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                if (imm != null)
-                    imm.hideSoftInputFromWindow(focusView.getWindowToken(), 0);
-                focusView.clearFocus();
-            }
-        }
-        return super.dispatchTouchEvent(ev);
-    }*/
 }

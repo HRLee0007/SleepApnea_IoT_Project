@@ -11,12 +11,12 @@
 
     <Button
         android:id="@+id/logout_button"
-        android:layout_width="match_parent"
+        android:layout_width="120dp"
         android:layout_height="71dp"
         android:gravity="center"
         android:drawableLeft="@drawable/logout_icon"
         android:background="@drawable/button_nocolor"
-        android:text="로그아웃                                                       "
+        android:text="로그아웃"
         android:textColor="@color/colorGray"
         android:textSize="20dp"
         android:textStyle="bold"
@@ -25,7 +25,6 @@
         tools:ignore="MissingConstraints"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         />
 
 
