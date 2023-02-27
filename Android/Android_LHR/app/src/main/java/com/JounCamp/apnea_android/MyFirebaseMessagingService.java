@@ -69,6 +69,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         String body = data.get("body");
         String activity = data.get("activity");
 
+        if(title.equals("초기 측정 시작")) {
+            Log.d("kim", "초기 측정 시작");
+            Intent intent = new Intent(MyFirebaseMessagingService.this, MeasureControlActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.putExtra("statusTitle", "초기 측정 시작");
+            startActivity(intent);
+        }
+
         if(title.equals("위험 0 : 정상 호흡")) {
             Log.d("kim", "sign0 일때 정상 호흡");
             Intent intent = new Intent(MyFirebaseMessagingService.this, MeasureControlActivity.class);
@@ -76,6 +84,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             intent.putExtra("statusTitle", "정상 호흡");
             startActivity(intent);
         }
+
 
         Log.d("Kim", "onMessageReceived title" + title);
 

@@ -109,11 +109,24 @@ public class UserApiController {
             firebaseCloudMessageService.sendMessageTo2(token);
         }
 
-        if(sign == 5){ // sign 5 : 초기측정 완료
+        if(sign == 5){ // sign 5 : 초기측정 시작
+            String token = userService.토큰확인(username);
+            List<String> userInfo = userService.유저메세지전송정보(username);
+            String realName = userInfo.get(1);
+
+            firebaseCloudMessageService.sendMessageTo(
+                    token,
+                    "초기 측정 시작",
+                    realName + "님의 호흡 패턴을 분석합니다.");
+        }
+
+        if(sign == 6){ // sign 6 : 초기측정 완료
             String token = userService.토큰확인(username);
 
             firebaseCloudMessageService.sendMessageTo3(token);
         }
+
+
         return 4;
 
     }

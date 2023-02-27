@@ -102,6 +102,12 @@ public class MeasureControlActivity extends AppCompatActivity implements View.On
                 Log.d("kim", "statusIntent - 정상 호흡");
             }
         }
+        if(!TextUtils.isEmpty(statusIntent.getStringExtra("statusTitle"))){
+            if(statusIntent.getStringExtra("statusTitle").equals("초기 측정 시작")) {
+                status_text.setText("현재 상태 : 호흡 패턴 분석중 ..");
+                Log.d("kim", "statusIntent - 초기측정 완료");
+            }
+        }
 
         if(!TextUtils.isEmpty(statusIntent.getStringExtra("statusTitle"))){
             if(statusIntent.getStringExtra("statusTitle").equals("초기측정 완료")) {
