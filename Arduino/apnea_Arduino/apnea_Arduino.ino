@@ -138,6 +138,10 @@ void connectWifi() {
 
 void firstMeasure()
 {
+  httpGet("/api/v1/userSign?sign=5&username="+ username);
+  // 안드로이드 앱에 초기측정 시작 표시
+
+
   for(int k = 0; k < 200; k++){ // 장력 센서 초기 값 ( 20초 )
     rubberValue[k] = analogRead(A5);
 
@@ -171,7 +175,7 @@ void firstMeasure()
   rubber_no_breath_value = (rubberMax - rubberMin) * 0.4;
   // wind_no_breath_value = (windMax - windMin) * (4/10);
 
-  httpGet("/api/v1/userSign?sign=5&username="+ username);
+  httpGet("/api/v1/userSign?sign=6&username="+ username);
   // 안드로이드 앱에 초기측정 완료 표시
 
 
