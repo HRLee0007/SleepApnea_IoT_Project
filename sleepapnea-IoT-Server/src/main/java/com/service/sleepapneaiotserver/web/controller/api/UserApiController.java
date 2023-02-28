@@ -73,7 +73,7 @@ public class UserApiController {
             firebaseCloudMessageService.sendMessageTo(
                     token,
                     "위험 1 : 진동",
-                    realName + "님의 수면무호흡 발생.\n10초 이상 호흡을 멈춘 상태입니다.");
+                    realName + "님의 수면무호흡 발생.\n5초 이상 호흡을 멈춘 상태입니다.");
         }
         //토큰을 먼저 불러와야함. mysql DB에서.
         if(sign == 2){ // 위험 2 : 소리
@@ -84,7 +84,7 @@ public class UserApiController {
             firebaseCloudMessageService.sendMessageTo(
                     token,
                     "위험 2 : 소리",
-                    realName + "님의 수면무호흡 발생.\n15초 이상 호흡을 멈춘 상태입니다.");
+                    realName + "님의 수면무호흡 발생.\n8초 이상 호흡을 멈춘 상태입니다.");
         }
 
         if(sign == 3){ // 위험 3 : 보호자에게 긴급 문자 전송
@@ -137,37 +137,7 @@ public class UserApiController {
         //기존 유저인지 확인.
         ResponseDto<UserDto> checkedUserInfo = userService.로그인(loginDto);
         userService.statusReady(loginDto.getUsername());
-        /* 해당되는 아이디가 없으면 반환값
-        {
-            "status": 400,
-            "data": {
-                "username": null,
-                "password": null,
-                "realname": null,
-                "email": null,
-                "address": null,
-                "phoneNum": null,
-                "c_phoneNum": null,
-                "role": null
-            }
-        }
-         */
 
-        /*  해당되는 아이디가 존재 및 패스워드일치 시 반환형태
-        {
-                "status": 200,
-                "data": {
-                    "username": "GM",
-                    "password": "$2a$10$X1vWiHjdamighXtJa7hoieGTgY8Vh/98QyC.x9yo1UAtq1zE3/5ma",
-                    "realname": "운영자",
-                    "email": "gm@naver.com",
-                    "address": "경상북도 포항시 대안길 23, 102동 602호",
-                    "phoneNum": "01033338476",
-                    "c_phoneNum": "01033338476",
-                    "role": null
-                }
-            }
-         */
        return checkedUserInfo;
     }
 }
